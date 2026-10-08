@@ -1,0 +1,67 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x05
+  name: Output Handling Sanitizer
+  nameKo: 출력 처리 부실 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Improper output handling
+spec:
+  series: C1
+  gate: output
+  isolation: L0
+  verdicts:
+  - block
+  - transform
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM10
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-79
+      - CWE-89
+      - CWE-78
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: sink_rules
+    available:
+    - id: sink_rules
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    downstream:
+      type: string
+      default: html
+      enum:
+      - html
+      - sql
+      - shell
+      - markdown
+      labelKo: 출력이 쓰이는 곳
+      labelEn: Downstream sink

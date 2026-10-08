@@ -1,0 +1,10 @@
+{"name": "over-limit", "request": {"tool": {"name": "transfer", "args": {"amount": 50000000}}}, "expect": ["block"]}
+{"name": "over-limit-approved", "request": {"tool": {"name": "wire", "args": {"amount": 20000000}, "approved": true}}, "expect": ["block"]}
+{"name": "needs-approval", "request": {"tool": {"name": "transfer_funds", "args": {"amount": 2400000}}}, "expect": ["require_approval"]}
+{"name": "irrev", "request": {"action": {"type": "purchase", "amount": 50000, "reversible": false}}, "expect": ["require_approval"]}
+{"name": "unknown", "request": {"tool": {"name": "refund", "args": {"order": "o-1"}}}, "expect": ["require_approval"]}
+{"name": "daily", "request": {"tool": {"name": "pay", "args": {"amount": 60000}}, "params": {"dailySpent": 50000, "dailyLimit": 100000}}, "expect": ["block"]}
+{"name": "action-big", "request": {"action": {"type": "payment", "amount": 500000}}, "expect": ["require_approval"]}
+{"name": "ko", "request": {"tool": {"name": "송금", "args": {"금액": 3000000}}}, "expect": ["require_approval"]}
+{"name": "price", "request": {"tool": {"name": "checkout", "args": {"price": 1500000}}}, "expect": ["require_approval"]}
+{"name": "custom-limit", "request": {"tool": {"name": "pay", "args": {"amount": 60000}}, "params": {"spendLimit": 50000}}, "expect": ["block"]}

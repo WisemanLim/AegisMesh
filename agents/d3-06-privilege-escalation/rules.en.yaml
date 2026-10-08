@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D3-06.scope-exceeded: The scope the tool needs exceeds the principal's permissions (human ∩ agent when delegated). Block.
+D3-06.self-elevation: A principal without an admin role calls a tool that grants admin or root. Block.
+D3-06.privilege-change: An admin grants high privileges. Two-person approval.
+D3-06.blocked-chain: Tool chain blocked by policy (privilege escalation path). Block.
+D3-06.pass: Passed permission scope check.

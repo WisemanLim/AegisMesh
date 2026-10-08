@@ -1,0 +1,1 @@
+{"name": "render-allowed-when-off", "request": {"output": "![chart](https://img.partner.example/c.png)", "params": {"blockAutoRender": false}}}

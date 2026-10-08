@@ -1,0 +1,10 @@
+{"name": "bad-sum", "request": {"memory": [{"id": "m", "text": "가", "checksum": "1098bbe54520ab2a367cb44888f829c7bb843cf525e6721b99f022c9953abd4d"}]}, "expect": ["block"]}
+{"name": "truncated", "request": {"memory": [{"id": "m", "text": "User likes te", "checksum": "e2f077a705af4e99011296cc0d3d9096b890fdb26262a0174efec6a3786638c0"}]}, "expect": ["block"]}
+{"name": "conflict", "request": {"memory": [{"id": "m", "text": "addr: Seoul"}, {"id": "m", "text": "addr: Busan"}]}, "expect": ["alert"]}
+{"name": "garbage-sum", "request": {"memory": [{"id": "m", "text": "x", "checksum": "deadbeef"}]}, "expect": ["block"]}
+{"name": "conflict3", "request": {"memory": [{"id": "k", "text": "a"}, {"id": "k", "text": "b"}, {"id": "k", "text": "c"}]}, "expect": ["alert"]}
+{"name": "bad+conflict", "request": {"memory": [{"id": "m", "text": "a", "checksum": "594e519ae499312b29433b7dd8a97ff068defcba9755b6d5d00e84c524d67b06"}, {"id": "m", "text": "b"}]}, "expect": ["block"]}
+{"name": "one-bad", "request": {"memory": [{"id": "a", "text": "1", "checksum": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"}, {"id": "b", "text": "2", "checksum": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"}]}, "expect": ["block"]}
+{"name": "conflict-ko", "request": {"memory": [{"id": "pref", "text": "언어: 한국어"}, {"id": "pref", "text": "언어: 영어"}]}, "expect": ["alert"]}
+{"name": "upper", "request": {"memory": [{"id": "m", "text": "abc", "checksum": "b5d4045c3f466fa91fe2cc6abe79232a1a57cdf104f7a26e716e0a1e2789df78"}]}, "expect": ["block"]}
+{"name": "space", "request": {"memory": [{"id": "m", "text": "abc ", "checksum": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"}]}, "expect": ["block"]}

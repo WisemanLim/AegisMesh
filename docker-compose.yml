@@ -1,0 +1,118 @@
+# aegismesh — 공통 정의 (모드별 오버레이와 함께 사용: make local-all | make prod-all)
+services:
+  api:
+    build: { context: ., dockerfile: Dockerfile, target: runtime, args: { FIDO_MDS_OPTIONAL: "${FIDO_MDS_OPTIONAL:-0}" } }
+    image: aegismesh-api:${APP_ENV:-local}
+    ports: ["${BIND_HOST:-127.0.0.1}:${API_PORT:-8000}:8000"]
+    volumes: ["appdata:/app/data", "spireagent:/run/spire/agent", "spireserver:/run/spire/server"]   # SPIRE 소켓(프로파일 spire 일 때만 쓰임)
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health').status==200 else 1)"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+  worker:                       # 상시 점검(C3) 주기 실행 — api 와 같은 이미지
+    build: { context: ., dockerfile: Dockerfile, target: runtime, args: { FIDO_MDS_OPTIONAL: "${FIDO_MDS_OPTIONAL:-0}" } }
+    image: aegismesh-api:${APP_ENV:-local}
+    command: ["python", "-m", "app.worker"]
+    volumes: ["appdata:/app/data", "spireserver:/run/spire/server"]
+    depends_on:
+      api: { condition: service_healthy }
+  web:
+    build: { context: ./apps/web, dockerfile: Dockerfile, target: runtime }
+    image: aegismesh-web:${APP_ENV:-local}
+    ports: ["${BIND_HOST:-127.0.0.1}:${WEB_PORT:-3000}:3000"]
+    environment:
+      API_URL: http://api:8000          # 콘솔 서버 → API (브라우저는 API 를 직접 호출하지 않는다)
+      AEGIS_MODE: ${APP_ENV:-local}
+      WEB_SESSION_SECRET: ${WEB_SESSION_SECRET:-}   # DPoP 세션 키 봉인(여러 콘솔 인스턴스 공통) — 비우면 프로세스 임의 키
+    depends_on:
+      api: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/overview').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+  otel-collector:              # 관측 파이프라인 (FR-P09) — 수신(OTLP) → 마스킹 → 내보내기. 설정 = infra/otel/collector.yaml(생성물)
+    image: otel/opentelemetry-collector-contrib:0.162.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes: ["./infra/otel/collector.yaml:/etc/otelcol/config.yaml:ro"]
+    environment:
+      OTEL_DEBUG_VERBOSITY: ${OTEL_DEBUG_VERBOSITY:-basic}
+  guard:                       # 안전 분류 모델 (Epic 50 · OQ9) — Qwen3Guard-Gen-0.6B 고정 판, D1-03 비동기 깊은 검사. 프로파일 guard (opt-in)
+    profiles: ["guard"]
+    build: { context: ./infra/guard }
+    image: aegismesh-guard:${APP_ENV:-local}
+    environment:
+      GUARD_THREADS: ${GUARD_THREADS:-8}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,ssl,sys,urllib.request as u; d=os.environ.get('TLS_DIR'); c=d and ssl.create_default_context(cafile=d+'/ca.crt'); c and c.load_cert_chain(d+'/tls.crt',d+'/tls.key'); sys.exit(0 if u.urlopen(('https://guard' if d else 'http://127.0.0.1')+':8080/health', context=c or None).status==200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+  injguard:                    # 인라인 주입 분류 모델 (Epic 64) — deberta-v3 주입 분류기 고정 판 ONNX, D1-03 인라인(입력 앞·뒤 창). 프로파일 injguard (opt-in)
+    profiles: ["injguard"]
+    build: { context: ./infra/injguard }
+    image: aegismesh-injguard:${APP_ENV:-local}
+    environment:
+      INJGUARD_THREADS: ${INJGUARD_THREADS:-8}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,ssl,sys,urllib.request as u; d=os.environ.get('TLS_DIR'); c=d and ssl.create_default_context(cafile=d+'/ca.crt'); c and c.load_cert_chain(d+'/tls.crt',d+'/tls.key'); sys.exit(0 if u.urlopen(('https://injguard' if d else 'http://127.0.0.1')+':8080/health', context=c or None).status==200 else 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  sandbox-l2:                  # L2 격리 브로커 (Epic 65) — gVisor runsc 고정 판으로 서드파티 L2 에이전트 판정·심사 재생. 프로파일 l2 (opt-in)
+    profiles: ["l2"]
+    build: { context: ., dockerfile: Dockerfile, target: l2, args: { FIDO_MDS_OPTIONAL: "${FIDO_MDS_OPTIONAL:-0}" } }
+    image: aegismesh-sandbox-l2:${APP_ENV:-local}
+    read_only: true
+    tmpfs: ["/tmp:size=256m,uid=10001"]        # runsc 상태 디렉터리. 샌드박스 덧씌움은 Sentry 메모리 — 끝나면 사라진다
+    cap_drop: [ALL]
+    # runsc --rootless 는 사용자 이름공간을 만든다 — Docker 기본 seccomp·AppArmor 가 막으므로 이 두 가지만 푼다(능력 없음·비루트·새 권한 금지)
+    security_opt: ["no-new-privileges:true", "seccomp=unconfined", "apparmor=unconfined"]
+    mem_limit: 3g
+    pids_limit: 1024
+    environment:
+      L2_SLOTS: ${SANDBOX_L2_SLOTS:-4}
+    volumes:
+      - { type: volume, source: appdata, target: /registry, read_only: true, volume: { subpath: registry } }   # 심사 통과 번들만(키·DB 없음)
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,ssl,sys,urllib.request as u; d=os.environ.get('TLS_DIR'); c=d and ssl.create_default_context(cafile=d+'/ca.crt'); c and c.load_cert_chain(d+'/tls.crt',d+'/tls.key'); sys.exit(0 if u.urlopen(('https://sandbox-l2' if d else 'http://127.0.0.1')+':8080/health', context=c or None).status==200 else 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  spire-server:                # 워크로드 신원 SPIRE (Epic 53, 프로파일 spire) — make spire-up 이 노드 토큰·번들·등록을 맞춘다
+    profiles: ["spire"]
+    image: ghcr.io/spiffe/spire-server:1.15.3
+    user: "0:0"                 # 관리 소켓(볼륨 spireserver)을 api·worker 가 연결할 수 있게
+    command: ["-config", "/opt/spire/conf/server/server.conf"]
+    volumes:
+      - ./infra/spire/server.conf:/opt/spire/conf/server/server.conf:ro
+      - spiredata:/opt/spire/data
+      - spireserver:/run/spire/server
+    healthcheck:
+      test: ["CMD", "/opt/spire/bin/spire-server", "healthcheck", "-socketPath", "/run/spire/server/api.sock"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  spire-agent:                 # api 와 PID 네임스페이스를 함께 써서 프로세스 uid 로 워크로드 증명(unix). api 를 다시 만들면 이것도 다시 만든다
+    profiles: ["spire"]
+    image: ghcr.io/spiffe/spire-agent:1.15.3
+    pid: "service:api"
+    command: ["-config", "/opt/spire/conf/aegis/agent.conf", "-joinToken", "${SPIRE_JOIN_TOKEN:-}"]
+    volumes:
+      - ./infra/spire:/opt/spire/conf/aegis:ro
+      - spireagentdata:/opt/spire/data
+      - spireagent:/run/spire/agent
+    healthcheck:
+      test: ["CMD", "/opt/spire/bin/spire-agent", "healthcheck", "-socketPath", "/run/spire/agent/api.sock"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    depends_on:
+      spire-server: { condition: service_healthy }
+volumes:
+  appdata:
+  spiredata:
+  spireagentdata:
+  spireserver:
+  spireagent:

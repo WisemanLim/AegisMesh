@@ -1,0 +1,77 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d8-05
+  name: Knowledge Injection Auditor
+  nameKo: 지식 주입 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D8
+    item: Knowledge injection
+spec:
+  series: C1
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM08
+      - LLM09
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0006
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-345
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: ingestion_audit
+    available:
+    - id: ingestion_audit
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxUnsignedRatio:
+      type: number
+      default: 0.1
+      min: 0
+      max: 1
+      labelKo: 미서명 문서 비율 한도
+      labelEn: Max unsigned ratio
+    spikeFactor:
+      type: number
+      default: 5
+      min: 1
+      labelKo: 급증 배율
+      labelEn: Spike factor

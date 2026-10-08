@@ -1,0 +1,4 @@
+{"name": "dpop-proof-matches", "request": {"session": {"id": "s7", "boundKey": "jkt-A", "proofKey": "jkt-A"}}}
+{"name": "dpop-match-same-device", "request": {"session": {"id": "s7", "boundKey": "jkt-A", "proofKey": "jkt-A", "boundFingerprint": "fp1", "fingerprint": "fp1", "boundIp": "10.0.1.x", "ip": "10.0.1.x"}}}
+{"name": "unbound-bearer-api-token", "request": {"session": {"id": "s7", "proofKey": "jkt-Z"}}}
+{"name": "no-binding-at-all", "request": {"session": {"id": "s7"}}}

@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D7-05.unapproved-change: Dataset integrity 'unapproved-change' → block.
+D7-05.label-shift: Dataset integrity 'label-shift' → alert.
+D7-05.row-spike: Dataset integrity 'row-spike' → alert.
+D7-05.pass: Passed dataset hash and distribution check.

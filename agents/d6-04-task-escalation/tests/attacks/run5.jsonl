@@ -1,0 +1,1 @@
+{"name": "contract-subtasks", "request": {"plan": ["a", "b", "c", "d"], "params": {"contract": {"maxSubtasks": 3}}}, "expect": ["require_approval"]}

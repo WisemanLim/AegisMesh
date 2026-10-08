@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D5-01.no-auth: auth.method=none (excluded when params.requireAuth=false), or requireAuth=true without an auth context. Block → 401.
+D5-01.alg-none: Token with signature algorithm none. Forgeable → block.
+D5-01.no-mfa: Password or basic auth without MFA. Alert.
+D5-01.shared-secret-agent: Agent or service authenticates with an API key or password. Alert recommending workload identity (mTLS/SPIFFE).
+D5-01.pass: Passed authentication strength check.

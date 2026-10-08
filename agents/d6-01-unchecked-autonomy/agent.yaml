@@ -1,0 +1,66 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d6-01
+  name: Autonomy Level Gate
+  nameKo: 통제 없는 자율성 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D6
+    item: Unchecked autonomy
+spec:
+  series: C2
+  gate: tool
+  isolation: L0
+  verdicts:
+  - require_approval
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM03
+      - LLM06
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI01
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0012
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: autonomy_levels
+    available:
+    - id: autonomy_levels
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    autonomyLevel:
+      type: integer
+      default: 1
+      min: 0
+      max: 3
+      labelKo: 자율 수준 0(모두 승인)~3
+      labelEn: Autonomy level 0 (all approval) – 3

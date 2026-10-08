@@ -1,0 +1,11 @@
+apiVersion: aegismesh/v1
+kind: Profile
+metadata: { id: tool-agent, nameKo: 도구 호출 에이전트, order: 3 }
+spec:
+  extends: chatbot-baseline
+  select:
+    - { domain: [D3] }
+    - { id: [D5-01, D5-02, D5-03, D5-04, D5-06, D6-01, D6-03, D6-06, D6-07, X01, X04] }
+  defaultStage: enforce
+  blocking: 도구 관문 차단, 고위험은 승인
+  expectedLatency: 도구 관문 15ms 추가

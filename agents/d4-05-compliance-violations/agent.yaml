@@ -1,0 +1,62 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d4-05
+  name: Regulated Phrase Checker
+  nameKo: 규정 위반 출력 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D4
+    item: Compliance violations
+spec:
+  series: C1
+  gate: output
+  isolation: L0
+  verdicts:
+  - block
+  - transform
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM07
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0012
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: prohibited_phrases
+    available:
+    - id: prohibited_phrases
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    prohibitedPhrases:
+      type: list
+      items: string
+      default: []
+      labelKo: 금지 문구
+      labelEn: Prohibited phrases

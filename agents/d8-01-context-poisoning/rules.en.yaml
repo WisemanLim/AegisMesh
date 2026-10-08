@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D8-01.poisoned-doc: Search document or tool response contains instructions aimed at the model. Block for untrusted sources, alert for trusted ones.
+D8-01.unsigned-doc: Unsigned document under the requireSignedDocs policy. Alert.
+D8-01.pass: Passed context fragment injection scan.

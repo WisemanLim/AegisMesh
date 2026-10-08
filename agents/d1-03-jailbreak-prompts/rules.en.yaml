@@ -1,0 +1,18 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D1-03.dan: Matches jailbreak corpus type 'dan' (after leetspeak normalization). Block.
+D1-03.dev-mode: Matches jailbreak corpus type 'dev-mode' (after leetspeak normalization). Block.
+D1-03.no-rules: Matches jailbreak corpus type 'no-rules' (after leetspeak normalization). Block.
+D1-03.persona: Matches jailbreak corpus type 'persona' (after leetspeak normalization). Block.
+D1-03.fiction-wrapper: Matches jailbreak corpus type 'fiction-wrapper' (after leetspeak normalization). Block.
+D1-03.ko-jailbreak: Matches jailbreak corpus type 'ko-jailbreak' (after leetspeak normalization). Block.
+D1-03.encoded: Matches jailbreak corpus type 'encoded' (after leetspeak normalization). Block.
+D1-03.override: Matches jailbreak corpus type 'override' (after leetspeak normalization). Block.
+D1-03.ko-override: Matches jailbreak corpus type 'ko-override' (after leetspeak normalization). Block.
+D1-03.prompt-extraction: Matches jailbreak corpus type 'prompt-extraction' (after leetspeak normalization). Block.
+D1-03.adversarial-suffix: GCG-style adversarial suffix shape. Heuristic, so alert only.
+D1-03.classifier: Dedicated classifier judged input that no corpus rule matched as a jailbreak or instruction override (at or above the alert threshold). Alert — human review.
+D1-03.classifier-block: Dedicated classifier score at or above the block threshold. Block.
+D1-03.model: The inline injection classifier (head and tail window of the input) judged it an instruction injection (above the alert threshold). Alert — human review.
+D1-03.model-block: The injection classifier score is above the block threshold. Block.
+D1-03.guard: The safety classification model (Qwen3Guard-Gen) judged the input unsafe (harmful intent or a wrapped jailbreak) — deep check after the response, so alert only.
+D1-03.pass: Passed jailbreak corpus, encoding, suffix and classifier checks.

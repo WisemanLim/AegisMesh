@@ -1,0 +1,10 @@
+{"name": "tool", "request": {"tool": {"name": "send_email", "args": {}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}, "expect": ["block"]}
+{"name": "resource", "request": {"tool": {"name": "read_file", "args": {"repo": "repo/payments"}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}, "expect": ["block"]}
+{"name": "action", "request": {"action": {"type": "refund"}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}, "expect": ["require_approval"]}
+{"name": "plan", "request": {"plan": ["요약 작성", "고객에게 메일 발송"], "params": {"scope": {"planKeywords": ["요약"]}}}, "expect": ["require_approval"]}
+{"name": "tool2", "request": {"tool": {"name": "deploy", "args": {}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}, "expect": ["block"]}
+{"name": "project", "request": {"tool": {"name": "read_file", "args": {"project": "hr-secrets"}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}, "expect": ["block"]}
+{"name": "action2", "request": {"action": {"type": "delete_user"}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}, "expect": ["require_approval"]}
+{"name": "tool3", "request": {"tool": {"name": "write_file", "args": {}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}, "expect": ["block"]}
+{"name": "plan2", "request": {"plan": ["refactor auth module"], "params": {"scope": {"planKeywords": ["docs"]}}}, "expect": ["require_approval"]}
+{"name": "tool-empty", "request": {"tool": {"name": "x", "args": {}}, "params": {"scope": {"tools": []}}}, "expect": ["block"]}

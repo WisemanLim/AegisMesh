@@ -1,0 +1,68 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x02
+  name: Cascading Failure Breaker
+  nameKo: 연쇄 실패 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Cascading failures
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI08
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-703
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: propagation_trace
+    available:
+    - id: propagation_trace
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxPropagation:
+      type: integer
+      default: 2
+      min: 1
+      labelKo: 오류 전파 한도(하위 에이전트 수)
+      labelEn: Max error propagation
+    maxErrorRate:
+      type: number
+      default: 0.2
+      min: 0
+      max: 1
+      labelKo: 오류율 한도
+      labelEn: Max error rate

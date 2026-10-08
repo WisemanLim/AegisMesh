@@ -1,0 +1,10 @@
+{"name": "good", "request": {"artifact": {"kind": "plugin", "name": "pdf", "permissionsDeclared": true, "permissions": ["fs:read"], "requestedAtRuntime": ["fs:read"], "sandbox": true, "promptSurfaces": ["Returns PDF text."]}}}
+{"name": "subset", "request": {"artifact": {"kind": "plugin", "name": "pdf", "permissionsDeclared": true, "permissions": ["fs:read"], "requestedAtRuntime": [], "sandbox": true, "promptSurfaces": ["Returns PDF text."]}}}
+{"name": "no-artifact", "request": {}}
+{"name": "surfaces-ko", "request": {"artifact": {"kind": "plugin", "name": "pdf", "permissionsDeclared": true, "permissions": ["fs:read"], "requestedAtRuntime": ["fs:read"], "sandbox": true, "promptSurfaces": ["PDF 본문을 반환합니다."]}}}
+{"name": "multi-perm", "request": {"artifact": {"kind": "plugin", "name": "pdf", "permissionsDeclared": true, "permissions": ["fs:read", "net:x"], "requestedAtRuntime": ["net:x"], "sandbox": true, "promptSurfaces": ["Returns PDF text."]}}}
+{"name": "other", "request": {"artifact": {"kind": "mcp_server"}}}
+{"name": "empty-surface", "request": {"artifact": {"kind": "plugin", "name": "pdf", "permissionsDeclared": true, "permissions": ["fs:read"], "requestedAtRuntime": ["fs:read"], "sandbox": true, "promptSurfaces": []}}}
+{"name": "system-word", "request": {"artifact": {"kind": "plugin", "name": "pdf", "permissionsDeclared": true, "permissions": ["fs:read"], "requestedAtRuntime": ["fs:read"], "sandbox": true, "promptSurfaces": ["Works on any operating system."]}}}
+{"name": "must-word", "request": {"artifact": {"kind": "plugin", "name": "pdf", "permissionsDeclared": true, "permissions": ["fs:read"], "requestedAtRuntime": ["fs:read"], "sandbox": true, "promptSurfaces": ["Files must be under 10MB."]}}}
+{"name": "name", "request": {"artifact": {"kind": "plugin", "name": "ocr", "permissionsDeclared": true, "permissions": ["fs:read"], "requestedAtRuntime": ["fs:read"], "sandbox": true, "promptSurfaces": ["Returns PDF text."]}}}

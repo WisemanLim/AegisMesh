@@ -1,0 +1,10 @@
+{"name": "repeat3", "request": {"tool": {"name": "search", "args": {"q": "a"}}, "history": [{"tool": "search", "args": {"q": "a"}}, {"tool": "search", "args": {"q": "a"}}]}, "expect": ["block"]}
+{"name": "repeat5", "request": {"tool": {"name": "poll", "args": {}}, "history": [{"tool": "poll", "args": {}}, {"tool": "poll", "args": {}}, {"tool": "poll", "args": {}}, {"tool": "poll", "args": {}}]}, "expect": ["block"]}
+{"name": "stuck", "request": {"history": [{"stateHash": "s"}, {"stateHash": "s"}, {"stateHash": "s"}, {"stateHash": "s"}]}, "expect": ["block"]}
+{"name": "stuck-long", "request": {"history": [{"stateHash": "a"}, {"stateHash": "z"}, {"stateHash": "z"}, {"stateHash": "z"}, {"stateHash": "z"}, {"stateHash": "z"}, {"stateHash": "z"}]}, "expect": ["block"]}
+{"name": "cycle", "request": {"history": [{"stateHash": "a"}, {"stateHash": "b"}, {"stateHash": "a"}, {"stateHash": "b"}, {"stateHash": "a"}, {"stateHash": "b"}]}, "expect": ["alert"]}
+{"name": "timeout", "request": {"params": {"elapsedSec": 3600}}, "expect": ["alert"]}
+{"name": "repeat-ko", "request": {"tool": {"name": "조회", "args": {"id": 1}}, "history": [{"tool": "조회", "args": {"id": 1}}, {"tool": "조회", "args": {"id": 1}}]}, "expect": ["block"]}
+{"name": "timeout-custom", "request": {"params": {"elapsedSec": 61, "maxRunSec": 60}}, "expect": ["alert"]}
+{"name": "cycle2", "request": {"history": [{"stateHash": "x"}, {"stateHash": "y"}, {"stateHash": "x"}, {"stateHash": "y"}, {"stateHash": "x"}, {"stateHash": "y"}, {"stateHash": "x"}, {"stateHash": "y"}]}, "expect": ["alert"]}
+{"name": "repeat-args", "request": {"tool": {"name": "fetch", "args": {"u": 1, "v": 2}}, "history": [{"tool": "fetch", "args": {"v": 2, "u": 1}}, {"tool": "fetch", "args": {"v": 2, "u": 1}}]}, "expect": ["block"]}

@@ -1,0 +1,10 @@
+{"name": "tokens", "request": {"params": {"usage": {"tokens": 100001}, "quota": {"tokens": 100000}}}, "expect": ["block"]}
+{"name": "seconds", "request": {"params": {"usage": {"seconds": 61}, "quota": {"seconds": 60}}}, "expect": ["block"]}
+{"name": "concurrency", "request": {"params": {"usage": {"concurrency": 10}, "quota": {"concurrency": 10}}}, "expect": ["block"]}
+{"name": "near", "request": {"params": {"usage": {"tokens": 95}, "quota": {"tokens": 100}}}, "expect": ["alert"]}
+{"name": "cost", "request": {"params": {"usage": {"costUsd": 120}, "quota": {"costUsd": 100}}}, "expect": ["block"]}
+{"name": "storage-near", "request": {"params": {"usage": {"storageMb": 950}, "quota": {"storageMb": 1000}}}, "expect": ["alert"]}
+{"name": "big-call", "request": {"tool": {"name": "llm", "args": {"max_tokens": 200000}}}, "expect": ["alert"]}
+{"name": "multi", "request": {"params": {"usage": {"tokens": 10, "seconds": 999}, "quota": {"tokens": 100, "seconds": 60}}}, "expect": ["block"]}
+{"name": "near-cost", "request": {"params": {"usage": {"costUsd": 92}, "quota": {"costUsd": 100}}}, "expect": ["alert"]}
+{"name": "storage", "request": {"params": {"usage": {"storageMb": 2000}, "quota": {"storageMb": 1000}}}, "expect": ["block"]}

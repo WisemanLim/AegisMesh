@@ -1,0 +1,10 @@
+{"name": "expired", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1789999999}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "expired-long", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1789913600}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "aud", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "aud": "other.svc"}}, "params": {"now": 1790000000, "audience": "api.acme"}}, "expect": ["block"]}
+{"name": "aud-missing", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060}}, "params": {"now": 1790000000, "audience": "api.acme"}}, "expect": ["block"]}
+{"name": "client", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "azp": "mobile"}}, "params": {"now": 1790000000, "clientId": "web"}}, "expect": ["block"]}
+{"name": "nbf", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000999, "nbf": 1790003600}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "scope", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "scope": "orders:read"}}, "params": {"now": 1790000000}, "tool": {"name": "t", "requiredScopes": ["orders:write"]}}, "expect": ["block"]}
+{"name": "scope-none", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060}}, "params": {"now": 1790000000}, "tool": {"name": "t", "requiredScopes": ["x"]}}, "expect": ["block"]}
+{"name": "long-lived", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1797776000, "iat": 1790000000}}, "params": {"now": 1790000000}}, "expect": ["alert"]}
+{"name": "long-lived-custom", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790007200, "iat": 1790000000}}, "params": {"now": 1790000000, "maxLifetimeSec": 3600}}, "expect": ["alert"]}

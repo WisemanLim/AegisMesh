@@ -1,0 +1,94 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d2-05
+  name: Training Data Recall Detector
+  nameKo: 학습 데이터 재현 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D2
+    item: Training data recall
+spec:
+  series: C3
+  gate: output
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0010
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-200
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: recall_probe
+    available:
+    - id: recall_probe
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    trainingCanaries:
+      type: list
+      items: string
+      default: []
+      labelKo: 학습 데이터 카나리
+      labelEn: Training-data canaries
+    protectedCorpus:
+      type: list
+      items: string
+      default: []
+      labelKo: 보호 말뭉치 문장
+      labelEn: Protected corpus passages
+    maxExtractionRate:
+      type: number
+      default: 0.001
+      min: 0
+      max: 1
+      labelKo: 배포 게이트 — 추출(정확 재현)률 기준
+      labelEn: Release gate — extraction (verbatim) rate limit
+    maxMiaAuc:
+      type: number
+      default: 0.6
+      min: 0.5
+      max: 1
+      labelKo: 배포 게이트 — 멤버십 추론 AUC 기준
+      labelEn: Release gate — membership-inference AUC limit
+    maxDpEpsilon:
+      type: number
+      min: 0
+      labelKo: 배포 게이트 — 차등 프라이버시 ε 상한(선택)
+      labelEn: Release gate — DP ε upper bound (optional)

@@ -1,0 +1,74 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d4-03
+  name: Decision Confidence Gate
+  nameKo: 잘못된 결정 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D4
+    item: Incorrect decisions
+spec:
+  series: C1
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - require_approval
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM07
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0012
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: decision_gate
+    available:
+    - id: decision_gate
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    decisionThreshold:
+      type: number
+      default: 0.75
+      min: 0
+      max: 1
+      labelKo: 결정 신뢰 임계(미만 → 승인)
+      labelEn: Decision confidence threshold (below → approval)
+    blockBelow:
+      type: number
+      default: 0.3
+      min: 0
+      max: 1
+      labelKo: 차단 신뢰 하한
+      labelEn: Block below confidence
+    thresholdsByAction:
+      type: map
+      labelKo: '행동별 결정 신뢰도 임계 {payment: 0.9, deploy: 0.85, notify: 0.8}'
+      labelEn: 'Decision threshold by action {payment: 0.9, deploy: 0.85, notify:
+        0.8}'

@@ -1,0 +1,62 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d8-04
+  name: Stored Prompt Attack Guard
+  nameKo: 저장형 프롬프트 공격 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D8
+    item: Stored prompt attacks
+spec:
+  series: C1
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM08
+      - LLM09
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0006
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-79
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: store_scan
+    available:
+    - id: store_scan
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1

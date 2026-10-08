@@ -1,0 +1,1 @@
+{"name": "write-readonly-mount", "request": {"tool": {"name": "write_file", "args": {"path": "/repo/src/app.py", "content": "x"}}, "params": {"allowedPaths": ["/workspace", "/repo"], "readOnlyPaths": ["/repo"]}}, "expect": ["block"]}

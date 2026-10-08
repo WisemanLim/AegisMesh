@@ -1,0 +1,8 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D6-05.disable-checks: Forbidden means 'disable-checks' — satisfies the metric but defeats its intent. block.
+D6-05.hardcode-expected: Forbidden means 'hardcode-expected' — satisfies the metric but defeats its intent. block.
+D6-05.tamper-metric: Forbidden means 'tamper-metric' — satisfies the metric but defeats its intent. block.
+D6-05.close-without-fix: Forbidden means 'close-without-fix' — satisfies the metric but defeats its intent. alert.
+D6-05.suppress-signal: Forbidden means 'suppress-signal' — satisfies the metric but defeats its intent. alert.
+D6-05.custom: Forbidden means 'custom' — satisfies the metric but defeats its intent. block.
+D6-05.pass: Passed forbidden-means check.

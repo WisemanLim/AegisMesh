@@ -1,0 +1,74 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d2-07
+  name: Memory Persistence Auditor
+  nameKo: 메모리 잔존 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D2
+    item: Memory persistence
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0010
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-226
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: deletion_audit
+    available:
+    - id: deletion_audit
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    backupGraceSec:
+      type: integer
+      default: 2592000
+      min: 0
+      labelKo: 백업 삭제 유예(초)
+      labelEn: Backup deletion grace (s)
+    defaultTtlDays:
+      type: integer
+      min: 1
+      labelKo: 메모리 기본 TTL(일, 항목 TTL 없을 때)
+      labelEn: Default memory TTL (days, when item has none)

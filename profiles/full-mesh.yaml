@@ -1,0 +1,9 @@
+apiVersion: aegismesh/v1
+kind: Profile
+metadata: { id: full-mesh, nameKo: 전체 92종, order: 5 }
+spec:
+  select:
+    - { all: true }
+  defaultStage: enforce
+  blocking: 정책 파일로 세부 제어
+  expectedLatency: NFR-L 예산 전체 사용

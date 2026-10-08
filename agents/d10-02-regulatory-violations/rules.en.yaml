@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D10-02.retention-short: Regulatory control mapping check 'retention-short' → block.
+D10-02.egress-violation: Regulatory control mapping check 'egress-violation' → block.
+D10-02.unmapped-controls: Regulatory control mapping check 'unmapped-controls' → alert.
+D10-02.pass: Passed control mapping, retention and transfer policy checks.

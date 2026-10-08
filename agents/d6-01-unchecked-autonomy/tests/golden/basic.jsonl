@@ -1,0 +1,10 @@
+{"name": "low", "request": {"action": {"type": "summarize"}}}
+{"name": "medium-l1", "request": {"action": {"type": "draft_email", "impact": "medium"}}}
+{"name": "approved", "request": {"action": {"type": "deploy", "impact": "critical", "approved": true}}}
+{"name": "l3-high", "request": {"action": {"type": "deploy", "impact": "high"}, "params": {"autonomyLevel": 3}}}
+{"name": "no-action", "request": {}}
+{"name": "tool-approved", "request": {"action": {"type": "x", "impact": "high"}, "tool": {"name": "x", "approved": true}}}
+{"name": "l2-medium-ext", "request": {"action": {"type": "post", "impact": "medium", "external": true}, "params": {"autonomyLevel": 2}}}
+{"name": "low-ext", "request": {"action": {"type": "ping", "external": true}}}
+{"name": "l0-none", "request": {"params": {"autonomyLevel": 0}}}
+{"name": "l2-high", "request": {"action": {"type": "update", "impact": "high"}, "params": {"autonomyLevel": 2}}}

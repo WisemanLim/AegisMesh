@@ -1,0 +1,65 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d1-01
+  name: Indirect Injection Detector
+  nameKo: 악성 지시 주입 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D1
+    item: Malicious instructions
+spec:
+  series: C1
+  gate: input
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM01
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI01
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0011
+      - AML.TA0005
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-77
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: spotlight_classifier
+    available:
+    - id: spotlight_classifier
+      kind: builtin
+    - id: spotlight_rules
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1

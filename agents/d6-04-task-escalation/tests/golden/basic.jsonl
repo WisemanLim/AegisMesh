@@ -1,0 +1,10 @@
+{"name": "in-scope", "request": {"tool": {"name": "search_docs", "args": {}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}}
+{"name": "read", "request": {"tool": {"name": "read_file", "args": {"repo": "repo/docs-main"}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}}
+{"name": "action-ok", "request": {"tool": {"name": "summarize", "args": {}}, "action": {"type": "summarize"}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}}
+{"name": "no-scope", "request": {"tool": {"name": "delete_everything", "args": {}}}}
+{"name": "no-resource", "request": {"tool": {"name": "read_file", "args": {}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}}
+{"name": "plan-ok", "request": {"plan": ["요약 작성"], "params": {"scope": {"planKeywords": ["요약"]}}}}
+{"name": "wildcard", "request": {"tool": {"name": "anything", "args": {}}, "params": {"scope": {"tools": ["*"]}}}}
+{"name": "answer", "request": {"action": {"type": "answer"}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}}
+{"name": "search2", "request": {"tool": {"name": "search_web", "args": {}}, "params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}}
+{"name": "empty", "request": {"params": {"scope": {"tools": ["search_*", "read_file", "summarize"], "actions": ["summarize", "answer"], "resources": ["repo/docs*"]}}}}

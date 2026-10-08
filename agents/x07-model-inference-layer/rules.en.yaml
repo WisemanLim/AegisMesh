@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X07.open-endpoint: Inference layer check 'open-endpoint' → block.
+X07.vulnerable-server: Inference layer check 'vulnerable-server' → block.
+X07.artifact-mismatch: Inference layer check 'artifact-mismatch' → block.
+X07.extraction-pattern: Inference layer check 'extraction-pattern' → alert.
+X07.pass: Passed inference layer check.

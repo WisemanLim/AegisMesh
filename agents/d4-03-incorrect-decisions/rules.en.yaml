@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D4-03.low-confidence: Confidence of a decision that leads to a real action is below the threshold. Human approval.
+D4-03.ungrounded: Decision without grounding citations. Human approval.
+D4-03.block-low: Decision confidence below the block floor (blockBelow). Block.
+D4-03.pass: Passed decision confidence gate.

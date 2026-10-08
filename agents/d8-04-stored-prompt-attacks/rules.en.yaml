@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D8-04.directive-stored: Memory or document save arguments contain instructions aimed at the model. Save blocked.
+D8-04.exec-marker: Template or script execution markers in save arguments. Save blocked.
+D8-04.pass: Passed save-time scan.

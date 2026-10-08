@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D2-05.canary: A canary string planted in training data was reproduced in the output. Block.
+D2-05.verbatim: Three or more 8-grams from a protected corpus reproduced. Alert.
+D2-05.pass: Passed canary and long-form reproduction checks.

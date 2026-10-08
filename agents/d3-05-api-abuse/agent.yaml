@@ -1,0 +1,80 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d3-05
+  name: API Abuse Guard
+  nameKo: API 남용 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D3
+    item: API abuse
+spec:
+  series: C2
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - require_approval
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM03
+      - LLM06
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI02
+      - ASI05
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0011
+      - AML.TA0012
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-770
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: usage_limits
+    available:
+    - id: usage_limits
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    rateLimit:
+      type: map
+      labelKo: 호출 한도 {calls, windowSec}
+      labelEn: Rate limit {calls, windowSec}
+    maxBatch:
+      type: integer
+      default: 1000
+      min: 1
+      labelKo: 최대 일괄 처리 건수
+      labelEn: Max batch size
+    quotas:
+      type: map
+      labelKo: '주체별 쿼터 {주체|*: {perHour, perDay, concurrency}}'
+      labelEn: 'Per-principal quotas {principal|*: {perHour, perDay, concurrency}}'

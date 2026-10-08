@@ -1,0 +1,10 @@
+{"name": "allowed", "request": {"tool": {"name": "search_docs", "args": {}}, "params": {"toolAllowlist": ["search_docs", "get_order"]}}}
+{"name": "no-allowlist", "request": {"tool": {"name": "get_order", "args": {}}}}
+{"name": "exec-approved", "request": {"tool": {"name": "run_python", "args": {"code": "print(1)"}, "approved": true}}}
+{"name": "execute-word", "request": {"tool": {"name": "execute_trade_report", "args": {}}}}
+{"name": "evaluation", "request": {"tool": {"name": "evaluation_summary", "args": {}}}}
+{"name": "allowed-exec", "request": {"tool": {"name": "run_code", "args": {}, "approved": true}, "params": {"toolAllowlist": ["run_code"]}}}
+{"name": "shell-word", "request": {"tool": {"name": "shellfish_menu", "args": {}}}}
+{"name": "python-docs", "request": {"tool": {"name": "search_docs", "args": {"q": "python tutorial"}}}}
+{"name": "runbook", "request": {"tool": {"name": "runbook_lookup", "args": {}}}}
+{"name": "spawnpoint", "request": {"tool": {"name": "get_spawnpoint", "args": {}}}}

@@ -1,0 +1,10 @@
+{"name": "low-pay", "request": {"action": {"type": "payment", "confidence": 0.6}}, "expect": ["require_approval"]}
+{"name": "ungrounded-deploy", "request": {"action": {"type": "deploy", "confidence": 0.9, "grounded": false}}, "expect": ["require_approval"]}
+{"name": "very-low", "request": {"action": {"type": "transfer", "confidence": 0.1}}, "expect": ["block"]}
+{"name": "irreversible", "request": {"action": {"type": "purge_archive", "reversible": false, "confidence": 0.5}}, "expect": ["require_approval"]}
+{"name": "critical", "request": {"action": {"type": "update_limits", "impact": "critical", "confidence": 0.7}}, "expect": ["require_approval"]}
+{"name": "notify", "request": {"action": {"type": "notify_all_customers", "confidence": 0.55}}, "expect": ["require_approval"]}
+{"name": "ko", "request": {"action": {"type": "결제_승인", "confidence": 0.4}}, "expect": ["require_approval"]}
+{"name": "loan", "request": {"action": {"type": "approve_loan", "confidence": 0.65, "grounded": false}}, "expect": ["require_approval"]}
+{"name": "custom-block", "request": {"action": {"type": "payment", "confidence": 0.45}, "params": {"blockBelow": 0.5}}, "expect": ["block"]}
+{"name": "publish", "request": {"action": {"type": "publish_report", "confidence": 0.7}}, "expect": ["require_approval"]}

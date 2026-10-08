@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D3-01.destructive-sql: Schema-destroying SQL such as DROP or TRUNCATE in tool arguments. Block.
+D3-01.unbounded-write: DELETE or UPDATE without WHERE. Risk of changing every row → block.
+D3-01.high-risk-tool: Hard-to-reverse tool such as delete, transfer or deploy. Waits for human approval (call again with approved=true after approval).
+D3-01.dry-run-impact: Dry run (transaction rollback mode) affects more rows than the threshold, or the change is irreversible. Human approval.
+D3-01.pass: Passed tool risk catalog check.

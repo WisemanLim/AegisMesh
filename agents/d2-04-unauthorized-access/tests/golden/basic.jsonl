@@ -1,0 +1,10 @@
+{"name": "public", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "d1"}]}}
+{"name": "acl-user", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "d2", "acl": ["u1"]}]}}
+{"name": "acl-role", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["finance"]}}, "retrieval": [{"id": "d3", "acl": ["role:finance"]}]}}
+{"name": "star", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "d4", "acl": ["*"]}]}}
+{"name": "obo-ok", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["reader"]}}, "retrieval": [{"id": "d5", "acl": ["u1", "bot"]}]}}
+{"name": "obo-role", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["hr"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["hr"]}}, "retrieval": [{"id": "d6", "acl": ["role:hr"]}]}}
+{"name": "none", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}}}
+{"name": "multi-ok", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["a"]}}, "retrieval": [{"id": "x", "acl": ["role:a"]}, {"id": "y"}]}}
+{"name": "anon-public", "request": {"retrieval": [{"id": "z"}]}}
+{"name": "acl-list", "request": {"subject": {"tenant": "acme", "principal": {"id": "u9", "roles": []}}, "retrieval": [{"id": "q", "acl": ["u1", "u9"]}]}}

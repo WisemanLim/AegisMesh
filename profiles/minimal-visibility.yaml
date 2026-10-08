@@ -1,0 +1,10 @@
+# PRD §11.4 — 도입 첫 주. 차단 없이 현황 파악
+apiVersion: aegismesh/v1
+kind: Profile
+metadata: { id: minimal-visibility, nameKo: 관측 우선 최소 구성, order: 1 }
+spec:
+  select:
+    - { series: [C3, C4] }
+  defaultStage: observe
+  blocking: 전부 alert
+  expectedLatency: 요청 경로 영향 없음

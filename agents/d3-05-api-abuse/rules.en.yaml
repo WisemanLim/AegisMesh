@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D3-05.rate-limit: Calls within the time window at or above the limit (params.rateLimit). Block.
+D3-05.bulk-request: Bulk parameter such as limit or count exceeds maxBatch. Human approval.
+D3-05.collection-write: DELETE, PUT or PATCH on a collection path without an identifier. Human approval.
+D3-05.quota-exceeded: Principal's daily quota used up (caller-aggregated usageToday). Block.
+D3-05.pass: Passed API usage limit check.

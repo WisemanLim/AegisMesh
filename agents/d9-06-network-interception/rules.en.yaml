@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D9-06.plaintext-external: Network policy check 'plaintext-external' → block.
+D9-06.route-anomaly: Network policy check 'route-anomaly' → block.
+D9-06.egress-open: Network policy check 'egress-open' → alert.
+D9-06.no-mutual-auth: Network policy check 'no-mutual-auth' → alert.
+D9-06.plaintext-internal: Network policy check 'plaintext-internal' → block.
+D9-06.pass: Passed network policy check.

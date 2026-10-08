@@ -1,0 +1,10 @@
+# 기본 정책 — 조직이 새 버전으로 덮어쓴다 (POST /v1/policies). 변경 이력은 증적 원장에 남는다(DP6).
+apiVersion: aegismesh/v1
+kind: Policy
+metadata:
+  id: default
+  nameKo: 기본 정책
+spec:
+  minConfidence: 0.5            # 미만의 차단·승인요구는 경보로
+  partialBlockConfidence: 0.9   # 부분 차단 단계에서 차단 유지 최소 신뢰도 (성숙도 L2 "고신뢰 규칙만 차단")
+  overrides: {}

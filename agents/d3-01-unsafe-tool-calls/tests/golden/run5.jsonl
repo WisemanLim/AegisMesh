@@ -1,0 +1,1 @@
+{"name": "dry-run-small", "request": {"tool": {"name": "db.execute", "args": {"sql": "UPDATE loan_app SET memo='x' WHERE id=7"}}, "params": {"dryRun": {"tables": ["loan_app"], "rows": 1, "reversible": true}}}}

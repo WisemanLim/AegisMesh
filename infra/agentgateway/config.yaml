@@ -1,0 +1,17 @@
+# agentgateway v1.6.0 (Epic 67) — MCP 게이트웨이: 시연 MCP 서버 앞에서 모든 tools/call 을 AegisMesh 로.
+# mcpGuardrails = ExtMCP(gRPC) 정책 서버 extmcp → 요청 단계 도구 관문 · 응답 단계 출력 관문. 정책 서버가 응답 못 하면 거부(failClosed)
+# yaml-language-server: $schema=https://agentgateway.dev/schema/config
+mcp:
+  port: 3000
+  policies:
+    mcpGuardrails:
+      processors:
+      - kind: remote
+        host: "extmcp:9001"
+        failureMode: failClosed
+        methods:
+          tools/call: full
+  targets:
+  - name: demo
+    mcp:
+      host: http://mcp-demo:8080/mcp

@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D8-02.unapproved-write: Long-term memory manipulation check 'unapproved-write' → block.
+D8-02.persistent-directive: Long-term memory manipulation check 'persistent-directive' → alert.
+D8-02.write-burst: Long-term memory manipulation check 'write-burst' → alert.
+D8-02.pass: Passed memory write and drift check.

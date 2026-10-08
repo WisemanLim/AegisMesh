@@ -1,0 +1,6 @@
+# garak 실행 설정 (Epic 59) — 보고서는 /out(OUT 디렉터리), 병렬 시도 8
+system:
+  parallel_attempts: 8
+  lite: true
+reporting:
+  report_dir: /out

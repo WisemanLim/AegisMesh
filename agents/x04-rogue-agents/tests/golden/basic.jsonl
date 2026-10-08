@@ -1,0 +1,10 @@
+{"name": "registered", "request": {"subject": {"principal": {"type": "agent", "id": "billing"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000}}}
+{"name": "human", "request": {"subject": {"principal": {"id": "u1"}}, "params": {"registeredAgents": ["billing"]}}}
+{"name": "no-registry", "request": {"subject": {"principal": {"type": "agent", "id": "x"}}}}
+{"name": "heartbeat-ok", "request": {"subject": {"principal": {"type": "agent", "id": "support"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000, "lastHeartbeat": {"support": 1789999970}}}}
+{"name": "obo-registered", "request": {"subject": {"principal": {"id": "u1"}, "onBehalfOf": {"type": "agent", "id": "billing"}}, "params": {"registeredAgents": ["billing"]}}}
+{"name": "service", "request": {"subject": {"principal": {"type": "service", "id": "etl"}}, "params": {"registeredAgents": []}}}
+{"name": "empty", "request": {}}
+{"name": "terminated-other", "request": {"subject": {"principal": {"type": "agent", "id": "billing"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000, "terminatedAgents": ["old-bot"]}}}
+{"name": "hb-custom", "request": {"subject": {"principal": {"type": "agent", "id": "billing"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000, "lastHeartbeat": {"billing": 1789999500}, "heartbeatTimeoutSec": 600}}}
+{"name": "hb-none", "request": {"subject": {"principal": {"type": "agent", "id": "support"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000, "lastHeartbeat": {}}}}

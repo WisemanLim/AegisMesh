@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D9-07.flood: Traffic check 'flood' → block.
+D9-07.surge: Traffic check 'surge' → alert.
+D9-07.no-rate-limit: Traffic check 'no-rate-limit' → alert.
+D9-07.unbounded-scale: Traffic check 'unbounded-scale' → alert.
+D9-07.pass: Passed traffic check.

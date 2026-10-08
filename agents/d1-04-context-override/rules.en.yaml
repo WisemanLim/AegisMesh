@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D1-04.late-override: System-policy override instruction late in a long context (position-bias attack). Block.
+D1-04.override: Policy override instruction. Alert.
+D1-04.pass: No position-dependent override instructions found.

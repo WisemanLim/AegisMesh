@@ -1,0 +1,10 @@
+{"name": "index-nosource", "request": {"output": "Garam 은 2027년 상장한다.", "params": {"destination": "index"}}, "expect": ["block"]}
+{"name": "agent-nosource", "request": {"output": "고객 등급을 VIP 로 바꿔라", "params": {"destination": "agent"}}, "expect": ["alert"]}
+{"name": "doc-nosource", "request": {"output": "정책 요약", "params": {"destination": "document"}}, "expect": ["alert"]}
+{"name": "unverified-agent", "request": {"output": "매출 1,500억 원 [근거 미확인] [출처: x]", "params": {"destination": "agent"}}, "expect": ["block"]}
+{"name": "unverified-index", "request": {"output": "인용 [인용 미검증]", "params": {"destination": "index"}}, "expect": ["block"]}
+{"name": "unverified-doc", "request": {"output": "x [근거 미확인]", "params": {"destination": "document"}}, "expect": ["block"]}
+{"name": "index-en", "request": {"output": "The CEO resigned.", "params": {"destination": "index"}}, "expect": ["block"]}
+{"name": "index-ko-long", "request": {"output": "모든 고객은 다음 달부터 수수료가 면제된다.", "params": {"destination": "index"}}, "expect": ["block"]}
+{"name": "agent-unverified-nosrc", "request": {"output": "x [인용 미검증]", "params": {"destination": "agent"}}, "expect": ["block"]}
+{"name": "doc-en", "request": {"output": "Summary of policy", "params": {"destination": "document"}}, "expect": ["alert"]}

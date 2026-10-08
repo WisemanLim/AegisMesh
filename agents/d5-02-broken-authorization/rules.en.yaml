@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D5-02.cross-tenant: Principal tenant differs from resource tenant. Block (403).
+D5-02.owner-mismatch: Not the resource owner and no privileged role (IDOR). Block (403).
+D5-02.role-missing: None of params.requiredRoles is held. Block (403).
+D5-02.pass: Passed object-level authorization check.

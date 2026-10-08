@@ -1,0 +1,10 @@
+{"name": "traversal", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/../etc/passwd"}}}, "expect": ["block"]}
+{"name": "traversal-rel", "request": {"tool": {"name": "write_file", "args": {"path": "../../root/.bashrc"}}}, "expect": ["block"]}
+{"name": "env", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/.env"}}}, "expect": ["block"]}
+{"name": "key", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/deploy/id_rsa"}}}, "expect": ["block"]}
+{"name": "aws", "request": {"tool": {"name": "upload_file", "args": {"path": "/workspace/.aws/credentials"}}}, "expect": ["block"]}
+{"name": "write-outside", "request": {"tool": {"name": "write_file", "args": {"path": "/etc/hosts", "content": "1.2.3.4 bank"}}}, "expect": ["block"]}
+{"name": "read-outside", "request": {"tool": {"name": "read_file", "args": {"path": "/var/log/app.log"}}}, "expect": ["require_approval"]}
+{"name": "mass-delete", "request": {"tool": {"name": "delete_files", "args": {"pattern": "/workspace/*"}}}, "expect": ["require_approval"]}
+{"name": "pem", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/certs/server.pem"}}}, "expect": ["block"]}
+{"name": "git-creds", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/.git/config"}}}, "expect": ["block"]}

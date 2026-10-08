@@ -1,0 +1,10 @@
+{"name": "fresh", "request": {"tool": {"name": "search", "args": {"q": "a"}}}}
+{"name": "two-repeat", "request": {"tool": {"name": "search", "args": {"q": "a"}}, "history": [{"tool": "search", "args": {"q": "a"}}]}}
+{"name": "varied", "request": {"tool": {"name": "search", "args": {"q": "c"}}, "history": [{"tool": "search", "args": {"q": "a"}}, {"tool": "search", "args": {"q": "b"}}]}}
+{"name": "progress", "request": {"history": [{"stateHash": "s1"}, {"stateHash": "s2"}, {"stateHash": "s3"}]}}
+{"name": "stuck-3", "request": {"history": [{"stateHash": "s"}, {"stateHash": "s"}, {"stateHash": "s"}]}}
+{"name": "time-ok", "request": {"params": {"elapsedSec": 100}}}
+{"name": "custom-repeat", "request": {"tool": {"name": "poll", "args": {}}, "history": [{"tool": "poll", "args": {}}, {"tool": "poll", "args": {}}, {"tool": "poll", "args": {}}], "params": {"maxRepeat": 10}}}
+{"name": "no-history", "request": {}}
+{"name": "alt-tools", "request": {"tool": {"name": "a", "args": {}}, "history": [{"tool": "b", "args": {}}, {"tool": "a", "args": {}}, {"tool": "b", "args": {}}]}}
+{"name": "progress-6", "request": {"history": [{"stateHash": "s0"}, {"stateHash": "s1"}, {"stateHash": "s2"}, {"stateHash": "s3"}, {"stateHash": "s4"}, {"stateHash": "s5"}]}}

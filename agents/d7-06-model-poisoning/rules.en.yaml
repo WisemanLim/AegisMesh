@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D7-06.dangerous-deserialization: Model artifact check 'dangerous-deserialization' → block.
+D7-06.unsafe-format: Model artifact check 'unsafe-format' → block.
+D7-06.hash-mismatch: Model artifact check 'hash-mismatch' → block.
+D7-06.bad-signature: Model artifact check 'bad-signature' → block.
+D7-06.unsigned: Model artifact check 'unsigned' → alert.
+D7-06.pass: Passed model format, hash and signature check.

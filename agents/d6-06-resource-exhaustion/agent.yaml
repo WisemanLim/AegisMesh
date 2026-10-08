@@ -1,0 +1,81 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d6-06
+  name: Resource Quota Guard
+  nameKo: 자원 고갈 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D6
+    item: Resource exhaustion
+spec:
+  series: C2
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM03
+      - LLM06
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI01
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0012
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-400
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: quota_check
+    available:
+    - id: quota_check
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    quota:
+      type: map
+      labelKo: 할당량 {tokens, calls, cpuSec, …}
+      labelEn: Quota {tokens, calls, cpuSec, …}
+    warnRatio:
+      type: number
+      default: 0.9
+      min: 0
+      max: 1
+      labelKo: 경고 비율
+      labelEn: Warn ratio
+    maxTokensPerCall:
+      type: integer
+      default: 32000
+      min: 1
+      labelKo: 호출당 최대 토큰
+      labelEn: Max tokens per call

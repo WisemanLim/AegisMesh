@@ -1,0 +1,81 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d6-02
+  name: Recursion Limiter
+  nameKo: 재귀 행동 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D6
+    item: Recursive actions
+spec:
+  series: C2
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - require_approval
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM03
+      - LLM06
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI01
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0012
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-674
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: lineage_limits
+    available:
+    - id: lineage_limits
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxDepth:
+      type: integer
+      default: 5
+      min: 1
+      labelKo: 최대 위임 깊이
+      labelEn: Max delegation depth
+    maxFanout:
+      type: integer
+      default: 10
+      min: 1
+      labelKo: 최대 동시 하위 생성
+      labelEn: Max fan-out
+    spawnBudget:
+      type: integer
+      min: 0
+      labelKo: 하위 에이전트 생성 예산
+      labelEn: Spawn budget

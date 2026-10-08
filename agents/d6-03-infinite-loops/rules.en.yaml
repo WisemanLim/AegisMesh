@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D6-03.repeat-call: Same tool and arguments called maxRepeat times in a row. Block.
+D6-03.no-progress: State hash unchanged for maxNoProgress steps. Block.
+D6-03.cycle: Oscillating between two states. Alert.
+D6-03.timeout: Run time limit exceeded. Alert (resuming via durable execution recommended).
+D6-03.pass: Passed repetition and progress checks.

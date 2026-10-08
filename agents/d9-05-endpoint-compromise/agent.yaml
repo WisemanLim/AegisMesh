@@ -1,0 +1,62 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d9-05
+  name: Endpoint Posture Checker
+  nameKo: 엔드포인트 침해 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D9
+    item: Endpoint compromise
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-522
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: endpoint_posture
+    available:
+    - id: endpoint_posture
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxSessionHours:
+      type: number
+      default: 12
+      min: 1
+      labelKo: 최대 세션(시간)
+      labelEn: Max session (h)
+    requireHwKey:
+      type: boolean
+      default: false
+      labelKo: 하드웨어 키 필수
+      labelEn: Require hardware key

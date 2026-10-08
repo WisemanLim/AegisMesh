@@ -1,0 +1,71 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d8-02
+  name: Memory Manipulation Detector
+  nameKo: 장기 조작 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D8
+    item: Long-term manipulation
+spec:
+  series: C1
+  gate: input
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM08
+      - LLM09
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0006
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: memory_drift
+    available:
+    - id: memory_drift
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    memoryWriteApproval:
+      type: boolean
+      default: false
+      labelKo: 메모리 쓰기 승인 필요
+      labelEn: Require memory-write approval
+    maxWritesPerWriter:
+      type: integer
+      default: 20
+      min: 1
+      labelKo: 작성자당 최대 쓰기
+      labelEn: Max writes per writer

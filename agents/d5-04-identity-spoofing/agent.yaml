@@ -1,0 +1,64 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d5-04
+  name: Identity Spoofing Detector
+  nameKo: 신원 위장 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D5
+    item: Identity spoofing
+spec:
+  series: C2
+  gate: input
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+      - LLM03
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI03
+      - ASI07
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0004
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-290
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: identity_attest
+    available:
+    - id: identity_attest
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1

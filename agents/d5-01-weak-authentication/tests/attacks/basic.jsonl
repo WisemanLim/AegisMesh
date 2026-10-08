@@ -1,0 +1,10 @@
+{"name": "none", "request": {"auth": {"method": "none"}}, "expect": ["block"]}
+{"name": "alg-none", "request": {"auth": {"method": "oauth", "tokenClaims": {"alg": "none"}}}, "expect": ["block"]}
+{"name": "alg-None", "request": {"auth": {"method": "oauth", "tokenClaims": {"alg": "None"}}}, "expect": ["block"]}
+{"name": "required-missing", "request": {"params": {"requireAuth": true}}, "expect": ["block"]}
+{"name": "pw-no-mfa", "request": {"auth": {"method": "password"}}, "expect": ["alert"]}
+{"name": "basic-no-mfa", "request": {"auth": {"method": "basic"}}, "expect": ["alert"]}
+{"name": "agent-apikey", "request": {"auth": {"method": "api_key"}, "subject": {"principal": {"type": "agent", "id": "bot"}}}, "expect": ["alert"]}
+{"name": "svc-pw", "request": {"auth": {"method": "password", "mfa": true}, "subject": {"principal": {"type": "service", "id": "etl"}}}, "expect": ["alert"]}
+{"name": "none-required", "request": {"auth": {"method": "none"}, "params": {"requireAuth": true}}, "expect": ["block"]}
+{"name": "alg-none-mtls", "request": {"auth": {"method": "mtls", "tokenClaims": {"alg": "none"}}}, "expect": ["block"]}

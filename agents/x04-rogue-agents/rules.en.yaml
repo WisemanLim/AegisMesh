@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X04.unregistered: Action by an agent not in the registry. Block.
+X04.terminated: Action by a terminated agent. Block and force-stop.
+X04.stale-heartbeat: Heartbeat lost. Alert.
+X04.pass: Passed agent registration and lifetime match.

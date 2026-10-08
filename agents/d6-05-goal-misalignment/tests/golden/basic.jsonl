@@ -1,0 +1,10 @@
+{"name": "fix", "request": {"plan": ["재현 테스트 작성", "버그 수정", "테스트 실행"]}}
+{"name": "tests-run", "request": {"tool": {"name": "run_tests", "args": {"cmd": "pytest -q"}}}}
+{"name": "close-fixed", "request": {"plan": ["fix the bug then close the ticket"]}}
+{"name": "metric-read", "request": {"tool": {"name": "read_metrics", "args": {"name": "latency"}}}}
+{"name": "en", "request": {"plan": ["investigate the alert", "write postmortem"]}}
+{"name": "ko", "request": {"plan": ["경보 원인 분석"]}}
+{"name": "lint", "request": {"tool": {"name": "run_lint", "args": {}}}}
+{"name": "tune", "request": {"plan": ["tune the model hyperparameters"]}}
+{"name": "review", "request": {"plan": ["update the reviews page layout"]}}
+{"name": "empty", "request": {}}

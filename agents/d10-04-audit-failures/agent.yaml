@@ -1,0 +1,67 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d10-04
+  name: Audit Trail Verifier
+  nameKo: 감사 실패 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D10
+    item: Audit failures
+spec:
+  series: C4
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-778
+    nist-ai-rmf:
+      version: '1.0'
+      ids:
+      - GOVERN 1.4
+      - MEASURE 2.8
+    iso-42001:
+      version: '2023'
+      ids:
+      - '7.5'
+      - '9.1'
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: audit_trail
+    available:
+    - id: audit_trail
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxUncheckpointed:
+      type: integer
+      default: 1000
+      min: 1
+      labelKo: 체크포인트 없는 최대 기록 수
+      labelEn: Max records without checkpoint

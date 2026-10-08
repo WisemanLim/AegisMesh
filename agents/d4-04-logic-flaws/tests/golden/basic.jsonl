@@ -1,0 +1,10 @@
+{"name": "ok-add", "request": {"output": "3 + 4 = 7"}}
+{"name": "ok-mul", "request": {"output": "12 × 3 = 36"}}
+{"name": "ok-div", "request": {"output": "10 / 4 = 2.5"}}
+{"name": "ok-cmp", "request": {"output": "20 is greater than 10"}}
+{"name": "no-math", "request": {"output": "요약입니다"}}
+{"name": "ko-cmp", "request": {"output": "30은 20보다 크다"}}
+{"name": "comma", "request": {"output": "1,200 + 300 = 1,500"}}
+{"name": "pct-ok", "request": {"output": "A 60%, B 40%", "params": {"percentagesSumTo100": true}}}
+{"name": "pct-off", "request": {"output": "성장률 12%, 마진 30%"}}
+{"name": "rounding", "request": {"output": "10 / 3 = 3.333"}}

@@ -1,0 +1,10 @@
+{"name": "valid", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000600, "iat": 1789999940, "aud": "api.acme", "azp": "web"}}, "params": {"now": 1790000000, "audience": "api.acme", "clientId": "web"}}}
+{"name": "aud-list", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "aud": ["api.acme", "x"]}}, "params": {"now": 1790000000, "audience": "api.acme"}}}
+{"name": "no-claims", "request": {"auth": {"method": "oauth"}}}
+{"name": "no-auth", "request": {}}
+{"name": "scope-ok", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "scope": "orders:read orders:write"}}, "params": {"now": 1790000000}, "tool": {"name": "t", "requiredScopes": ["orders:read"]}}}
+{"name": "scp-list", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "scp": ["a", "b"]}}, "params": {"now": 1790000000}, "tool": {"name": "t", "requiredScopes": ["a"]}}}
+{"name": "no-exp", "request": {"auth": {"method": "oauth", "tokenClaims": {"sub": "u1"}}, "params": {"now": 1790000000}}}
+{"name": "nbf-ok", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "nbf": 1789999999}}, "params": {"now": 1790000000}}}
+{"name": "clientid", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790000060, "client_id": "cli"}}, "params": {"now": 1790000000, "clientId": "cli"}}}
+{"name": "lifetime-ok", "request": {"auth": {"method": "oauth", "tokenClaims": {"exp": 1790003600, "iat": 1790000000}}, "params": {"now": 1790000000}}}

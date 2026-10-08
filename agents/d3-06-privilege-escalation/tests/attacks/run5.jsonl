@@ -1,0 +1,1 @@
+{"name": "blocked-chain", "request": {"tool": {"name": "secrets.list", "args": {}}, "history": [{"tool": "files.read"}], "params": {"blockedChains": ["files.read->secrets.list"]}}, "expect": ["block"]}

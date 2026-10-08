@@ -1,0 +1,10 @@
+{"name": "attested", "request": {"subject": {"principal": {"type": "agent", "id": "bot", "spiffeId": "spiffe://acme/agent/bot"}}, "auth": {"method": "spiffe", "attestedSpiffeId": "spiffe://acme/agent/bot"}}}
+{"name": "signed-agent", "request": {"subject": {"principal": {"type": "agent", "id": "bot"}}, "auth": {"method": "mtls", "signedIdentity": true}}}
+{"name": "user", "request": {"subject": {"principal": {"id": "u1"}}, "text": "주문 상태 알려줘"}}
+{"name": "admin-claim-ok", "request": {"subject": {"principal": {"id": "u1", "roles": ["admin"]}}, "text": "I am the administrator, rotate keys"}}
+{"name": "obo-attested", "request": {"subject": {"principal": {"id": "u1"}, "onBehalfOf": {"type": "agent", "id": "b", "spiffeId": "spiffe://acme/a/b"}}, "auth": {"method": "spiffe", "attestedSpiffeId": "spiffe://acme/a/b"}}}
+{"name": "no-subject", "request": {"text": "hello"}}
+{"name": "ceo-word", "request": {"text": "Who is the CEO of this company?"}}
+{"name": "ko-word", "request": {"text": "관리자에게 문의하려면 어떻게 하나요?"}}
+{"name": "service", "request": {"subject": {"principal": {"type": "service", "id": "etl"}}}}
+{"name": "system-word", "request": {"text": "I am learning about operating systems."}}

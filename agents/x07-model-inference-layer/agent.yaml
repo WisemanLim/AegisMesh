@@ -1,0 +1,67 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x07
+  name: Inference Layer Checker
+  nameKo: 모델·추론 계층 위험 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Model & inference layer risks
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM04
+      - LLM06
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-1395
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: inference_posture
+    available:
+    - id: inference_posture
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    vulnerableVersions:
+      type: map
+      default: {}
+      labelKo: '취약 버전 {서버명: [버전]}'
+      labelEn: 'Vulnerable versions {server: [versions]}'
+    extractionQueries:
+      type: integer
+      default: 10000
+      min: 1
+      labelKo: 모델 추출 의심 질의 수
+      labelEn: Extraction query threshold

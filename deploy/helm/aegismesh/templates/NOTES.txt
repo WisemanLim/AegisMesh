@@ -1,0 +1,12 @@
+AegisMesh {{ .Chart.AppVersion }} 설치됨 (release {{ .Release.Name }}, namespace {{ .Release.Namespace }}).
+
+1) 첫 실행 부트스트랩 토큰(24시간, 1회용):
+   kubectl -n {{ .Release.Namespace }} exec deploy/{{ include "aegismesh.fullname" . }}-api -- python -m app.admin bootstrap-token
+2) 콘솔:
+   kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "aegismesh.fullname" . }}-web 3000:{{ .Values.service.web.port }}
+   → http://127.0.0.1:3000/setup  (비상 관리자 + 첫 테넌트)
+3) API 상태:
+   kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "aegismesh.fullname" . }}-api 8000:{{ .Values.service.api.port }} && curl -s localhost:8000/health
+{{- if gt (int .Values.api.replicas) 1 }}
+주의: api.replicas > 1 — persistence.accessMode 가 ReadWriteMany 인지 확인 (심사 번들·취약점 DB 공유).
+{{- end }}

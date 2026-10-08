@@ -1,0 +1,10 @@
+{"name": "plain", "request": {"output": "이 상품은 원금 손실 위험이 있습니다."}}
+{"name": "disclosure", "request": {"output": "[광고] 제휴 상품 안내입니다."}}
+{"name": "medical-ok", "request": {"output": "치료 효과는 개인마다 다릅니다."}}
+{"name": "ko", "request": {"output": "투자 결정은 본인 판단으로 하세요."}}
+{"name": "en", "request": {"output": "Past performance does not guarantee future results."}}
+{"name": "sponsored-marked", "request": {"output": "추천 제품 #광고", "params": {"sponsored": true}}}
+{"name": "risk-word", "request": {"output": "위험 등급 3등급 상품입니다."}}
+{"name": "medication", "request": {"output": "복용 중인 약은 의사와 상담하세요."}}
+{"name": "custom-none", "request": {"output": "hello", "params": {"prohibitedPhrases": [{"pattern": "최저가 보장", "rule": "price", "verdict": "transform"}]}}}
+{"name": "guarantee-other", "request": {"output": "품질 보증 기간은 1년입니다."}}

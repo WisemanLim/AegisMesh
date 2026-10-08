@@ -1,0 +1,10 @@
+{"name": "egress", "request": {"artifact": {"kind": "network_policy", "egressDefault": "allow", "mtls": true, "flows": []}}, "expect": ["alert"]}
+{"name": "no-mtls", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": false, "flows": []}}, "expect": ["alert"]}
+{"name": "plain-ext", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "agent", "dst": "llm.example", "port": 80, "tls": false, "external": true}]}}, "expect": ["block"]}
+{"name": "route", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "b", "tls": true, "unexpectedRoute": true}]}}, "expect": ["block"]}
+{"name": "both", "request": {"artifact": {"kind": "network_policy", "egressDefault": "allow", "mtls": false, "flows": []}}, "expect": ["alert"]}
+{"name": "mixed", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "b", "tls": true}, {"src": "c", "dst": "d", "tls": false, "external": true}]}}, "expect": ["block"]}
+{"name": "egress-any", "request": {"artifact": {"kind": "network_policy", "egressDefault": "any", "mtls": true, "flows": []}}, "expect": ["alert"]}
+{"name": "plain2", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "x", "dst": "y", "port": 21, "tls": false, "external": true}]}}, "expect": ["block"]}
+{"name": "route2", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "z", "unexpectedRoute": true}]}}, "expect": ["block"]}
+{"name": "all-bad", "request": {"artifact": {"kind": "network_policy", "egressDefault": "allow", "mtls": false, "flows": [{"src": "a", "dst": "b", "tls": false, "external": true}]}}, "expect": ["block"]}

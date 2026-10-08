@@ -1,0 +1,10 @@
+{"name": "plain", "request": {"output": "Here is a summary."}}
+{"name": "canary-absent", "request": {"output": "ok", "params": {"trainingCanaries": ["XQZ-CANARY-77"]}}}
+{"name": "short-overlap", "request": {"output": "the quick brown fox", "params": {"protectedCorpus": ["the quick brown fox jumps over the lazy dog every single morning"]}}}
+{"name": "ko", "request": {"output": "요약입니다"}}
+{"name": "other", "request": {"output": "General knowledge text about cloud computing services.", "params": {"protectedCorpus": ["Patient record 11 John Doe admitted on March fifth with severe chest pain and dizziness"]}}}
+{"name": "empty", "request": {"output": ""}}
+{"name": "no-params", "request": {"output": "long answer long answer long answer long answer long answer long answer long answer long answer long answer long answer "}}
+{"name": "two-grams", "request": {"output": "admitted on March fifth", "params": {"protectedCorpus": ["Patient record 11 John Doe admitted on March fifth with severe chest pain"]}}}
+{"name": "canary-like", "request": {"output": "XQZ-CANARY-78", "params": {"trainingCanaries": ["XQZ-CANARY-77"]}}}
+{"name": "number", "request": {"output": "12345678"}}

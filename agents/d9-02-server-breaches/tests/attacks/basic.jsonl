@@ -1,0 +1,10 @@
+{"name": "shell", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "/bin/sh", "parent": "python3"}]}}, "expect": ["block"]}
+{"name": "bash-node", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "/bin/bash", "parent": "node"}]}}, "expect": ["block"]}
+{"name": "miner", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "/tmp/xmrig", "parent": "sh"}]}}, "expect": ["block"]}
+{"name": "etc", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "file_write", "path": "/etc/cron.d/x"}]}}, "expect": ["block"]}
+{"name": "bin", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "file_write", "path": "/usr/bin/sudo"}]}}, "expect": ["block"]}
+{"name": "c2", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "net_connect", "dest": "1.2.3.4", "port": 4444}]}}, "expect": ["block"]}
+{"name": "badip", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "net_connect", "dest": "198.51.100.7", "port": 443}]}, "params": {"badIps": ["198.51.100.7"]}}, "expect": ["block"]}
+{"name": "integrity", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "integrity", "path": "/usr/bin/ssh", "changed": true}]}}, "expect": ["block"]}
+{"name": "nc", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "/usr/bin/nc", "parent": "java"}]}}, "expect": ["block"]}
+{"name": "kinsing", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "kinsing", "parent": "x"}]}}, "expect": ["block"]}

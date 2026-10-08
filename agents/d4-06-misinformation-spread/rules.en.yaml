@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D4-06.unverified-propagation: Output still carrying [unverified grounding] or [unverified citation] is propagated to another agent, document or index. Block.
+D4-06.no-provenance: Propagation without source attribution. Index loading is blocked, anything else alerts.
+D4-06.pass: Passed the pre-propagation provenance gate (user replies are out of scope).

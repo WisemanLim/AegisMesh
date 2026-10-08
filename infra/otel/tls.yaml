@@ -1,0 +1,9 @@
+# prod 전용 덧씌움 (Epic 48 · NFR-D3) — OTLP 수신을 상호 TLS 로. docker-compose.prod.yml 이 두 번째 --config 로 합친다.
+# client_ca_file = 내부 CA 가 서명한 클라이언트 인증서 필수. reload_interval 로 회전된 인증서를 재기동 없이 다시 읽는다.
+receivers:
+  otlp:
+    protocols:
+      http:
+        tls: { cert_file: /tls/tls.crt, key_file: /tls/tls.key, client_ca_file: /tls/ca.crt, reload_interval: 30s }
+      grpc:
+        tls: { cert_file: /tls/tls.crt, key_file: /tls/tls.key, client_ca_file: /tls/ca.crt, reload_interval: 30s }

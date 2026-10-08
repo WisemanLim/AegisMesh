@@ -1,0 +1,10 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D1-01.override: Untrusted context fragment contains a demand to ignore previous instructions. Risk of data being read as instructions → block.
+D1-01.persona: Untrusted context fragment contains a role redefinition. Risk of data being read as instructions → block.
+D1-01.covert: Untrusted context fragment contains a demand to hide things from the user. Risk of data being read as instructions → block.
+D1-01.action: Untrusted context fragment contains an attempt to trigger external sends or payments. Risk of data being read as instructions → block.
+D1-01.role-marker: Untrusted context fragment contains forged system/role delimiters. Risk of data being read as instructions → block.
+D1-01.new-instructions: Untrusted context fragment contains a declaration of new instructions. Risk of data being read as instructions → block.
+D1-01.classifier: Small classifier judged an untrusted fragment as injected instructions although no rule matched (at or above the alert threshold). Alert — human review.
+D1-01.classifier-block: Small classifier score at or above the block threshold. Risk of data being read as instructions → block.
+D1-01.pass: No instruction patterns found in untrusted fragments (rules and classifier).

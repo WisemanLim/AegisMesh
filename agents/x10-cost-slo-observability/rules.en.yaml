@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X10.latency-budget: SLO check 'latency-budget' → alert.
+X10.cost-budget: SLO check 'cost-budget' → alert.
+X10.fp-budget: SLO check 'fp-budget' → alert.
+X10.pass: Latency, cost and false-positive budgets within limits.

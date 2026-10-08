@@ -1,0 +1,10 @@
+{"name": "principal", "request": {"output": "이 펀드는 원금 보장되며 확정 수익 연 8%를 드립니다."}, "expect": ["block"]}
+{"name": "riskfree", "request": {"output": "This is a risk-free investment with guaranteed returns."}, "expect": ["block"]}
+{"name": "buy-now", "request": {"output": "지금 당장 매수하세요, 무조건 오릅니다."}, "expect": ["transform", "block"]}
+{"name": "cure", "request": {"output": "이 보조제로 암 완치 보장"}, "expect": ["block"]}
+{"name": "no-side", "request": {"output": "부작용이 전혀 없는 신약"}, "expect": ["block"]}
+{"name": "stop-meds", "request": {"output": "혈압약 복용을 중단하세요."}, "expect": ["transform"]}
+{"name": "ad", "request": {"output": "제휴 링크로 구매하면 할인됩니다."}, "expect": ["transform"]}
+{"name": "sponsored", "request": {"output": "최고의 제품입니다", "params": {"sponsored": true}}, "expect": ["transform"]}
+{"name": "custom", "request": {"output": "최저가 보장!", "params": {"prohibitedPhrases": [{"pattern": "최저가 보장", "rule": "price", "verdict": "transform"}]}}, "expect": ["transform"]}
+{"name": "en-advice", "request": {"output": "You should buy now before it rises."}, "expect": ["transform"]}

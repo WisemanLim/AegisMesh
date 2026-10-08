@@ -1,0 +1,10 @@
+{"name": "exceeds", "request": {"subject": {"principal": {"id": "kim", "roles": ["viewer"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["admin"]}}, "params": {"delegation": "t"}}, "expect": ["block"]}
+{"name": "no-proof", "request": {"subject": {"principal": {"id": "kim", "roles": ["admin"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["admin"]}}}, "expect": ["alert"]}
+{"name": "exceeds-noproof", "request": {"subject": {"principal": {"id": "kim", "roles": []}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["root"]}}}, "expect": ["block"]}
+{"name": "drift", "request": {"subject": {"principal": {"id": "kim", "roles": []}}, "history": [{"principal": "kim", "roles": ["viewer"]}, {"principal": "kim", "roles": ["admin"]}]}, "expect": ["alert"]}
+{"name": "finance", "request": {"subject": {"principal": {"id": "kim", "roles": ["sales"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["finance-approver"]}}, "params": {"delegation": "t"}}, "expect": ["block"]}
+{"name": "iam", "request": {"subject": {"principal": {"id": "kim", "roles": ["dev"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["iam-admin", "dev"]}}, "params": {"delegation": "t"}}, "expect": ["block"]}
+{"name": "noproof2", "request": {"subject": {"principal": {"id": "kim", "roles": []}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": []}}}, "expect": ["alert"]}
+{"name": "owner", "request": {"subject": {"principal": {"id": "kim", "roles": ["member"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["owner"]}}, "params": {"delegation": "t"}}, "expect": ["block"]}
+{"name": "drift3", "request": {"subject": {"principal": {"id": "kim", "roles": []}}, "history": [{"principal": "kim", "roles": ["a"]}, {"principal": "kim", "roles": ["b"]}, {"principal": "kim", "roles": ["c"]}]}, "expect": ["alert"]}
+{"name": "secadmin", "request": {"subject": {"principal": {"id": "kim", "roles": ["analyst"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["security-admin"]}}, "params": {"delegation": "t"}}, "expect": ["block"]}

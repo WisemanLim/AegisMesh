@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D9-04.over-privileged: DB account check 'over-privileged' → block.
+D9-04.direct-access: DB account check 'direct-access' → alert.
+D9-04.no-audit: DB account check 'no-audit' → alert.
+D9-04.pass: Passed agent DB account check.

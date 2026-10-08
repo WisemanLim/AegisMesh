@@ -1,0 +1,1 @@
+{"name": "daily-quota", "request": {"tool": {"name": "crm.lookup", "args": {"id": "7"}}, "subject": {"principal": {"id": "batch-report"}}, "params": {"quotas": {"batch-report": {"perDay": 5000}}, "usageToday": 5000}}, "expect": ["block"]}

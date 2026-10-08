@@ -1,0 +1,10 @@
+{"name": "depth", "request": {"tool": {"name": "x", "args": {}}, "params": {"depth": 5}}, "expect": ["block"]}
+{"name": "fanout", "request": {"tool": {"name": "spawn_agent", "args": {}}, "params": {"childrenSpawned": 10}}, "expect": ["block"]}
+{"name": "cycle", "request": {"tool": {"name": "spawn_agent", "args": {"agent": "planner"}}, "history": [{"agent": "planner"}, {"agent": "researcher"}]}, "expect": ["block"]}
+{"name": "budget", "request": {"tool": {"name": "spawn_agent", "args": {}}, "params": {"spawnBudget": 2, "childrenSpawned": 2, "maxFanout": 99}}, "expect": ["require_approval"]}
+{"name": "depth-hist", "request": {"tool": {"name": "x", "args": {}}, "history": [{"depth": 6}]}, "expect": ["block"]}
+{"name": "fanout-hist", "request": {"tool": {"name": "spawn_subagent", "args": {}}, "history": [{"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}, {"tool": "spawn_subagent"}]}, "expect": ["block"]}
+{"name": "fork", "request": {"tool": {"name": "fork_worker", "args": {"name": "w"}}, "history": [{"agent": "w"}]}, "expect": ["block"]}
+{"name": "depth-deep", "request": {"tool": {"name": "y", "args": {}}, "params": {"depth": 50}}, "expect": ["block"]}
+{"name": "launch", "request": {"tool": {"name": "launch_agents", "args": {}}, "params": {"childrenSpawned": 40}}, "expect": ["block"]}
+{"name": "cycle-delegate", "request": {"tool": {"name": "delegate", "args": {"agent": "root"}}, "history": [{"agent": "root"}]}, "expect": ["block"]}

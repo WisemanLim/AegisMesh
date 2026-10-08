@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D2-07.residual-copy: Copies remain in the source, index, cache or backup after a deletion request. Block (re-propagate). Low confidence within the backup grace period.
+D2-07.no-receipt: No deletion evidence issued. Alert.
+D2-07.ttl-expired: Memory item remains past its TTL. Alert.
+D2-07.pass: Passed deletion propagation and TTL checks.

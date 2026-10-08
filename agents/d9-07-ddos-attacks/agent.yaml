@@ -1,0 +1,64 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d9-07
+  name: Traffic Abuse Detector
+  nameKo: 서비스 거부 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D9
+    item: DDoS attacks
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-770
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: traffic_guard
+    available:
+    - id: traffic_guard
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    surgeFactor:
+      type: number
+      default: 5
+      min: 1
+      labelKo: 트래픽 급증 배율
+      labelEn: Traffic surge factor
+    maxClientShare:
+      type: number
+      default: 0.5
+      min: 0
+      max: 1
+      labelKo: 단일 클라이언트 최대 비중
+      labelEn: Max single-client share

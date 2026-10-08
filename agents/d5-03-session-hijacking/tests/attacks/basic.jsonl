@@ -1,0 +1,10 @@
+{"name": "fp", "request": {"session": {"id": "s1", "boundFingerprint": "fp1", "fingerprint": "fp9"}}, "expect": ["block"]}
+{"name": "fp-ip", "request": {"session": {"id": "s1", "boundFingerprint": "a", "fingerprint": "b", "boundIp": "1.1.1.1", "ip": "9.9.9.9"}}, "expect": ["block"]}
+{"name": "ip", "request": {"session": {"id": "s1", "boundFingerprint": "a", "fingerprint": "a", "boundIp": "1.1.1.1", "ip": "2.2.2.2"}}, "expect": ["alert"]}
+{"name": "ip-only", "request": {"session": {"id": "s1", "boundIp": "1.1.1.1", "ip": "5.5.5.5"}}, "expect": ["alert"]}
+{"name": "fp-case", "request": {"session": {"id": "s1", "boundFingerprint": "ABC", "fingerprint": "abc"}}, "expect": ["block"]}
+{"name": "fp-ua", "request": {"session": {"id": "s1", "boundFingerprint": "chrome-mac", "fingerprint": "curl"}}, "expect": ["block"]}
+{"name": "fp2", "request": {"session": {"id": "s1", "boundFingerprint": "x1", "fingerprint": "x2", "ip": "1.1.1.1"}}, "expect": ["block"]}
+{"name": "ip6", "request": {"session": {"id": "s1", "boundIp": "::1", "ip": "::2"}}, "expect": ["alert"]}
+{"name": "fp3", "request": {"session": {"id": "s1", "boundFingerprint": "device-A", "fingerprint": "device-B"}}, "expect": ["block"]}
+{"name": "fp4", "request": {"session": {"id": "s1", "boundFingerprint": "1", "fingerprint": "2", "boundIp": "a", "ip": "b"}}, "expect": ["block"]}

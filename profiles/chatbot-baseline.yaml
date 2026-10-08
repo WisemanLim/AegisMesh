@@ -1,0 +1,10 @@
+apiVersion: aegismesh/v1
+kind: Profile
+metadata: { id: chatbot-baseline, nameKo: 사용자 대면 챗봇 기본, order: 2 }
+spec:
+  select:
+    - { domain: [D1] }
+    - { id: [D2-01, D2-02, D2-03, D4-01, D4-02, D4-03, X05] }
+  defaultStage: enforce
+  blocking: 인젝션·민감정보 차단, 환각은 표시
+  expectedLatency: 입력 40ms, 출력 90ms

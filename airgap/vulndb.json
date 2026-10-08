@@ -1,0 +1,8 @@
+{
+  "version": "2026.10.01",
+  "source": "내부 취약점 DB (폐쇄망 미러 — OSV·NVD 동기화본을 번들로 반입해 갱신). 아래는 형식 예시용 합성 항목이다.",
+  "vulnerabilities": [
+    {"id": "AEG-DEMO-0001", "package": "pkg:pypi/aegis-demo-vulnerable", "versions": ["0.1.0", "0.1.1"], "severity": "critical",
+     "summary": "형식 예시 — 실제 패키지 아님"}
+  ]
+}

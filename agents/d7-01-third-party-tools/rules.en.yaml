@@ -1,0 +1,9 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D7-01.unsigned: Third-party MCP server/plugin review 'unsigned' → block.
+D7-01.bad-signature: Third-party MCP server/plugin review 'bad-signature' → block.
+D7-01.unapproved: Third-party MCP server/plugin review 'unapproved' → block.
+D7-01.tool-poisoning: Third-party MCP server/plugin review 'tool-poisoning' → block.
+D7-01.rug-pull: Third-party MCP server/plugin review 'rug-pull' → block.
+D7-01.unpinned: Third-party MCP server/plugin review 'unpinned' → alert.
+D7-01.broad-permissions: Third-party MCP server/plugin review 'broad-permissions' → alert.
+D7-01.pass: Passed signature, approval, tool description and permission review.

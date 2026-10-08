@@ -1,0 +1,10 @@
+{"name": "known-doi", "request": {"output": "참고: https://doi.org/10.1145/3442188.3445922", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}
+{"name": "known-arxiv", "request": {"output": "See arXiv:2307.15043 for GCG.", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}
+{"name": "no-cite", "request": {"output": "인용 없는 답변입니다.", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}
+{"name": "retrieval-url", "request": {"output": "출처 https://docs.garam.example/a", "retrieval": [{"id": "d", "url": "https://docs.garam.example/a"}], "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}
+{"name": "allow-unlisted", "request": {"output": "see https://example.com/x", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"], "allowUnlistedUrls": true}}}
+{"name": "doi-bare-known", "request": {"output": "doi:10.1145/3442188.3445922", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}
+{"name": "no-known-list", "request": {"output": "see https://python.org"}}
+{"name": "ko", "request": {"output": "논문은 학회지에 게재되었다.", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}
+{"name": "arxiv-v", "request": {"output": "arXiv:2307.15043v2 참고", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}
+{"name": "email", "request": {"output": "문의 a@b.com", "params": {"knownCitations": ["https://doi.org/10.1145/3442188.3445922", "arXiv:2307.15043"]}}}

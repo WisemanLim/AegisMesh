@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D5-05.agent-role-exceeds-human: Role confusion check 'agent-role-exceeds-human' → block.
+D5-05.no-delegation-proof: Role confusion check 'no-delegation-proof' → alert.
+D5-05.role-drift: Role confusion check 'role-drift' → alert.
+D5-05.pass: Passed delegation and role checks.

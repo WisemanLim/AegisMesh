@@ -1,0 +1,10 @@
+{"name": "ok", "request": {"params": {"usage": {"tokens": 1000}, "quota": {"tokens": 100000}}}}
+{"name": "none", "request": {}}
+{"name": "half", "request": {"params": {"usage": {"seconds": 30}, "quota": {"seconds": 60}}}}
+{"name": "no-quota", "request": {"params": {"usage": {"tokens": 5}, "quota": {}}}}
+{"name": "multi-ok", "request": {"params": {"usage": {"tokens": 10, "concurrency": 2}, "quota": {"tokens": 100, "concurrency": 10}}}}
+{"name": "custom-warn", "request": {"params": {"usage": {"tokens": 95}, "quota": {"tokens": 100}, "warnRatio": 0.99}}}
+{"name": "call-ok", "request": {"tool": {"name": "llm", "args": {"max_tokens": 4000}}}}
+{"name": "cost", "request": {"params": {"usage": {"costUsd": 1}, "quota": {"costUsd": 100}}}}
+{"name": "storage", "request": {"params": {"usage": {"storageMb": 10}, "quota": {"storageMb": 1000}}}}
+{"name": "zero", "request": {"params": {"usage": {"tokens": 0}, "quota": {"tokens": 0}}}}

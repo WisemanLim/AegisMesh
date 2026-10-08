@@ -1,0 +1,10 @@
+{"name": "ls", "request": {"tool": {"name": "run_shell", "args": {"command": "ls /workspace"}}}}
+{"name": "cat-readme", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/README.md"}}}}
+{"name": "pip", "request": {"tool": {"name": "run_shell", "args": {"command": "pip install requests"}}}}
+{"name": "curl-json", "request": {"tool": {"name": "run_shell", "args": {"command": "curl -s https://api.example.com/v1/items"}}}}
+{"name": "chmod-644", "request": {"tool": {"name": "run_shell", "args": {"command": "chmod 644 /workspace/a.txt"}}}}
+{"name": "ps", "request": {"tool": {"name": "run_shell", "args": {"command": "ps aux"}}}}
+{"name": "docker-ps", "request": {"tool": {"name": "run_shell", "args": {"command": "docker ps"}}}}
+{"name": "profile-word", "request": {"tool": {"name": "search_docs", "args": {"q": "user profile settings"}}}}
+{"name": "nc-word", "request": {"tool": {"name": "search_docs", "args": {"q": "NC State university"}}}}
+{"name": "etc-hosts", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/etc/hosts.md"}}}}

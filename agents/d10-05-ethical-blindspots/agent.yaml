@@ -1,0 +1,72 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d10-05
+  name: Fairness Gap Monitor
+  nameKo: 윤리 맹점 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D10
+    item: Ethical blindspots
+spec:
+  series: C4
+  gate: offline
+  isolation: L0
+  verdicts:
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    nist-ai-rmf:
+      version: '1.0'
+      ids:
+      - MEASURE 2.11
+    iso-42001:
+      version: '2023'
+      ids:
+      - A.5
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: fairness_gap
+    available:
+    - id: fairness_gap
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    minGroupSize:
+      type: integer
+      default: 30
+      min: 1
+      labelKo: 집단 최소 표본
+      labelEn: Min group sample size
+    maxRatio:
+      type: number
+      default: 1.25
+      min: 1
+      labelKo: 집단 간 오탐률 최대 배율
+      labelEn: Max false-positive-rate ratio between groups
+    maxGapPp:
+      type: number
+      default: 1.5
+      min: 0
+      labelKo: 집단 간 차단율 격차 한도(%p)
+      labelEn: Max block-rate gap between groups (pp)

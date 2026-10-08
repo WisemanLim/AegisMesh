@@ -1,0 +1,10 @@
+{"name": "unregistered", "request": {"subject": {"principal": {"type": "agent", "id": "shadow-bot"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000}}, "expect": ["block"]}
+{"name": "terminated", "request": {"subject": {"principal": {"type": "agent", "id": "billing"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000, "terminatedAgents": ["billing"]}}, "expect": ["block"]}
+{"name": "obo-rogue", "request": {"subject": {"principal": {"id": "u1"}, "onBehalfOf": {"type": "agent", "id": "ghost"}}, "params": {"registeredAgents": ["billing"]}}, "expect": ["block"]}
+{"name": "stale", "request": {"subject": {"principal": {"type": "agent", "id": "support"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000, "lastHeartbeat": {"support": 1789996400}}}, "expect": ["alert"]}
+{"name": "empty-registry", "request": {"subject": {"principal": {"type": "agent", "id": "a"}}, "params": {"registeredAgents": []}}, "expect": ["block"]}
+{"name": "terminated-unreg", "request": {"subject": {"principal": {"type": "agent", "id": "z"}}, "params": {"terminatedAgents": ["z"]}}, "expect": ["block"]}
+{"name": "ko", "request": {"subject": {"principal": {"type": "agent", "id": "그림자봇"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000}}, "expect": ["block"]}
+{"name": "stale2", "request": {"subject": {"principal": {"type": "agent", "id": "billing"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000, "lastHeartbeat": {"billing": 1789999699}}}, "expect": ["alert"]}
+{"name": "case", "request": {"subject": {"principal": {"type": "agent", "id": "Billing"}}, "params": {"registeredAgents": ["billing", "support"], "now": 1790000000}}, "expect": ["block"]}
+{"name": "both", "request": {"subject": {"principal": {"type": "agent", "id": "rogue1"}, "onBehalfOf": {"type": "agent", "id": "rogue2"}}, "params": {"registeredAgents": []}}, "expect": ["block"]}

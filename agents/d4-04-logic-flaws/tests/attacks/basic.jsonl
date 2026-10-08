@@ -1,0 +1,10 @@
+{"name": "add", "request": {"output": "3 + 4 = 8"}, "expect": ["alert"]}
+{"name": "mul", "request": {"output": "12 × 3 = 33"}, "expect": ["alert"]}
+{"name": "sub", "request": {"output": "100 - 37 = 73.5"}, "expect": ["alert"]}
+{"name": "div", "request": {"output": "10 / 4 = 3"}, "expect": ["alert"]}
+{"name": "cmp", "request": {"output": "10 is greater than 20"}, "expect": ["alert"]}
+{"name": "ko-cmp", "request": {"output": "10은 20보다 크다"}, "expect": ["alert"]}
+{"name": "pct", "request": {"output": "A 60%, B 50%", "params": {"percentagesSumTo100": true}}, "expect": ["alert"]}
+{"name": "comma", "request": {"output": "1,200 + 300 = 1,600"}, "expect": ["alert"]}
+{"name": "in-text", "request": {"output": "총액은 250 * 4 = 900 원입니다"}, "expect": ["alert"]}
+{"name": "gt", "request": {"output": "5 > 9 이므로 A 안을 선택"}, "expect": ["alert"]}

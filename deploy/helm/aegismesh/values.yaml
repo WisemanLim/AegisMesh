@@ -1,0 +1,70 @@
+# AegisMesh Helm values (NFR-C1). 비밀값은 existingSecret 로 외부(KMS·external-secrets)에서 넣는 것을 권장한다.
+image:
+  api: { repository: aegismesh-api, tag: prod }
+  web: { repository: aegismesh-web, tag: prod }
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+
+# 비밀: existingSecret 이 있으면 그것을 쓴다(키: DB_PASSWORD · LEDGER_SIGNING_KEY · SVID_SIGNING_KEY · AUTH_SECRET).
+# 없으면 아래 값으로 Secret 을 만든다 — 비어 있으면 설치 거부(CHANGE_ME 금지).
+secrets:
+  existingSecret: ""
+  dbPassword: ""
+  ledgerSigningKey: ""      # base64 Ed25519 개인키 32바이트
+  svidSigningKey: ""        # base64 Ed25519 개인키 32바이트
+  authSecret: ""
+  oidcClientSecret: ""      # 선택 — 기밀 클라이언트일 때만 (기본 공개 클라이언트 + PKCE)
+
+config:
+  appEnv: prod
+  evidenceRetentionDays: 90
+  modelEgress: deny
+  spiffeTrustDomain: aegismesh.local
+  workerIntervalSec: 30
+  oidcIssuer: ""
+  oidcClientId: ""
+  oidcBackchannelMap: ""    # 선택 — 서버 간 IdP 호출 주소 치환 "https://sso.example=http://keycloak.idp:8080"
+  extra: {}                 # 그 밖의 환경 변수 (예: SANDBOX_L1_SLOTS: "4")
+
+api:
+  replicas: 1               # >1 이면 persistence.accessMode=ReadWriteMany 필요 (심사 번들·취약점 DB 공유)
+  workers: 2
+  resources: { requests: { cpu: 250m, memory: 512Mi }, limits: { memory: 1536Mi } }
+worker:
+  replicas: 1
+  resources: { requests: { cpu: 100m, memory: 384Mi }, limits: { memory: 1Gi } }
+web:
+  replicas: 1
+  resources: { requests: { cpu: 100m, memory: 256Mi }, limits: { memory: 512Mi } }
+
+persistence:                # /app/data — 심사 통과 서드파티 번들·내부 취약점 DB (키는 Secret 으로 주입)
+  size: 2Gi
+  accessMode: ReadWriteOnce
+  storageClass: ""
+
+postgresql:
+  enabled: true             # false 면 externalDatabase.url 사용
+  image: postgres:17-alpine
+  database: app
+  user: app
+  storage: 5Gi
+  maxConnections: 300      # api 복제 × workers × (DB_POOL_SIZE+DB_MAX_OVERFLOW, 기본 20) 여유
+externalDatabase:
+  url: ""                   # postgresql+psycopg://user:pass@host:5432/db (비밀번호는 secrets 와 별도 관리 권장)
+
+collector:
+  enabled: true
+  image: otel/opentelemetry-collector-contrib:0.162.0
+  debugVerbosity: basic
+
+service:
+  api: { type: ClusterIP, port: 8000 }
+  web: { type: ClusterIP, port: 3000 }
+
+ingress:
+  enabled: false
+  className: ""
+  host: aegismesh.local
+  tls: []
+
+podSecurityContext: { runAsNonRoot: true, runAsUser: 10001, fsGroup: 10001, seccompProfile: { type: RuntimeDefault } }

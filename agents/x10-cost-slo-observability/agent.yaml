@@ -1,0 +1,66 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x10
+  name: Cost & SLO Monitor
+  nameKo: 비용·서비스 수준 관측 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Cost & service-level observability
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM06
+    nist-ai-rmf:
+      version: '1.0'
+      ids:
+      - MEASURE 2.12
+      - MANAGE 2.2
+    iso-42001:
+      version: '2023'
+      ids:
+      - '9.1'
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: slo_budget
+    available:
+    - id: slo_budget
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    warnAt:
+      type: number
+      default: 0.8
+      min: 0
+      max: 1
+      labelKo: 비용·SLO 경고 비율
+      labelEn: Cost/SLO warn ratio

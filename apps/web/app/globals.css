@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* 디자인 토큰 — 화면설계서 §8 공통 UI 가이드. 판정·심각도·보조 글자색은 같은 색상(hue)에서 명도만 낮춰
+   흰 바탕·#f5f6fa·primary-soft 위 글자 대비 4.5:1 이상 (WCAG 2.2 1.4.3, Epic 39) */
+:root {
+  --primary: #3f51e5;
+  --primary-soft: #eef0fd;
+  --navy: #1f3864;
+  --bg: #f5f6fa;
+  --panel: #ffffff;
+  --line: #e3e6ee;
+  --ink: #1d2433;
+  --muted: #636c81;
+  --verdict-allow: #187b43;
+  --verdict-block: #cd2d2d;
+  --verdict-approval: #9d5d08;
+  --verdict-transform: #2366db;
+  --verdict-alert: #7b4fd6;
+  --sev-info: #626d81;
+  --sev-low: #2366db;
+  --sev-medium: #9d5d08;
+  --sev-high: #cd2d2d;
+  --sev-critical: #8f1d1d;
+  --state-missing: #e6e8ee;
+  --focus: 2px solid #3f51e5;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-navy: var(--navy);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --font-sans: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html, body { background: var(--bg); color: var(--ink); font-size: 14px; }
+:focus-visible { outline: var(--focus); outline-offset: 2px; }
+/* 접근성 (Epic 39) — 본문 바로가기 · 글 속 링크 밑줄(색만으로 구분 금지 1.4.1) · 체크·라디오 대상 크기(2.5.8) */
+.skip-link { position: absolute; left: 8px; top: -40px; z-index: 50; padding: 6px 12px; border-radius: 6px; background: var(--navy); color: #fff; font-weight: 600; }
+.skip-link:focus { top: 8px; }
+a.text-primary:not(.btn) { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+input[type="checkbox"], input[type="radio"] { width: 18px; height: 18px; margin: 3px; accent-color: var(--primary); vertical-align: middle; }
+.mono { font-family: var(--font-mono); font-size: 13px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+.btn { height: calc(32rem / 14); padding: 0 14px; border-radius: 6px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-secondary { background: #fff; color: var(--primary); border: 1px solid var(--primary); }
+.btn-danger { background: #fff; color: var(--verdict-block); border: 1px solid var(--verdict-block); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.input { height: calc(32rem / 14); border: 1px solid var(--line); border-radius: 6px; padding: 0 10px; background: #fff; }
+table.grid-table { width: 100%; border-collapse: collapse; }
+table.grid-table th { background: var(--navy); color: #fff; font-weight: 600; text-align: left; padding: 8px 10px; font-size: 13px; }
+table.grid-table td { border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+table.grid-table tr:hover td { background: var(--primary-soft); }
+
+/* 재배치·글자 확대·글자 간격 (WCAG 1.4.10·1.4.4·1.4.12, Epic 45) — 1024px 이상은 화면설계서 그대로, 좁은 화면만 한 줄로 흐른다.
+   레이어 밖 규칙이라 Tailwind 유틸리티보다 우선한다. 표·코드는 카드 안에서 가로 스크롤(1.4.10 예외), 2차원 배치가 의미인 곳은 data-2d. */
+.card { overflow-x: auto; }
+main { overflow-wrap: anywhere; }
+@media (max-width: 1023px) {
+  main [class*="grid-cols-"]:not([data-2d]) { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)) !important; }
+  main :not([data-2d]) > [class*="col-span-"] { grid-column: 1 / -1 !important; }
+  main [class*="min-w-"]:not([data-2d]) { min-width: 0 !important; }
+  main [class*="w-["]:not([data-2d] *) { max-width: 100%; }
+  main .flex { flex-wrap: wrap; }
+  main input, main select, main textarea, main pre { max-width: 100%; }
+}
+

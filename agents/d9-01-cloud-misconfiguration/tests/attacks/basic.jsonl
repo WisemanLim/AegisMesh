@@ -1,0 +1,10 @@
+{"name": "public", "request": {"artifact": {"kind": "iac", "resources": [{"type": "bucket", "name": "pii", "public": true}]}}, "expect": ["block"]}
+{"name": "acl", "request": {"artifact": {"kind": "iac", "resources": [{"type": "bucket", "name": "x", "acl": "public-read"}]}}, "expect": ["block"]}
+{"name": "iam", "request": {"artifact": {"kind": "iac", "resources": [{"type": "iam_policy", "name": "admin", "actions": ["*"], "resources": ["*"]}]}}, "expect": ["block"]}
+{"name": "ssh", "request": {"artifact": {"kind": "iac", "resources": [{"type": "security_group", "name": "x", "ingress": [{"cidr": "0.0.0.0/0", "port": 22}]}]}}, "expect": ["block"]}
+{"name": "pg", "request": {"artifact": {"kind": "iac", "resources": [{"type": "security_group", "name": "x", "ingress": [{"cidr": "::/0", "port": 5432}]}]}}, "expect": ["block"]}
+{"name": "unenc", "request": {"artifact": {"kind": "iac", "resources": [{"type": "bucket", "name": "x", "encrypted": false}]}}, "expect": ["alert"]}
+{"name": "db-unenc", "request": {"artifact": {"kind": "iac", "resources": [{"type": "db", "name": "x", "encrypted": false}]}}, "expect": ["alert"]}
+{"name": "redis", "request": {"artifact": {"kind": "iac", "resources": [{"type": "security_group", "name": "x", "ingress": [{"cidr": "0.0.0.0/0", "port": 6379}]}]}}, "expect": ["block"]}
+{"name": "mixed", "request": {"artifact": {"kind": "iac", "resources": [{"type": "bucket", "name": "ok", "public": false}, {"type": "bucket", "name": "bad", "public": true}]}}, "expect": ["block"]}
+{"name": "docker", "request": {"artifact": {"kind": "iac", "resources": [{"type": "security_group", "name": "x", "ingress": [{"cidr": "0.0.0.0/0", "port": 2375}]}]}}, "expect": ["block"]}

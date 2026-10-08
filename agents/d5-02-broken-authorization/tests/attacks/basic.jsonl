@@ -1,0 +1,10 @@
+{"name": "cross-tenant", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "resource": {"tenant": "globex", "id": "o9"}}}, "expect": ["block"]}
+{"name": "idor", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "resource": {"owner": "u2", "id": "o2"}}}, "expect": ["block"]}
+{"name": "idor-viewer", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["viewer"]}, "resource": {"owner": "u3"}}}, "expect": ["block"]}
+{"name": "role-missing", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["viewer"]}}, "params": {"requiredRoles": ["finance"]}}, "expect": ["block"]}
+{"name": "cross-tenant-admin", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["admin"]}, "resource": {"tenant": "initech"}}}, "expect": ["block"]}
+{"name": "no-roles-required", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "params": {"requiredRoles": ["admin"]}}, "expect": ["block"]}
+{"name": "cross+idor", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "resource": {"tenant": "x", "owner": "u7"}}}, "expect": ["block"]}
+{"name": "ko-tenant", "request": {"subject": {"tenant": "가람", "principal": {"id": "u1", "roles": []}, "resource": {"tenant": "나래"}}}, "expect": ["block"]}
+{"name": "idor-agent", "request": {"subject": {"tenant": "acme", "principal": {"type": "agent", "id": "bot"}, "resource": {"owner": "u1"}}}, "expect": ["block"]}
+{"name": "role-case", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["Finance"]}}, "params": {"requiredRoles": ["finance"]}}, "expect": ["block"]}

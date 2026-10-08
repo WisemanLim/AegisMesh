@@ -1,0 +1,10 @@
+{"name": "good", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "dev1", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8}]}}}
+{"name": "no-hw-not-required", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "dev1", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8, "hwKey": false}]}}}
+{"name": "session-12", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 12}]}}}
+{"name": "none", "request": {}}
+{"name": "empty", "request": {"artifact": {"kind": "endpoint_posture", "hosts": []}}}
+{"name": "custom-session", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 20}]}, "params": {"maxSessionHours": 24}}}
+{"name": "many", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8}, {"name": "b", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8}]}}}
+{"name": "hw-ok", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8, "hwKey": true}]}, "params": {"requireHwKey": true}}}
+{"name": "unknown-edr", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "x"}]}}}
+{"name": "runner", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "ci-runner", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8}]}}}

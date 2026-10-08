@@ -1,0 +1,72 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x04
+  name: Rogue Agent Detector
+  nameKo: 이탈 에이전트 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Rogue agents
+spec:
+  series: C2
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI10
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-284
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: agent_registry
+    available:
+    - id: agent_registry
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    registeredAgents:
+      type: list
+      items: string
+      labelKo: 등록부 에이전트(미설정 = 대조 안 함)
+      labelEn: Registered agents (unset = no check)
+    terminatedAgents:
+      type: list
+      items: string
+      default: []
+      labelKo: 종료된 에이전트
+      labelEn: Terminated agents
+    heartbeatTimeoutSec:
+      type: integer
+      default: 300
+      min: 10
+      labelKo: 하트비트 시한(초)
+      labelEn: Heartbeat timeout (s)

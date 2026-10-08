@@ -1,0 +1,10 @@
+{"name": "plain", "request": {"output": "Here is your summary."}}
+{"name": "allowed-img", "request": {"output": "![chart](https://cdn.garam.example/c.png?v=2)", "params": {"urlAllowlist": ["garam.example"]}}}
+{"name": "link-docs", "request": {"output": "See [docs](https://docs.python.org/3/library/json.html)."}}
+{"name": "link-query-low", "request": {"output": "[search](https://www.google.com/search?q=weather)"}}
+{"name": "ko", "request": {"output": "요약: 매출이 12% 증가했습니다."}}
+{"name": "code", "request": {"output": "```\ncurl https://api.example.com/v1/items\n```"}}
+{"name": "relative-img", "request": {"output": "![logo](/static/logo.png)"}}
+{"name": "data-url", "request": {"output": "![x](data:image/png;base64,AAAA)"}}
+{"name": "allowed-sub", "request": {"output": "<img src=\"https://img.cdn.garam.example/a.png\">", "params": {"urlAllowlist": ["garam.example"]}}}
+{"name": "link-short-id", "request": {"output": "[ticket](https://tracker.example.com/t?id=48213)"}}

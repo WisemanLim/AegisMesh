@@ -1,0 +1,63 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d5-07
+  name: Permission Drift Auditor
+  nameKo: 권한 불일치 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D5
+    item: Permission misalignment
+spec:
+  series: C2
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+      - LLM03
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI03
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0004
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-269
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: permission_inventory
+    available:
+    - id: permission_inventory
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1

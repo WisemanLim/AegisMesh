@@ -1,0 +1,67 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d9-02
+  name: Runtime Breach Detector
+  nameKo: 서버 침해 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D9
+    item: Server breaches
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-78
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: runtime_events
+    available:
+    - id: runtime_events
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    badPorts:
+      type: list
+      items: integer
+      default:
+      - 4444
+      - 1337
+      - 31337
+      - 6667
+      labelKo: 의심 포트
+      labelEn: Suspicious ports
+    badIps:
+      type: list
+      items: string
+      default: []
+      labelKo: 차단 IP
+      labelEn: Blocked IPs

@@ -1,0 +1,10 @@
+{"name": "normal", "request": {"tool": {"name": "search", "args": {}}}}
+{"name": "spawn-ok", "request": {"tool": {"name": "spawn_agent", "args": {"name": "summarizer"}}, "history": [{"agent": "root", "depth": 0}]}}
+{"name": "depth-ok", "request": {"tool": {"name": "x", "args": {}}, "params": {"depth": 3}}}
+{"name": "fanout-ok", "request": {"tool": {"name": "spawn_agent", "args": {}}, "params": {"childrenSpawned": 3}}}
+{"name": "no-tool", "request": {}}
+{"name": "custom-depth", "request": {"tool": {"name": "x", "args": {}}, "params": {"depth": 7, "maxDepth": 10}}}
+{"name": "create-task", "request": {"tool": {"name": "create_task", "args": {"name": "t1"}}}}
+{"name": "lineage-other", "request": {"tool": {"name": "spawn_agent", "args": {"agent": "writer"}}, "history": [{"agent": "planner"}, {"agent": "researcher"}]}}
+{"name": "budget-ok", "request": {"tool": {"name": "spawn_agent", "args": {}}, "params": {"spawnBudget": 5, "childrenSpawned": 2}}}
+{"name": "delegate-ok", "request": {"tool": {"name": "delegate", "args": {"agent": "a"}}}}

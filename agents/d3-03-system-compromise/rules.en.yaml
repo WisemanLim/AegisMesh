@@ -1,0 +1,8 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D3-03.sensitive-path: Tool arguments contain access to a sensitive system path. Block (cannot be released by approval).
+D3-03.privilege-cmd: Tool arguments contain a privilege command (sudo, chmod 777, setuid). Block (cannot be released by approval).
+D3-03.persistence: Tool arguments contain a persistence mechanism (cron, service, shell profile, authorized_keys). Block (cannot be released by approval).
+D3-03.download-exec: Tool arguments contain download-and-execute. Block (cannot be released by approval).
+D3-03.reverse-shell: Tool arguments contain a reverse shell. Block (cannot be released by approval).
+D3-03.container-escape: Tool arguments contain a container escape attempt. Block (cannot be released by approval).
+D3-03.pass: No system compromise indicators found.

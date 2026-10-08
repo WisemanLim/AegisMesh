@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X03.credential-request: Interaction check 'credential-request' → block.
+X03.approval-fatigue: Interaction check 'approval-fatigue' → alert.
+X03.pressure: Interaction check 'pressure' → alert.
+X03.pass: Passed human–agent interaction check.

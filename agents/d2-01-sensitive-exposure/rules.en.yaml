@@ -1,0 +1,9 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D2-01.rrn: 'Personal data of type rrn in the output. Action: transform (the value is not kept in evidence).'
+D2-01.card: 'Personal data of type card in the output. Action: transform (the value is not kept in evidence).'
+D2-01.passport: 'Personal data of type passport in the output. Action: transform (the value is not kept in evidence).'
+D2-01.phone: 'Personal data of type phone in the output. Action: transform (the value is not kept in evidence).'
+D2-01.email: 'Personal data of type email in the output. Action: transform (the value is not kept in evidence).'
+D2-01.health: 'Personal data of type health in the output. Action: alert (the value is not kept in evidence).'
+D2-01.zone-block: The trust-zone exposure policy blocks this type (external models and cross-border transfer only when explicitly allowed).
+D2-01.pass: Passed personal and health data dictionary checks.

@@ -1,0 +1,10 @@
+{"name": "confident-pay", "request": {"action": {"type": "payment", "confidence": 0.95, "grounded": true}}}
+{"name": "lookup", "request": {"action": {"type": "lookup_order", "confidence": 0.2}}}
+{"name": "approved", "request": {"action": {"type": "payment", "confidence": 0.4, "approved": true}}}
+{"name": "no-action", "request": {}}
+{"name": "low-impact", "request": {"action": {"type": "summarize", "impact": "low", "confidence": 0.3}}}
+{"name": "threshold-custom", "request": {"action": {"type": "deploy", "confidence": 0.6}, "params": {"decisionThreshold": 0.5}}}
+{"name": "grounded-none", "request": {"action": {"type": "notify_customer", "confidence": 0.9}}}
+{"name": "high-ok", "request": {"action": {"type": "close_ticket", "impact": "high", "confidence": 0.99, "grounded": true}}}
+{"name": "edge", "request": {"action": {"type": "refund", "confidence": 0.75}}}
+{"name": "search", "request": {"action": {"type": "search", "impact": "medium", "confidence": 0.1}}}

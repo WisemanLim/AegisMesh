@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D4-05.finance-guarantee: Categorical claims such as guaranteed principal or fixed returns (Financial Consumer Protection Act, Capital Markets Act). Block.
+D4-05.finance-advice: Urges an immediate buy or sell. The phrase is removed.
+D4-05.medical-claim: Medical overstatement such as guaranteed cure or no side effects (Medical Service Act). Block.
+D4-05.medical-advice: Advises stopping medication. The phrase is removed.
+D4-05.ad-undisclosed: Advertising or affiliate content not labeled (Labeling and Advertising Act). An [Ad] label is added.
+D4-05.pass: Passed domain prohibited-phrase dictionary.

@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D9-01.public-bucket: IaC check 'public-bucket' → block.
+D9-01.iam-wildcard: IaC check 'iam-wildcard' → block.
+D9-01.open-admin-port: IaC check 'open-admin-port' → block.
+D9-01.unencrypted: IaC check 'unencrypted' → alert.
+D9-01.pass: Passed IaC static checks.

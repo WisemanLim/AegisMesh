@@ -1,0 +1,10 @@
+{"name": "rate", "request": {"tool": {"name": "search", "args": {}}, "params": {"rateLimit": {"calls": 60, "windowSec": 60}, "recentCalls": 61}}, "expect": ["block"]}
+{"name": "rate-eq", "request": {"tool": {"name": "send_sms", "args": {}}, "params": {"rateLimit": {"calls": 10, "windowSec": 1}, "recentCalls": 10}}, "expect": ["block"]}
+{"name": "bulk-limit", "request": {"tool": {"name": "list_users", "args": {"limit": 1000000}}}, "expect": ["require_approval"]}
+{"name": "bulk-page", "request": {"tool": {"name": "export", "args": {"page_size": 50000}}}, "expect": ["require_approval"]}
+{"name": "delete-collection", "request": {"tool": {"name": "http_request", "args": {"method": "DELETE", "url": "https://api.example.com/v1/orders"}}}, "expect": ["require_approval"]}
+{"name": "put-collection", "request": {"tool": {"name": "http_request", "args": {"method": "PUT", "url": "/v1/users/"}}}, "expect": ["require_approval"]}
+{"name": "patch-collection", "request": {"tool": {"name": "http_request", "args": {"method": "PATCH", "url": "https://api.example.com/v1/prices?all=true"}}}, "expect": ["require_approval"]}
+{"name": "bulk-count", "request": {"tool": {"name": "generate_invoices", "args": {"count": 99999}}}, "expect": ["require_approval"]}
+{"name": "rate-bulk", "request": {"tool": {"name": "list", "args": {"limit": 2000}}, "params": {"rateLimit": {"calls": 5}, "recentCalls": 9}}, "expect": ["block"]}
+{"name": "max-results", "request": {"tool": {"name": "scrape", "args": {"max_results": 250000}}}, "expect": ["require_approval"]}

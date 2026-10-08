@@ -1,0 +1,74 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d10-07
+  name: Monitoring Health Checker
+  nameKo: 모니터링 부재 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D10
+    item: Lack monitoring
+spec:
+  series: C4
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-778
+    nist-ai-rmf:
+      version: '1.0'
+      ids:
+      - MEASURE 3.1
+      - MANAGE 4.1
+    iso-42001:
+      version: '2023'
+      ids:
+      - '9.1'
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: monitoring_health
+    available:
+    - id: monitoring_health
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxDegradedRate:
+      type: number
+      default: 0.05
+      min: 0
+      max: 1
+      labelKo: 허용 강등률
+      labelEn: Max degraded rate
+    maxOverBudgetRate:
+      type: number
+      default: 0.01
+      min: 0
+      max: 1
+      labelKo: 허용 지연 예산 초과율
+      labelEn: Max over-budget rate

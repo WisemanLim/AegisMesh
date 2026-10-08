@@ -1,0 +1,10 @@
+{"name": "same", "request": {"session": {"id": "s1", "boundFingerprint": "fp1", "fingerprint": "fp1", "boundIp": "1.1.1.1", "ip": "1.1.1.1"}}}
+{"name": "no-session", "request": {}}
+{"name": "no-binding", "request": {"session": {"id": "s1", "fingerprint": "fp1", "ip": "1.1.1.1"}}}
+{"name": "fp-only", "request": {"session": {"id": "s1", "boundFingerprint": "a", "fingerprint": "a"}}}
+{"name": "ip-only-same", "request": {"session": {"id": "s1", "boundIp": "10.0.0.1", "ip": "10.0.0.1"}}}
+{"name": "missing-current", "request": {"session": {"id": "s1", "boundFingerprint": "a"}}}
+{"name": "ipv6", "request": {"session": {"id": "s1", "boundIp": "::1", "ip": "::1"}}}
+{"name": "fp-same-ip-missing", "request": {"session": {"id": "s1", "boundFingerprint": "z", "fingerprint": "z", "boundIp": "1.2.3.4"}}}
+{"name": "id-only", "request": {"session": {"id": "s1"}}}
+{"name": "ko", "request": {"session": {"id": "s1", "boundFingerprint": "기기1", "fingerprint": "기기1"}}}

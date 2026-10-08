@@ -1,0 +1,1 @@
+{"name": "no-compensation", "request": {"action": {"type": "remit", "amount": 50000}, "params": {"requireCompensation": true, "compensations": {"payment": "refund"}}}, "expect": ["block"]}

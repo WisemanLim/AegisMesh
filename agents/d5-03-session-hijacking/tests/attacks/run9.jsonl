@@ -1,0 +1,2 @@
+{"name": "impossible-travel", "request": {"session": {"id": "s9", "boundKey": "jkt-A", "proofKey": "jkt-A", "boundFingerprint": "fp1", "fingerprint": "fp1", "boundIp": "KR · Seoul", "ip": "US · Mountain View", "travelKm": 9050, "travelKmh": 108600}}, "expect": ["alert"]}
+{"name": "impossible-travel-new-device", "request": {"session": {"id": "s9", "boundFingerprint": "fp1", "fingerprint": "fp7", "boundIp": "KR · Seoul", "ip": "GB · London", "travelKm": 8860, "travelKmh": 53160}}, "expect": ["block"]}

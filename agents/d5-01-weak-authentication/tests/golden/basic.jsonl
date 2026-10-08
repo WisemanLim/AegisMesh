@@ -1,0 +1,10 @@
+{"name": "oauth", "request": {"auth": {"method": "oauth", "tokenClaims": {"alg": "RS256"}}}}
+{"name": "pw-mfa", "request": {"auth": {"method": "password", "mfa": true}}}
+{"name": "mtls", "request": {"auth": {"method": "mtls"}}}
+{"name": "spiffe-agent", "request": {"auth": {"method": "spiffe", "attestedSpiffeId": "spiffe://acme/agent/bot"}, "subject": {"principal": {"type": "agent", "id": "bot"}}}}
+{"name": "no-auth-context", "request": {"text": "hello"}}
+{"name": "public", "request": {"auth": {"method": "none"}, "params": {"requireAuth": false}}}
+{"name": "user-apikey", "request": {"auth": {"method": "api_key"}}}
+{"name": "basic-mfa", "request": {"auth": {"method": "basic", "mfa": true}}}
+{"name": "es256", "request": {"auth": {"method": "oauth", "tokenClaims": {"alg": "ES256", "sub": "u1"}}}}
+{"name": "oauth-user", "request": {"auth": {"method": "oauth"}, "subject": {"principal": {"id": "u1"}}}}

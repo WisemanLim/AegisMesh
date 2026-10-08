@@ -1,0 +1,10 @@
+{"name": "own", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "d1", "tenant": "acme", "owner": "u1", "text": "내 주문 내역"}], "output": "주문 내역입니다"}}
+{"name": "shared", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "d2", "tenant": "acme", "owner": "shared", "text": "FAQ"}]}}
+{"name": "no-meta", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "d3", "text": "공개 문서"}]}}
+{"name": "mem-own", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "memory": [{"id": "m1", "tenant": "acme", "owner": "u1", "session": "s1"}], "session": {"id": "s1"}}}
+{"name": "mem-no-session", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "memory": [{"id": "m2", "owner": "u1"}]}}
+{"name": "empty", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}}}
+{"name": "session-scope-off", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "memory": [{"id": "m3", "owner": "u1", "session": "s9"}], "session": {"id": "s1"}, "params": {"sessionScopedMemory": false}}}
+{"name": "same-tenant-no-owner", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "d4", "tenant": "acme"}]}}
+{"name": "anon", "request": {"retrieval": [{"id": "d5", "tenant": "default"}]}}
+{"name": "many-own", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "d0", "tenant": "acme", "owner": "u1"}, {"id": "d1", "tenant": "acme", "owner": "u1"}, {"id": "d2", "tenant": "acme", "owner": "u1"}, {"id": "d3", "tenant": "acme", "owner": "u1"}, {"id": "d4", "tenant": "acme", "owner": "u1"}]}}

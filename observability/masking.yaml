@@ -1,0 +1,42 @@
+# 수집 단계 민감정보 마스킹 규칙 (FR-P09, D2-06, SCR-Q05) — 단일 원천.
+#   python scripts/gen_otel_config.py  → infra/otel/collector.yaml (OTel Collector transform 프로세서)
+#   POST /v1/observability:mask-test    → 같은 규칙으로 시험 로그 미리보기 (배포 전 확인)
+# 정규식은 RE2(Collector)·Python re 공통 부분집합만 쓴다 — 전후방 탐색·역참조 금지.
+# samples: 반드시 치환돼야 하는 예 / keeps: 그대로 남아야 하는 예 (pytest 가 둘 다 확인)
+rules:
+  - name: rrn
+    title: 주민등록번호
+    pattern: '\d{6}-[1-4]\d{6}'
+    replacement: '[REDACTED_RRN]'
+    samples: ['주민번호 900101-1234567 확인']
+    keeps: ['주문번호 20261006-001']
+  - name: card
+    title: 카드번호
+    pattern: '\b(?:\d{4}[- ]?){3}\d{4}\b'
+    replacement: '[REDACTED_CARD]'
+    samples: ['카드 4111-1111-1111-1111', '4111111111111111']
+    keeps: ['금액 5000 원']
+  - name: email
+    title: 이메일
+    pattern: '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
+    replacement: '[REDACTED_EMAIL]'
+    samples: ['문의 kim.hana@garam.example 로']
+    keeps: ['agent@v1 배포']
+  - name: phone_kr
+    title: 휴대전화번호
+    pattern: '01[016789]-?\d{3,4}-?\d{4}'
+    replacement: '[REDACTED_PHONE]'
+    samples: ['연락처 010-1234-5678', '01098765432']
+    keeps: ['버전 0.162.0']
+  - name: api_key
+    title: API 키·클라우드 키
+    pattern: '(?:sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36})'
+    replacement: '[REDACTED_KEY]'
+    samples: ['key sk-ant-api03-AbCdEfGhIjKlMnOpQrSt', 'AKIAABCDEFGHIJKLMNOP']
+    keeps: ['sk-short']
+  - name: bearer
+    title: 베어러·세션 토큰
+    pattern: '(?:[Bb]earer\s+[A-Za-z0-9._~+/=-]{16,}|am1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{20,})'
+    replacement: '[REDACTED_TOKEN]'
+    samples: ['Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.abc.def', 'am1.0123456789abcdef0123456789abcdef.AbCdEfGhIjKlMnOpQrStUvWx']
+    keeps: ['bearer of news']

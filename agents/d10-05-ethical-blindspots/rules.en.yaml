@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D10-05.not-measured: Fairness check 'not-measured' → alert.
+D10-05.fpr-disparity: Fairness check 'fpr-disparity' → alert.
+D10-05.tpr-disparity: Fairness check 'tpr-disparity' → alert.
+D10-05.block-rate-gap: Fairness check 'block-rate-gap' → alert.
+D10-05.pass: Group performance gaps within threshold.

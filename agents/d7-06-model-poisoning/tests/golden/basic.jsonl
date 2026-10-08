@@ -1,0 +1,10 @@
+{"name": "good", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "safetensors", "sha256": "aa", "expectedSha256": "aa", "signed": true, "signatureValid": true}}}
+{"name": "gguf", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "gguf", "sha256": "aa", "expectedSha256": "aa", "signed": true, "signatureValid": true}}}
+{"name": "onnx", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "onnx", "sha256": "aa", "expectedSha256": "aa", "signed": true, "signatureValid": true}}}
+{"name": "allowed-pickle", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "pt", "sha256": "aa", "expectedSha256": "aa", "signed": true, "signatureValid": true}, "params": {"allowPickle": true}}}
+{"name": "no-expected", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "safetensors", "sha256": "zz", "expectedSha256": null, "signed": true, "signatureValid": true}}}
+{"name": "no-artifact", "request": {}}
+{"name": "safe-globals", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "safetensors", "sha256": "aa", "expectedSha256": "aa", "signed": true, "signatureValid": true, "pickleGlobals": ["torch._utils._rebuild_tensor_v2", "collections.OrderedDict"]}}}
+{"name": "signed-unknown", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "safetensors", "sha256": "aa", "expectedSha256": "aa", "signed": true, "signatureValid": null}}}
+{"name": "other", "request": {"artifact": {"kind": "dataset"}}}
+{"name": "h5", "request": {"artifact": {"kind": "model", "name": "llama-ko", "format": "h5", "sha256": "aa", "expectedSha256": "aa", "signed": true, "signatureValid": true}}}

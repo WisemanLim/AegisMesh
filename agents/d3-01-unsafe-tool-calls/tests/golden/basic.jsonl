@@ -1,0 +1,10 @@
+{"name": "search", "request": {"tool": {"name": "search_docs", "args": {"q": "refund policy"}}}}
+{"name": "read", "request": {"tool": {"name": "get_order", "args": {"id": "o-1"}}}}
+{"name": "sql-select", "request": {"tool": {"name": "run_sql", "args": {"query": "SELECT * FROM orders WHERE id=3"}}}}
+{"name": "sql-delete-where", "request": {"tool": {"name": "run_sql", "args": {"query": "DELETE FROM sessions WHERE expires_at < now()"}}}}
+{"name": "update-where", "request": {"tool": {"name": "run_sql", "args": {"query": "UPDATE users SET name='a' WHERE id=1"}}}}
+{"name": "approved-delete", "request": {"tool": {"name": "delete_file", "args": {"path": "/workspace/tmp.txt"}, "approved": true}}}
+{"name": "send-email", "request": {"tool": {"name": "send_email", "args": {"to": "a@b.com", "body": "hi"}}}}
+{"name": "weather", "request": {"tool": {"name": "get_weather", "args": {"city": "Seoul"}}}}
+{"name": "drop-word", "request": {"tool": {"name": "search_docs", "args": {"q": "how to drop a pin on the map"}}}}
+{"name": "list", "request": {"tool": {"name": "list_files", "args": {"path": "/workspace"}}}}

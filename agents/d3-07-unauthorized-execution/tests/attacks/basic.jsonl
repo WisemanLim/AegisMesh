@@ -1,0 +1,10 @@
+{"name": "not-allowed", "request": {"tool": {"name": "delete_repo", "args": {}}, "params": {"toolAllowlist": ["search_docs"]}}, "expect": ["block"]}
+{"name": "not-allowed-exec", "request": {"tool": {"name": "run_shell", "args": {}}, "params": {"toolAllowlist": ["search_docs"]}}, "expect": ["block"]}
+{"name": "exec", "request": {"tool": {"name": "run_python", "args": {"code": "import os"}}}, "expect": ["require_approval"]}
+{"name": "shell", "request": {"tool": {"name": "shell", "args": {"cmd": "ls"}}}, "expect": ["require_approval"]}
+{"name": "eval", "request": {"tool": {"name": "eval", "args": {"expr": "1+1"}}}, "expect": ["require_approval"]}
+{"name": "code-interp", "request": {"tool": {"name": "code_interpreter", "args": {}}}, "expect": ["require_approval"]}
+{"name": "bash", "request": {"tool": {"name": "bash", "args": {}}}, "expect": ["require_approval"]}
+{"name": "subprocess", "request": {"tool": {"name": "subprocess_run", "args": {}}}, "expect": ["require_approval"]}
+{"name": "empty-allowlist", "request": {"tool": {"name": "search_docs", "args": {}}, "params": {"toolAllowlist": []}}, "expect": ["block"]}
+{"name": "execute", "request": {"tool": {"name": "execute", "args": {"sql": "x"}}}, "expect": ["require_approval"]}

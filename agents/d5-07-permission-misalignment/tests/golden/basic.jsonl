@@ -1,0 +1,10 @@
+{"name": "aligned", "request": {"artifact": {"kind": "permission_inventory", "principals": [{"id": "kim", "type": "user", "granted": ["docs:read", "docs:write"], "used": ["docs:read", "docs:write"]}]}}}
+{"name": "agent-subset", "request": {"artifact": {"kind": "permission_inventory", "principals": [{"id": "kim", "type": "user", "granted": ["a:read", "a:write"], "used": ["a:read", "a:write"]}, {"id": "bot", "type": "agent", "granted": ["a:read"], "used": ["a:read"], "owner": "kim"}]}}}
+{"name": "unused-read", "request": {"artifact": {"kind": "permission_inventory", "principals": [{"id": "kim", "type": "user", "granted": ["docs:read", "x:read"], "used": ["docs:read"]}]}}}
+{"name": "none", "request": {}}
+{"name": "empty", "request": {"artifact": {"kind": "permission_inventory", "principals": []}}}
+{"name": "agent-no-owner", "request": {"artifact": {"kind": "permission_inventory", "principals": [{"id": "bot", "type": "agent", "granted": ["a:read"], "used": ["a:read"]}]}}}
+{"name": "used-admin", "request": {"artifact": {"kind": "permission_inventory", "principals": [{"id": "ops", "type": "user", "granted": ["cluster:admin"], "used": ["cluster:admin"]}]}}}
+{"name": "agent-equal", "request": {"artifact": {"kind": "permission_inventory", "principals": [{"id": "kim", "type": "user", "granted": ["a:write"], "used": ["a:write"]}, {"id": "bot", "type": "agent", "granted": ["a:write"], "used": ["a:write"], "owner": "kim"}]}}}
+{"name": "other", "request": {"artifact": {"kind": "iac"}}}
+{"name": "multi", "request": {"artifact": {"kind": "permission_inventory", "principals": [{"id": "a", "type": "user", "granted": ["r"], "used": ["r"]}, {"id": "b", "type": "user", "granted": ["s"], "used": ["s"]}]}}}

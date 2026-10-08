@@ -1,0 +1,16 @@
+apiVersion: aegismesh/v1
+kind: Profile
+metadata: { id: regulated-kr, nameKo: 국내 규제 산업 기본, order: 4 }
+spec:
+  extends: tool-agent
+  select:
+    - { domain: [D2, D10] }
+    - { id: [X08] }
+  policyOverrides:
+    D2-01: { verdict: block, threshold: 0.60 }   # 민감정보는 임계 낮춤
+    D4-01: { verdict: transform }                # 환각은 표시 후 통과
+  evidence: { retentionDays: 1825, payload: masked }
+  region: { modelEgress: deny }                  # 외부 모델 호출 금지
+  defaultStage: enforce
+  blocking: 민감정보 무관용, 증적 전량 보존
+  expectedLatency: 출력 140ms

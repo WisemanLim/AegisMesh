@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D5-07.wildcard-grant: Permission inventory check 'wildcard-grant' → block.
+D5-07.agent-exceeds-owner: Permission inventory check 'agent-exceeds-owner' → block.
+D5-07.unused-privileged: Permission inventory check 'unused-privileged' → alert.
+D5-07.pass: Passed permission consistency check.

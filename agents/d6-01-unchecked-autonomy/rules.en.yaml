@@ -1,0 +1,3 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D6-01.over-autonomy: Action impact level (impact + external effect + irreversibility) exceeds the agent's autonomy level. Human approval.
+D6-01.pass: Action within the autonomy level.

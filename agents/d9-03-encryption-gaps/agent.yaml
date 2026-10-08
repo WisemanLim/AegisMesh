@@ -1,0 +1,63 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d9-03
+  name: Encryption Gap Checker
+  nameKo: 암호화 공백 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D9
+    item: Encryption gaps
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-319
+      - CWE-311
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: crypto_inventory
+    available:
+    - id: crypto_inventory
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    requireMtls:
+      type: boolean
+      default: true
+      labelKo: mTLS 필수
+      labelEn: Require mTLS
+    certWarnDays:
+      type: integer
+      default: 14
+      min: 1
+      labelKo: 인증서 만료 경고(일)
+      labelEn: Cert expiry warning (days)

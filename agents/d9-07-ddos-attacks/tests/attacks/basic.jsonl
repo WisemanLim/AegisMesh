@@ -1,0 +1,10 @@
+{"name": "flood", "request": {"artifact": {"kind": "traffic_stats", "rps": 5000, "baselineRps": 100, "topClient": "203.0.113.9", "topClientShare": 0.8, "rateLimit": true, "autoscaleMax": 20}}, "expect": ["block"]}
+{"name": "surge", "request": {"artifact": {"kind": "traffic_stats", "rps": 1000, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": 20}}, "expect": ["alert"]}
+{"name": "no-rl", "request": {"artifact": {"kind": "traffic_stats", "rps": 100, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": false, "autoscaleMax": 20}}, "expect": ["alert"]}
+{"name": "unbounded", "request": {"artifact": {"kind": "traffic_stats", "rps": 100, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": "unbounded"}}, "expect": ["alert"]}
+{"name": "flood2", "request": {"artifact": {"kind": "traffic_stats", "rps": 600, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.55, "rateLimit": true, "autoscaleMax": 20}}, "expect": ["block"]}
+{"name": "no-rl-none", "request": {"artifact": {"kind": "traffic_stats", "rps": 100, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": null, "autoscaleMax": 20}}, "expect": ["alert"]}
+{"name": "zero-scale", "request": {"artifact": {"kind": "traffic_stats", "rps": 100, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": 0}}, "expect": ["alert"]}
+{"name": "custom-share", "request": {"artifact": {"kind": "traffic_stats", "rps": 600, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.3, "rateLimit": true, "autoscaleMax": 20}, "params": {"maxClientShare": 0.2}}, "expect": ["block"]}
+{"name": "surge2", "request": {"artifact": {"kind": "traffic_stats", "rps": 2000, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.4, "rateLimit": true, "autoscaleMax": 20}}, "expect": ["alert"]}
+{"name": "all", "request": {"artifact": {"kind": "traffic_stats", "rps": 9000, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.99, "rateLimit": false, "autoscaleMax": 20}}, "expect": ["block"]}

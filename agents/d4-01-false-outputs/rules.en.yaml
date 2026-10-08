@@ -1,0 +1,3 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D4-01.ungrounded-claim: Numeric, date or proper-noun claim not supported by grounding documents. The sentence is marked [unverified grounding].
+D4-01.pass: Passed sentence-level groundedness check (or no grounding documents).

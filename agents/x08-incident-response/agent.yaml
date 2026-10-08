@@ -1,0 +1,61 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x08
+  name: Incident Readiness Checker
+  nameKo: 사고 대응·포렌식 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Incident response & forensics
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    nist-ai-rmf:
+      version: '1.0'
+      ids:
+      - MANAGE 4.3
+    iso-42001:
+      version: '2023'
+      ids:
+      - '10.2'
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: incident_readiness
+    available:
+    - id: incident_readiness
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    containWithinHours:
+      type: number
+      default: 4
+      min: 0
+      labelKo: 격리 목표(시간)
+      labelEn: Containment target (h)

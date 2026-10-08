@@ -1,0 +1,1 @@
+{"name": "ddl-agent", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "copilot_rw", "usedBy": "agent", "privileges": ["DDL", "DML"], "viaGateway": true, "queryAudit": true}]}}, "expect": ["block"]}

@@ -1,0 +1,31 @@
+[project]
+name = "aegismesh"
+version = "0.1.0"
+description = "AegisMesh — AI 에이전트 보안 위험 대응 멀티 에이전트 플랫폼 (제어 API + 에이전트 SDK)"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.3",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "psycopg[binary]>=3.2",
+  "pyyaml>=6.0",
+  "mcp>=2.3,<3",
+  "cryptography>=43",
+  "maxminddb>=2.6",
+  "opentelemetry-sdk>=1.30",
+  "opentelemetry-exporter-otlp-proto-http>=1.30",
+]
+
+[dependency-groups]
+dev = ["pytest>=8", "httpx>=0.27", "ruff>=0.5"]
+
+# 모든 테스트는 test/ 로 통일 (시험표준 dev-env/impl 도 test/ 하위)
+[tool.pytest.ini_options]
+testpaths = ["test"]
+pythonpath = ["."]
+
+[tool.uv]
+package = false

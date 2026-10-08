@@ -1,0 +1,10 @@
+{"name": "plain", "request": {"output": "Your order shipped."}}
+{"name": "md", "request": {"output": "**bold** and [link](https://a.example)"}}
+{"name": "code-html-escaped", "request": {"output": "&lt;script&gt;alert(1)&lt;/script&gt;"}}
+{"name": "sql-select", "request": {"output": "SELECT name FROM users WHERE id = 1", "params": {"downstream": "sql"}}}
+{"name": "shell-ls", "request": {"output": "ls -la /workspace", "params": {"downstream": "shell"}}}
+{"name": "onboarding-word", "request": {"output": "Our onboarding = 3 steps"}}
+{"name": "js-word", "request": {"output": "JavaScript is a language"}}
+{"name": "sql-single-delete-where", "request": {"output": "DELETE FROM sessions WHERE id = 5", "params": {"downstream": "sql"}}}
+{"name": "ko", "request": {"output": "결과를 표로 정리했습니다."}}
+{"name": "img", "request": {"output": "<img src=\"a.png\" alt=\"chart\">"}}

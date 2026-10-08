@@ -1,0 +1,10 @@
+{"name": "ok", "request": {"tool": {"name": "read_orders", "args": {}, "requiredScopes": ["orders:read"]}, "subject": {"tenant": "acme", "principal": {"id": "u1", "scopes": ["orders:read"], "roles": []}}}}
+{"name": "superset", "request": {"tool": {"name": "update_order", "args": {}, "requiredScopes": ["orders:write"]}, "subject": {"tenant": "acme", "principal": {"id": "u1", "scopes": ["orders:read", "orders:write"], "roles": []}}}}
+{"name": "obo-ok", "request": {"tool": {"name": "read_orders", "args": {}, "requiredScopes": ["orders:read"]}, "subject": {"tenant": "acme", "principal": {"id": "u1", "scopes": ["orders:read"], "roles": []}, "onBehalfOf": {"type": "agent", "id": "bot", "scopes": ["orders:read", "x"]}}}}
+{"name": "no-required", "request": {"tool": {"name": "get_weather", "args": {}}}}
+{"name": "admin-grant", "request": {"tool": {"name": "list_groups", "args": {"name": "engineering"}}}}
+{"name": "role-viewer", "request": {"tool": {"name": "assign_role", "args": {"user": "u2", "role": "viewer"}}, "subject": {"tenant": "acme", "principal": {"id": "u1", "scopes": [], "roles": ["admin"]}}}}
+{"name": "search-admin-doc", "request": {"tool": {"name": "search_docs", "args": {"q": "admin guide"}}}}
+{"name": "grant-read", "request": {"tool": {"name": "grant_access", "args": {"user": "u3", "level": "read"}}}}
+{"name": "policy-read", "request": {"tool": {"name": "get_policy", "args": {"id": "p1"}}}}
+{"name": "multi", "request": {"tool": {"name": "x", "args": {}, "requiredScopes": ["a", "b"]}, "subject": {"tenant": "acme", "principal": {"id": "u1", "scopes": ["a", "b", "c"], "roles": []}}}}

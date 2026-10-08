@@ -1,0 +1,8 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D9-03.plaintext: Encryption check 'plaintext' → block.
+D9-03.cert-expired: Encryption check 'cert-expired' → block.
+D9-03.unencrypted-store: Encryption check 'unencrypted-store' → block.
+D9-03.no-mtls: Encryption check 'no-mtls' → alert.
+D9-03.cert-expiring: Encryption check 'cert-expiring' → alert.
+D9-03.weak-tls: Encryption check 'weak-tls' → alert.
+D9-03.pass: Passed encryption inventory check.

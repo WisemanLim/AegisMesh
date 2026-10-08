@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X06.embedded-instruction: Multimodal attachment scan 'embedded-instruction' → block.
+X06.metadata-instruction: Multimodal attachment scan 'metadata-instruction' → block.
+X06.hidden-layer: Multimodal attachment scan 'hidden-layer' → block.
+X06.unscanned: Multimodal attachment scan 'unscanned' → alert.
+X06.pass: Passed attachment injection scan.

@@ -1,0 +1,63 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d2-03
+  name: API Key Leak Detector
+  nameKo: 자격증명 유출 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D2
+    item: API key leaks
+spec:
+  series: C3
+  gate: output
+  isolation: L0
+  verdicts:
+  - transform
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0010
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-798
+      - CWE-200
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: secret_patterns
+    available:
+    - id: secret_patterns
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1

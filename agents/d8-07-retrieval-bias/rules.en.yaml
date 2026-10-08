@@ -1,0 +1,3 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D8-07.source-dominance: One source's share of search results exceeds maxSourceShare. Alert.
+D8-07.pass: Passed source distribution check.

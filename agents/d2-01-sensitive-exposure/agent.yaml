@@ -1,0 +1,74 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d2-01
+  name: Sensitive Data Exposure Detector
+  nameKo: 민감정보 노출 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D2
+    item: Sensitive exposure
+spec:
+  series: C3
+  gate: output
+  isolation: L0
+  verdicts:
+  - block
+  - transform
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0010
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-359
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: pii_kr
+    available:
+    - id: pii_kr
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    publicEmailDomains:
+      type: list
+      items: string
+      default: []
+      labelKo: 공개해도 되는 이메일 도메인
+      labelEn: Public e-mail domains (not PII)
+    zonePolicy:
+      type: map
+      labelKo: '신뢰 구역별 노출 {구역: {유형|*: raw·last4·mask·pseudo·block}}'
+      labelEn: 'Exposure by trust zone {zone: {type|*: raw·last4·mask·pseudo·block}}'

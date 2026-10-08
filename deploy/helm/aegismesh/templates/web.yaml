@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-web
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+    app.kubernetes.io/component: web
+spec:
+  replicas: {{ .Values.web.replicas }}
+  selector: { matchLabels: {{ include "aegismesh.sel" (list . "web") }} }
+  template:
+    metadata: { labels: {{ include "aegismesh.sel" (list . "web") }} }
+    spec:
+      {{- include "aegismesh.podSecurity" . | nindent 6 }}
+      containers:
+        - name: web
+          image: {{ .Values.image.web.repository }}:{{ .Values.image.web.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- include "aegismesh.containerSecurity" . | nindent 10 }}
+          ports: [{ containerPort: 3000, name: http }]
+          env:
+            - { name: API_URL, value: "http://{{ include "aegismesh.fullname" . }}-api:{{ .Values.service.api.port }}" }
+            - { name: AEGIS_MODE, value: k8s }
+          readinessProbe: { httpGet: { path: /login, port: http }, periodSeconds: 5, failureThreshold: 12 }
+          resources: {{- toYaml .Values.web.resources | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-web
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.web.type }}
+  selector: {{ include "aegismesh.sel" (list . "web") }}
+  ports: [{ port: {{ .Values.service.web.port }}, targetPort: http, name: http }]
+{{- if .Values.ingress.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "aegismesh.fullname" . }}
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.ingress.className }}
+  ingressClassName: {{ . }}
+  {{- end }}
+  {{- with .Values.ingress.tls }}
+  tls: {{- toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http: { paths: [{ path: /, pathType: Prefix, backend: { service: { name: {{ include "aegismesh.fullname" . }}-web, port: { number: {{ .Values.service.web.port }} } } } }] }
+{{- end }}

@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D7-03.install-remote-exec: Package heuristic 'install-remote-exec' → block.
+D7-03.obfuscation: Package heuristic 'obfuscation' → block.
+D7-03.typosquat: Package heuristic 'typosquat' → block.
+D7-03.low-trust: Package heuristic 'low-trust' → alert.
+D7-03.pass: Passed package heuristics.

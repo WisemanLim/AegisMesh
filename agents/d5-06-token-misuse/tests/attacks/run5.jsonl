@@ -1,0 +1,1 @@
+{"name": "no-aud", "request": {"auth": {"method": "oauth", "tokenClaims": {"sub": "x", "exp": 9999999999}}, "params": {"requireAudience": true, "now": 1000}}, "expect": ["block"]}

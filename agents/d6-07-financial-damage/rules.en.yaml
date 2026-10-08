@@ -1,0 +1,8 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D6-07.over-limit: Spending cap exceeded. Cannot be released by approval → block.
+D6-07.daily-limit: Daily spending limit exceeded. Block.
+D6-07.needs-approval: Monetary action above the approval threshold. Two-person approval.
+D6-07.irreversible: Irreversible monetary action. Two-person approval.
+D6-07.unknown-amount: Monetary tool with an unknown amount. Human approval.
+D6-07.no-compensation: Monetary action with no registered compensating transaction (policy requireCompensation). Block.
+D6-07.pass: Passed spending limit check.

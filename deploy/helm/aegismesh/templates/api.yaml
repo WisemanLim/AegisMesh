@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-api
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+spec:
+  replicas: {{ .Values.api.replicas }}
+  strategy: { type: RollingUpdate, rollingUpdate: { maxUnavailable: 0 } }
+  selector: { matchLabels: {{ include "aegismesh.sel" (list . "api") }} }
+  template:
+    metadata:
+      labels: {{ include "aegismesh.sel" (list . "api") }}
+      annotations: { checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} }
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- include "aegismesh.podSecurity" . | nindent 6 }}
+      containers:
+        - name: api
+          image: {{ include "aegismesh.apiImage" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- include "aegismesh.containerSecurity" . | nindent 10 }}
+          command: [uvicorn, app.main:app, --host, 0.0.0.0, --port, "8000", --workers, {{ .Values.api.workers | quote }}]
+          ports: [{ containerPort: 8000, name: http }]
+          envFrom: [{ configMapRef: { name: {{ include "aegismesh.fullname" . }}-config } }]
+          env: {{- include "aegismesh.env" . | nindent 12 }}
+          readinessProbe: { httpGet: { path: /health, port: http }, periodSeconds: 5, failureThreshold: 6 }
+          livenessProbe: { httpGet: { path: /healthz, port: http }, periodSeconds: 10, initialDelaySeconds: 15 }
+          resources: {{- toYaml .Values.api.resources | nindent 12 }}
+          volumeMounts: [{ name: data, mountPath: /app/data }, { name: tmp, mountPath: /tmp }]
+      volumes:
+        - { name: data, persistentVolumeClaim: { claimName: {{ include "aegismesh.fullname" . }}-data } }
+        - { name: tmp, emptyDir: {} }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-api
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.api.type }}
+  selector: {{ include "aegismesh.sel" (list . "api") }}
+  ports: [{ port: {{ .Values.service.api.port }}, targetPort: http, name: http }]

@@ -1,0 +1,70 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d5-01
+  name: Weak Authentication Detector
+  nameKo: 취약 인증 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D5
+    item: Weak authentication
+spec:
+  series: C2
+  gate: input
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+      - LLM03
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI03
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0004
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-287
+      - CWE-308
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: auth_strength
+    available:
+    - id: auth_strength
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    requireAuth:
+      type: boolean
+      default: true
+      labelKo: 인증 필수
+      labelEn: Require authentication

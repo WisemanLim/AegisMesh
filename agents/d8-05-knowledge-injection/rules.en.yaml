@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D8-05.unauthenticated-ingest: Index ingestion audit 'unauthenticated-ingest' → block.
+D8-05.poisoned-docs: Index ingestion audit 'poisoned-docs' → block.
+D8-05.unsigned-docs: Index ingestion audit 'unsigned-docs' → alert.
+D8-05.ingest-spike: Index ingestion audit 'ingest-spike' → alert.
+D8-05.pass: Passed index ingestion audit.

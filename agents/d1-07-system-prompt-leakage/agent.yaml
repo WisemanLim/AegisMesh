@@ -1,0 +1,83 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d1-07
+  name: System Prompt Leakage Detector
+  nameKo: 시스템 프롬프트 유출 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D1
+    item: System prompt leakage
+spec:
+  series: C1
+  gate: output
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM01
+      - LLM08
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI01
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0011
+      - AML.TA0005
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-200
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: canary_similarity
+    available:
+    - id: canary_similarity
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    canaries:
+      type: list
+      items: string
+      default: []
+      labelKo: 카나리 토큰(시스템 지시에 심은 표식)
+      labelEn: Canary tokens (planted in system prompt)
+    matchOutput:
+      type: boolean
+      default: true
+      labelKo: 출력에서 카나리 대조 → 차단
+      labelEn: Match canaries in output → block
+    similarityThreshold:
+      type: number
+      default: 0.15
+      min: 0.05
+      max: 0.9
+      labelKo: 시스템 지시 재현율 임계(6-gram)
+      labelEn: System-prompt reproduction threshold (6-gram)

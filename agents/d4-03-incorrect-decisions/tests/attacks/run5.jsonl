@@ -1,0 +1,1 @@
+{"name": "payment-under-action-threshold", "request": {"action": {"type": "payment", "impact": "high", "confidence": 0.86}, "params": {"thresholdsByAction": {"payment": 0.9}}}, "expect": ["require_approval"]}

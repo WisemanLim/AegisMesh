@@ -1,0 +1,10 @@
+{"name": "human-only", "request": {"subject": {"principal": {"id": "kim", "roles": ["admin"]}}}}
+{"name": "delegated", "request": {"subject": {"principal": {"id": "kim", "roles": ["admin"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["admin"]}}, "params": {"delegation": "tok"}}}
+{"name": "agent-lesser", "request": {"subject": {"principal": {"id": "kim", "roles": ["admin"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["viewer"]}}, "params": {"delegation": "t"}}}
+{"name": "none", "request": {}}
+{"name": "same-roles", "request": {"subject": {"principal": {"id": "kim", "roles": ["finance-approver"]}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["finance-approver"]}}, "params": {"delegation": "t"}}}
+{"name": "history-stable", "request": {"subject": {"principal": {"id": "kim", "roles": []}}, "history": [{"principal": "kim", "roles": ["a"]}, {"principal": "kim", "roles": ["a"]}]}}
+{"name": "agent-non-priv", "request": {"subject": {"principal": {"id": "kim", "roles": []}, "onBehalfOf": {"type": "agent", "id": "bot", "roles": ["reader"]}}, "params": {"delegation": "t"}}}
+{"name": "history-other", "request": {"subject": {"principal": {"id": "kim", "roles": []}}, "history": [{"principal": "lee", "roles": ["x"]}, {"principal": "kim", "roles": ["a"]}]}}
+{"name": "no-roles-hist", "request": {"subject": {"principal": {"id": "kim", "roles": []}}, "history": [{"principal": "kim"}]}}
+{"name": "service", "request": {"subject": {"principal": {"type": "service", "id": "etl"}}}}

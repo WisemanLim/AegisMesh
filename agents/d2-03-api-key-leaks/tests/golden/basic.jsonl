@@ -1,0 +1,10 @@
+{"name": "plain", "request": {"output": "Your order shipped."}}
+{"name": "ko", "request": {"output": "배송이 시작되었습니다."}}
+{"name": "sk-word", "request": {"output": "Ask the sk-team for skiing tips."}}
+{"name": "short-akia", "request": {"output": "AKIA is a prefix used by AWS."}}
+{"name": "pubkey", "request": {"output": "-----BEGIN PUBLIC KEY----- is safe to share"}}
+{"name": "url", "request": {"output": "Visit https://example.com/docs?id=123"}}
+{"name": "eyj-short", "request": {"output": "the token starts with eyJ usually"}}
+{"name": "conn-no-pw", "request": {"output": "connect to postgresql://db.internal:5432/app"}}
+{"name": "code", "request": {"output": "api_key = os.environ['API_KEY']"}}
+{"name": "uuid", "request": {"output": "request id 550e8400-e29b-41d4-a716-446655440000"}}

@@ -1,0 +1,9 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D5-06.expired: Token claim check 'expired' failed → block.
+D5-06.not-yet-valid: Token claim check 'not-yet-valid' failed → block.
+D5-06.audience-mismatch: Token claim check 'audience-mismatch' failed → block.
+D5-06.client-mismatch: Token claim check 'client-mismatch' failed → block.
+D5-06.scope-insufficient: Token claim check 'scope-insufficient' failed → block.
+D5-06.long-lived: Token claim check 'long-lived' failed → alert.
+D5-06.audience-missing: Token claim check 'audience-missing' failed → block.
+D5-06.pass: Passed token claim checks.

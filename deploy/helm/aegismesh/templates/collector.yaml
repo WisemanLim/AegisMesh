@@ -1,0 +1,37 @@
+{{- if .Values.collector.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-otel
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+    app.kubernetes.io/component: otel-collector
+spec:
+  replicas: 1
+  selector: { matchLabels: {{ include "aegismesh.sel" (list . "otel-collector") }} }
+  template:
+    metadata:
+      labels: {{ include "aegismesh.sel" (list . "otel-collector") }}
+      annotations: { checksum/config: {{ .Files.Get "files/collector.yaml" | sha256sum }} }
+    spec:
+      securityContext: { runAsNonRoot: true, runAsUser: 10001, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: otel
+          image: {{ .Values.collector.image }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- include "aegismesh.containerSecurity" . | nindent 10 }}
+          args: [--config=/etc/otelcol/config.yaml]
+          env: [{ name: OTEL_DEBUG_VERBOSITY, value: {{ .Values.collector.debugVerbosity | quote }} }]
+          ports: [{ containerPort: 4318, name: otlp-http }, { containerPort: 4317, name: otlp-grpc }]
+          readinessProbe: { httpGet: { path: /, port: 13133 }, periodSeconds: 5 }
+          volumeMounts: [{ name: config, mountPath: /etc/otelcol }]
+      volumes: [{ name: config, configMap: { name: {{ include "aegismesh.fullname" . }}-otel } }]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-otel
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+spec:
+  selector: {{ include "aegismesh.sel" (list . "otel-collector") }}
+  ports: [{ port: 4318, targetPort: otlp-http, name: otlp-http }, { port: 4317, targetPort: otlp-grpc, name: otlp-grpc }]
+{{- end }}

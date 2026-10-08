@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-config
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+data:
+  APP_ENV: {{ .Values.config.appEnv | quote }}
+  DB_ENGINE: postgres
+  AUTO_MIGRATE: "false"
+  REGISTRY_DIR: /app/data/registry
+  LEDGER_KEY_FILE: /app/data/ledger_ed25519.key
+  EVIDENCE_RETENTION_DAYS: {{ .Values.config.evidenceRetentionDays | quote }}
+  MODEL_EGRESS: {{ .Values.config.modelEgress | quote }}
+  SPIFFE_TRUST_DOMAIN: {{ .Values.config.spiffeTrustDomain | quote }}
+  WORKER_INTERVAL_SEC: {{ .Values.config.workerIntervalSec | quote }}
+  OIDC_ISSUER: {{ .Values.config.oidcIssuer | quote }}
+  OIDC_CLIENT_ID: {{ .Values.config.oidcClientId | quote }}
+  OIDC_BACKCHANNEL_MAP: {{ .Values.config.oidcBackchannelMap | quote }}
+  OTEL_ENDPOINT: {{ if .Values.collector.enabled }}{{ printf "http://%s-otel:4318" (include "aegismesh.fullname" .) | quote }}{{ else }}""{{ end }}
+  {{- range $k, $v := .Values.config.extra }}
+  {{ $k }}: {{ $v | quote }}
+  {{- end }}
+---
+{{- if .Values.collector.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-otel
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+{{ .Files.Get "files/collector.yaml" | indent 4 }}
+{{- end }}

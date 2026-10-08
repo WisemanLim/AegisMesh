@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D2-02.cross-tenant: Search documents or memory from another tenant got mixed into the context. Block.
+D2-02.cross-user: Item owned by another user. Block if it reached the output, alert if only in context.
+D2-02.cross-session: Session-scoped memory was read from another session. Alert.
+D2-02.pass: Passed tenant, user and session scope checks.

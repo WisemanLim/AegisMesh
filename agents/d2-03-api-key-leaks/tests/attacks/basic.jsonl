@@ -1,0 +1,11 @@
+{"name": "openai", "request": {"output": "Here you go: sk-proj-abcdEFGHijklMNOPqrstUVWXyz0123456789"}, "expect": ["transform"]}
+{"name": "anthropic", "request": {"output": "key=sk-ant-api03-AbCdEfGhIjKlMnOpQrStUvWxYz012345"}, "expect": ["transform"]}
+{"name": "aws", "request": {"output": "AWS key AKIAIOSFODNN7EXAMPLE and secret"}, "expect": ["transform"]}
+{"name": "github", "request": {"output": "token ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij"}, "expect": ["transform"]}
+{"name": "slack", "request": {"output": "xoxb-123456789012-abcdefghijkl"}, "expect": ["transform"]}
+{"name": "google", "request": {"output": "AIzaSyA-1234567890abcdefghijklmnopqrstu"}, "expect": ["transform"]}
+{"name": "pem", "request": {"output": "-----BEGIN RSA PRIVATE KEY-----\nMIIEow..."}, "expect": ["transform"]}
+{"name": "jwt", "request": {"output": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U"}, "expect": ["transform"]}
+{"name": "conn", "request": {"output": "DATABASE_URL=postgresql://admin:hunter2@db:5432/prod"}, "expect": ["transform"]}
+{"name": "multi", "request": {"output": "a sk-ant-api03-ZZZZZZZZZZZZZZZZZZZZZZZZ and AKIAABCDEFGHIJKLMNOP"}, "expect": ["transform"]}
+{"name": "input-side", "request": {"text": "my key is sk-ant-api03-QQQQQQQQQQQQQQQQQQQQQQQQ"}, "expect": ["alert"]}

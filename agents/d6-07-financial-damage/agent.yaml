@@ -1,0 +1,86 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d6-07
+  name: Financial Action Guard
+  nameKo: 금전 피해 탐지기
+  version: 1.1.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D6
+    item: Financial damage
+spec:
+  series: C2
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - require_approval
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM03
+      - LLM06
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI01
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0012
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: spend_limits
+    available:
+    - id: spend_limits
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    spendLimit:
+      type: number
+      default: 10000000
+      min: 0
+      labelKo: 건당 지출 상한
+      labelEn: Per-transaction spend limit
+    approvalThreshold:
+      type: number
+      default: 100000
+      min: 0
+      labelKo: 승인 필요 금액
+      labelEn: Approval threshold
+    dailyLimit:
+      type: number
+      min: 0
+      labelKo: 일 지출 상한
+      labelEn: Daily spend limit
+    requireCompensation:
+      type: boolean
+      default: false
+      labelKo: 보상 트랜잭션 없는 금전 행동 거부
+      labelEn: Refuse money actions without a compensation
+    compensations:
+      type: map
+      labelKo: '보상 트랜잭션 {행동: 보상 행동}'
+      labelEn: 'Compensations {action: compensating action}'

@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X02.cascade: Faulty output propagated to maxPropagation or more downstream agents. Propagation blocked.
+X02.propagation: Faulty output propagation (below the threshold). Alert.
+X02.error-rate: Agent error rate above the threshold. Alert.
+X02.pass: Passed propagation tracing.

@@ -1,0 +1,10 @@
+{"name": "clean", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"primary": false, "index": false, "cache": false, "backup": false}}, "params": {"now": 1790000000}}}
+{"name": "no-artifact", "request": {"params": {"now": 1790000000}}}
+{"name": "backup-grace", "request": {"artifact": {"kind": "deletion_audit", "requestedAt": 1789913600, "receiptIssued": true, "stores": {"backup": true}}, "params": {"now": 1790000000}}}
+{"name": "ttl-ok", "request": {"memory": [{"id": "m", "createdAt": 1789999990, "ttlSec": 3600}], "params": {"now": 1790000000}}}
+{"name": "no-ttl", "request": {"memory": [{"id": "m", "createdAt": 1789000001}], "params": {"now": 1790000000}}}
+{"name": "other-kind", "request": {"artifact": {"kind": "sbom"}}}
+{"name": "empty-stores", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {}}, "params": {"now": 1790000000}}}
+{"name": "ttl-edge", "request": {"memory": [{"id": "m", "createdAt": 1789999900, "ttlSec": 100}], "params": {"now": 1790000000}}}
+{"name": "no-created", "request": {"memory": [{"id": "m", "ttlSec": 1}], "params": {"now": 1790000000}}}
+{"name": "many-clean", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"primary": false, "index": false}}, "params": {"now": 1790000000}}}

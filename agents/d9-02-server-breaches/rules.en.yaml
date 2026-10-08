@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D9-02.app-spawned-shell: Runtime compromise indicator 'app-spawned-shell'. Block and isolate the host.
+D9-02.cryptominer: Runtime compromise indicator 'cryptominer'. Block and isolate the host.
+D9-02.system-write: Runtime compromise indicator 'system-write'. Block and isolate the host.
+D9-02.c2-connect: Runtime compromise indicator 'c2-connect'. Block and isolate the host.
+D9-02.integrity-change: Runtime compromise indicator 'integrity-change'. Block and isolate the host.
+D9-02.pass: Passed runtime event check.

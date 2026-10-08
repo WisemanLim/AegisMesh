@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-worker
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+    app.kubernetes.io/component: worker
+spec:
+  replicas: {{ .Values.worker.replicas }}
+  selector: { matchLabels: {{ include "aegismesh.sel" (list . "worker") }} }
+  template:
+    metadata:
+      labels: {{ include "aegismesh.sel" (list . "worker") }}
+      annotations: { checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} }
+    spec:
+      {{- include "aegismesh.podSecurity" . | nindent 6 }}
+      containers:
+        - name: worker
+          image: {{ include "aegismesh.apiImage" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- include "aegismesh.containerSecurity" . | nindent 10 }}
+          command: [python, -m, app.worker]
+          envFrom: [{ configMapRef: { name: {{ include "aegismesh.fullname" . }}-config } }]
+          env: {{- include "aegismesh.env" . | nindent 12 }}
+          resources: {{- toYaml .Values.worker.resources | nindent 12 }}
+          volumeMounts: [{ name: data, mountPath: /app/data }, { name: tmp, mountPath: /tmp }]
+      volumes:
+        - { name: data, persistentVolumeClaim: { claimName: {{ include "aegismesh.fullname" . }}-data } }
+        - { name: tmp, emptyDir: {} }

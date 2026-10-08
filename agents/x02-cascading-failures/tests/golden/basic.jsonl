@@ -1,0 +1,10 @@
+{"name": "all-ok", "request": {"artifact": {"kind": "propagation_trace", "chain": [{"agent": "a", "status": "ok", "inputFrom": []}, {"agent": "b", "status": "ok", "inputFrom": ["a"]}, {"agent": "c", "status": "ok", "inputFrom": ["b"]}]}}}
+{"name": "error-isolated", "request": {"artifact": {"kind": "propagation_trace", "chain": [{"agent": "a", "status": "error", "inputFrom": []}, {"agent": "b", "status": "ok", "inputFrom": []}]}}}
+{"name": "none", "request": {}}
+{"name": "low-rate", "request": {"artifact": {"kind": "propagation_trace", "chain": [{"agent": "a", "status": "ok", "inputFrom": []}], "errorRate": 0.05}}}
+{"name": "error-not-consumed", "request": {"artifact": {"kind": "propagation_trace", "chain": [{"agent": "a", "status": "error", "inputFrom": []}, {"agent": "b", "status": "ok", "inputFrom": ["c"]}, {"agent": "c", "status": "ok", "inputFrom": []}]}}}
+{"name": "other", "request": {"artifact": {"kind": "iac"}}}
+{"name": "degraded-leaf", "request": {"artifact": {"kind": "propagation_trace", "chain": [{"agent": "a", "status": "ok", "inputFrom": []}, {"agent": "b", "status": "degraded", "inputFrom": ["a"]}]}}}
+{"name": "parallel-ok", "request": {"artifact": {"kind": "propagation_trace", "chain": [{"agent": "a", "status": "ok", "inputFrom": []}, {"agent": "b", "status": "ok", "inputFrom": ["a"]}, {"agent": "c", "status": "ok", "inputFrom": ["a"]}]}}}
+{"name": "empty", "request": {"artifact": {"kind": "propagation_trace", "chain": []}}}
+{"name": "rate-custom", "request": {"artifact": {"kind": "propagation_trace", "chain": [{"agent": "a", "status": "ok", "inputFrom": []}], "errorRate": 0.3}, "params": {"maxErrorRate": 0.5}}}

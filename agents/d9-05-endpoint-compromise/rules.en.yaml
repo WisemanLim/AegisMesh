@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D9-05.plaintext-credentials: Endpoint check 'plaintext-credentials' → block.
+D9-05.integrity-fail: Endpoint check 'integrity-fail' → block.
+D9-05.no-edr: Endpoint check 'no-edr' → alert.
+D9-05.long-session: Endpoint check 'long-session' → alert.
+D9-05.no-hw-key: Endpoint check 'no-hw-key' → alert.
+D9-05.pass: Passed endpoint posture check.

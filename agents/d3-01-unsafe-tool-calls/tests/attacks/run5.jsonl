@@ -1,0 +1,1 @@
+{"name": "dry-run-12k-rows", "request": {"tool": {"name": "db.execute", "args": {"sql": "DELETE FROM loan_app WHERE status='draft'"}}, "params": {"dryRun": {"tables": ["loan_app"], "rows": 12408, "reversible": false}}}, "expect": ["require_approval"]}

@@ -1,0 +1,13 @@
+# 개인정보보호법(대한민국) — PRD §4.4 매핑. 설계 참고용이며 법률 판단이 아니다(PRD 부록 E).
+framework: pipa
+title: 개인정보보호법(대한민국)
+titleEn: Personal Information Protection Act (Korea)
+version: 현행
+versionEn: current
+controls:
+  - { id: "§15·§17", title: 처리·제공 근거, titleEn: "Lawful basis for processing and provision", items: [D2-01, D2-04], platform: [ledger] }
+  - { id: "§21", title: 파기, titleEn: "Destruction", items: [D2-07], platform: [ledger] }
+  - { id: "§29", title: 안전성 확보조치(접근통제·암호화·접속기록), titleEn: "Safeguards (access control · encryption · access logs)", items: [D2-03, D5-01, D5-02, D9-03, D10-04], platform: [ledger, masking] }
+  - { id: "§34", title: 유출 통지, titleEn: "Breach notification", items: [X08], platform: [incidents] }
+  - { id: "§28-2", title: 가명정보 처리, titleEn: "Pseudonymized data processing", items: [D2-01], platform: [masking] }
+  - { id: "§37-2", title: 자동화된 결정에 대한 권리, titleEn: "Rights on automated decisions", items: [D4-03, D6-01], platform: [approvals] }

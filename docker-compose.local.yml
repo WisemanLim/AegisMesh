@@ -1,0 +1,222 @@
+# aegismesh — local 모드: SQLite + dev 스테이지 + 소스 바인드(핫리로드)
+services:
+  api:
+    build: { target: dev }
+    env_file:
+      - .env.local
+      - path: ./infra/openbao/api.env   # make bao-up 이 만든다(비커밋) — 있으면 OpenBao 임대 백엔드
+        required: false
+      - path: ./infra/guard/api.env     # make guard-up 이 만든다(비커밋) — 있으면 D1-03 깊은 검사(안전 분류 모델)
+        required: false
+      - path: ./infra/spire/api.env     # make spire-up 이 만든다(비커밋) — 있으면 워크로드 신원 SPIRE
+        required: false
+      - path: ./infra/nats/api.env      # make bus-up 이 만든다(비커밋) — 있으면 발견 버스 상태 조회(BUS_URL)
+        required: false
+      - path: ./infra/injguard/api.env  # make injguard-up 이 만든다(비커밋) — 있으면 D1-03 인라인 주입 분류 모델
+        required: false
+      - path: ./infra/gvisor/api.env    # make l2-up 이 만든다(비커밋) — 있으면 L2 격리(gVisor 브로커)
+        required: false
+    # 핫리로드는 소스만 감시 — data/(심사 번들·DB·키)가 바뀌어도 재기동하지 않는다
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload",
+              "--reload-dir", "app", "--reload-dir", "aegis", "--reload-dir", "agents", "--reload-dir", "policies",
+              "--reload-dir", "profiles", "--reload-dir", "controls", "--reload-dir", "observability"]
+    volumes:
+      - ./:/app
+      - appdata:/app/data
+      - corpora:/corpora:ro              # 공개 공격 코퍼스 반입본(make corpus-eval) — 평가 전용
+  worker:
+    build: { target: dev }
+    env_file:
+      - .env.local
+      - path: ./infra/openbao/api.env
+        required: false
+      - path: ./infra/guard/api.env
+        required: false
+      - path: ./infra/spire/api.env
+        required: false
+      - path: ./infra/nats/api.env
+        required: false
+      - path: ./infra/injguard/api.env
+        required: false
+      - path: ./infra/gvisor/api.env
+        required: false
+    volumes:
+      - ./:/app
+      - appdata:/app/data
+      - corpora:/corpora:ro
+  web:
+    build: { target: dev }
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules     # 이미지 안 의존성 유지 (호스트 바인드가 가리지 않게)
+      - /app/.next
+  # 패스키 E2E (Epic 34) — Playwright Chromium + CDP 가상 인증기. 콘솔 네트워크를 공유해 http://localhost:3000(보안 컨텍스트) 으로 접속.
+  # `make e2e-passkey OUT=test/impl/<N>/logs` 가 1회 실행한다(상주 프로세스 아님).
+  e2e:
+    build: { context: ./infra/e2e }
+    image: aegismesh-e2e:local
+    profiles: ["e2e"]
+    network_mode: "service:web"
+    working_dir: /e2e
+    volumes:
+      - ./test/e2e:/e2e:ro
+      - ./apps/web/app:/routes:ro                         # 접근성 점검 경로 목록(page.tsx)
+      - ./${OUT:-test/impl/e2e}:/out
+    environment:
+      E2E_OUT: /out
+      E2E_ONLY: ${E2E_ONLY:-}                              # 접근성 점검 일부 경로만(쉼표)
+    command: ["python", "passkey_e2e.py"]
+  # 공개 공격 코퍼스 (Epic 43, NFR-Q2) — 이미지 빌드가 GitHub 고정 커밋의 데이터 파일만 받는다(infra/corpus). 실행 = corpora 볼륨에 복사
+  corpus:
+    build: { context: ./infra/corpus }
+    image: aegismesh-corpus:local
+    profiles: ["corpus"]
+    volumes:
+      - corpora:/out
+  # 폐쇄망 레지스트리 미러 (Epic 61, 프로파일 mirror) — 이미지·헬름 차트(OCI). `make mirror-push` 가 채우고 k3d 는 docker.io 미러로만 받는다
+  agentgateway:                          # MCP 게이트웨이 (Epic 67, 프로파일 agw) — tools/call 을 AegisMesh 도구·출력 관문으로(ExtMCP)
+    profiles: ["agw"]
+    image: cr.agentgateway.dev/agentgateway:v1.6.0@sha256:9d3e6044ddcdc0878b1787f77bd401252b95e22684203fb5e874c4c42d2ed90c
+    command: ["-f", "/config/config.yaml"]
+    ports: ["127.0.0.1:${AGW_PORT:-3100}:3000"]
+    volumes: ["./infra/agentgateway/config.yaml:/config/config.yaml:ro"]
+    read_only: true
+    depends_on: [extmcp, mcp-demo]
+  extmcp:                                # ExtMCP 정책 서버 — 서비스 계정 토큰은 비커밋 infra/agentgateway/extmcp.env (make agw-up)
+    profiles: ["agw"]
+    build: { context: ./infra/extmcp }
+    image: aegismesh-extmcp:local
+    env_file: [{ path: ./infra/agentgateway/extmcp.env, required: false }]
+    environment: { AEGIS_URL: "http://api:8000" }
+    read_only: true
+  mcp-demo:                              # 시연 MCP 서버(표준 라이브러리, 도구는 흉내만)
+    profiles: ["agw"]
+    image: python:3.12-slim
+    command: ["python", "/srv/mcp_demo.py"]
+    volumes: ["./infra/agentgateway/mcp_demo.py:/srv/mcp_demo.py:ro"]
+    user: "65534:65534"
+    read_only: true
+  registry:
+    image: registry:3.0.0
+    profiles: ["mirror"]
+    ports:
+      - "127.0.0.1:${REGISTRY_PORT:-5005}:5000"
+    volumes:
+      - regdata:/var/lib/registry
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:5000/v2/"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  # 발견 버스 (Epic 60, 프로파일 bus) — NATS JetStream(파일 저장) + 원장 커서 중계(bus-relay). `make bus-up`
+  nats:
+    image: nats:2.11.9-alpine
+    profiles: ["bus"]
+    command: ["nats-server", "-js", "-sd", "/data", "-m", "8222"]
+    volumes:
+      - natsdata:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8222/healthz?js-enabled-only=true"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  bus-relay:
+    build: { target: dev }
+    image: aegismesh-api:local
+    profiles: ["bus"]
+    command: ["python", "-m", "app.bus", "relay"]
+    env_file:
+      - .env.local
+      - path: ./infra/nats/api.env
+        required: false
+    volumes:
+      - ./:/app
+      - appdata:/app/data
+    restart: unless-stopped
+    depends_on:
+      nats: { condition: service_healthy }
+  # 외부 레드팀 엔진 garak (Epic 59, 프로파일 garak) — 고정 판 이미지, 보고서는 OUT. `make garak-scan` 이 1회 실행(상주 아님)
+  garak:
+    build: { context: ./infra/garak }
+    image: aegismesh-garak:local
+    profiles: ["garak"]
+    volumes:
+      - ./infra/garak:/cfg:ro
+      - ./${OUT:-test/impl/garak}:/out
+  # garak 대상 — 무방비(되풀이) 모델 앞뒤에 AegisMesh 입력·출력 관문(scripts/garak_target.py). 토큰은 make garak-scan 이 만든 비커밋 env
+  garak-target:
+    build: { target: dev }
+    image: aegismesh-api:local
+    profiles: ["garak"]
+    command: ["python", "scripts/garak_target.py"]
+    env_file:
+      - path: ./infra/garak/target.env
+        required: false
+    volumes:
+      - ./:/app
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://127.0.0.1:9000/')"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  # OpenBao 시크릿 백엔드 (Epic 41, FR-P07) — local 시험용 dev 서버(메모리 저장, 재기동하면 비워짐). `make bao-up` 이 루트 토큰(비커밋)으로
+  # 정책·토큰 역할·브로커 토큰을 만들고 api·worker 를 OpenBao 임대로 재기동한다. 운영은 외부 OpenBao 클러스터를 OPENBAO_ADDR 로 가리킨다.
+  bao:
+    image: openbao/openbao:2.4.1
+    profiles: ["bao"]
+    command: ["server", "-dev", "-dev-listen-address=0.0.0.0:8200"]
+    env_file:
+      - path: ./infra/openbao/bao.env
+        required: false
+    cap_add: ["IPC_LOCK"]
+    ports:
+      - "127.0.0.1:${BAO_PORT:-8210}:8200"   # 8200 은 다른 프로세스가 쓸 수 있어 기본 8210
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8200/v1/sys/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+  # OpenBao 운영형 리허설 (Epic 46) — raft 저장(baodata 볼륨, 재기동해도 임대 유지)·수동 봉인 해제·파일 감사 장치. `make bao-up MODE=server`
+  bao-server:
+    image: openbao/openbao:2.4.1
+    profiles: ["bao-server"]
+    command: ["server"]                           # 이미지 진입점이 -config=/openbao/config 를 붙인다
+    cap_add: ["IPC_LOCK"]
+    volumes:
+      - ./infra/openbao/config.hcl:/openbao/config/config.hcl:ro
+      - baodata:/openbao/file                     # 진입점이 소유자를 openbao 로 맞추는 경로
+      - baoaudit:/openbao/logs
+    ports:
+      - "127.0.0.1:${BAO_PORT:-8210}:8200"
+    healthcheck:                                  # 초기화 전·봉인 상태도 '살아 있음'으로 본다(봉인 해제는 bao_setup.py)
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8200/v1/sys/health?uninitcode=200&sealedcode=200&standbyok=true"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+  # 조직 SSO 시험용 IdP (Epic 22) — local 전용 프로파일. `make idp-up` 이 렐름·시험 사용자(비커밋)를 만든 뒤 기동
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.3
+    profiles: ["idp"]
+    command: ["start-dev", "--import-realm", "--http-port=8080", "--health-enabled=true"]
+    environment:
+      KC_HOSTNAME: http://localhost:${IDP_PORT:-8080}       # 브라우저·토큰 iss 기준 주소
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"              # api 의 서버 간 호출은 http://keycloak:8080
+    env_file:
+      - path: ./infra/keycloak/import/admin.env
+        required: false
+    volumes:
+      - ./infra/keycloak/import:/opt/keycloak/data/import:ro
+    ports:
+      - "127.0.0.1:${IDP_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000 && printf 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && grep -q UP <&3"]
+      interval: 5s
+      timeout: 3s
+      retries: 60
+
+volumes:
+  regdata:                               # 폐쇄망 레지스트리 미러 (registry)
+  natsdata:                              # 발견 버스 JetStream 저장소 (nats)
+  baodata:                               # OpenBao raft 저장소 (bao-server)
+  baoaudit:                              # OpenBao 감사 로그 (bao-server)
+  corpora:                               # 공개 공격 코퍼스 반입본 (corpus 서비스가 채우고 api·worker 가 읽기 전용)

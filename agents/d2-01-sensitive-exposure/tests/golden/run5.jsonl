@@ -1,0 +1,1 @@
+{"name": "zone-operator-raw-phone", "request": {"output": "담당자 연락처 010-1234-5678", "params": {"zone": "operator", "zonePolicy": {"operator": {"phone": "raw"}}}}}

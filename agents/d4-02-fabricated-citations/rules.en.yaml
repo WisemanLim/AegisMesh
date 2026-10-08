@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D4-02.invalid-id: DOI or arXiv identifier that cannot exist by format. Removed.
+D4-02.unverified: Citation (URL, DOI, arXiv) not in the grounding documents or allowlist. Replaced with [unverified citation].
+D4-02.pass: Passed citation identifier check.

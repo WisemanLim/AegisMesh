@@ -1,0 +1,15 @@
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: test -f .env.prod || cp .env.example .env.prod
+      - run: make preflight
+      - run: make coverage      # DP10 — 도식 항목 누락 시 빌드 실패 (FR-P16)
+      - run: make test          # API·SDK·에이전트 품질 게이트(골든셋·공격셋·회귀 기준선)
+      - run: make test-web      # 콘솔 단위 시험 + 타입 검사
+      - run: docker compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.prod build

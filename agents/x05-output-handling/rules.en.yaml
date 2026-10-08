@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X05.xss: 'Output rendered as HTML or Markdown contains scripts, event handlers or javascript: URLs. Passes after HTML escaping.'
+X05.sql-sink: Output executed as SQL contains multiple statements or destructive syntax. Block.
+X05.shell-sink: Output executed by a shell contains command chaining, substitution or destructive syntax. Block.
+X05.pass: Passed per-sink output checks.

@@ -1,0 +1,69 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d2-06
+  name: Log Pipeline Auditor
+  nameKo: 로그 취약성 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D2
+    item: Log vulnerabilities
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM02
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI06
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0010
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-532
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: log_pipeline_audit
+    available:
+    - id: log_pipeline_audit
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxRetentionDays:
+      type: integer
+      default: 90
+      min: 1
+      labelKo: 로그 최대 보존(일)
+      labelEn: Max log retention (days)

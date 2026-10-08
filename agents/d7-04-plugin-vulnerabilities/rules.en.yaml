@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D7-04.undeclared-permissions: Plugin check 'undeclared-permissions' → block.
+D7-04.permission-creep: Plugin check 'permission-creep' → block.
+D7-04.prompt-surface-injection: Plugin check 'prompt-surface-injection' → block.
+D7-04.no-sandbox: Plugin check 'no-sandbox' → alert.
+D7-04.pass: Passed plugin permission and surface check.

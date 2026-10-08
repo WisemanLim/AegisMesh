@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D6-02.depth: Call depth limit (maxDepth) reached. Block.
+D6-02.fanout: Number of spawned sub-agents hit the fan-out limit. Block.
+D6-02.cycle: Spawns an agent already in the lineage again (cycle). Block.
+D6-02.budget: Spawn budget used up. Human approval.
+D6-02.pass: Passed depth, fan-out and lineage checks.

@@ -1,0 +1,10 @@
+{"name": "normal", "request": {"artifact": {"kind": "traffic_stats", "rps": 100, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": 20}}}
+{"name": "double", "request": {"artifact": {"kind": "traffic_stats", "rps": 300, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": 20}}}
+{"name": "diverse-surge-small", "request": {"artifact": {"kind": "traffic_stats", "rps": 450, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.9, "rateLimit": true, "autoscaleMax": 20}}}
+{"name": "none", "request": {}}
+{"name": "no-baseline", "request": {"artifact": {"kind": "traffic_stats", "rps": 99999, "baselineRps": null, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": 20}}}
+{"name": "custom-surge", "request": {"artifact": {"kind": "traffic_stats", "rps": 800, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": 20}, "params": {"surgeFactor": 10}}}
+{"name": "other", "request": {"artifact": {"kind": "iac"}}}
+{"name": "scale-high", "request": {"artifact": {"kind": "traffic_stats", "rps": 100, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": true, "autoscaleMax": 500}}}
+{"name": "share-mid", "request": {"artifact": {"kind": "traffic_stats", "rps": 200, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.6, "rateLimit": true, "autoscaleMax": 20}}}
+{"name": "rl", "request": {"artifact": {"kind": "traffic_stats", "rps": 100, "baselineRps": 100, "topClient": "c1", "topClientShare": 0.1, "rateLimit": {"rps": 1000}, "autoscaleMax": 20}}}

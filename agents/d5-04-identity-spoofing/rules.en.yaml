@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D5-04.spiffe-mismatch: The SPIFFE ID the principal claims differs from the proven SVID, or there is no proof. Block.
+D5-04.unsigned-agent: Agent principal calls without a signature or proof. Block (FR-X01 mutual authentication).
+D5-04.claimed-authority: Input text impersonates an admin or executive but the actual role is missing. Alert (social engineering).
+D5-04.pass: Passed identity proof comparison.

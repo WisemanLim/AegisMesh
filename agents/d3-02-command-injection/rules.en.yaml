@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D3-02.shell-meta: Metacharacters such as ; && || | backticks $( ) in shell tool arguments — chains extra commands. Block.
+D3-02.substitution: Command substitution syntax (backticks, $()) in ordinary arguments. Block.
+D3-02.sql-injection: Tautology, UNION SELECT or stacked queries in query arguments. Block.
+D3-02.pass: No shell or SQL injection patterns found.

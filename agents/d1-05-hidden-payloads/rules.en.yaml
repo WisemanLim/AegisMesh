@@ -1,0 +1,8 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D1-05.unicode-tag: Instructions hidden in the Unicode tag block (U+E0000–E007F) (ASCII smuggling). Block.
+D1-05.zero-width: Two or more zero-width characters. Passes after normalization and removal (transform).
+D1-05.bidi-override: Bidirectional control characters manipulate display order. Passes after normalization and removal (transform).
+D1-05.html-comment: Instruction inside an HTML comment — invisible when rendered. Block.
+D1-05.hidden-css: Instruction inside hidden styling (display:none, white text, zero size). Block.
+D1-05.alt-text: Instruction inside image alt text. Block.
+D1-05.pass: Passed all 6 rule checks.

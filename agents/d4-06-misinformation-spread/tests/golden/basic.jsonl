@@ -1,0 +1,10 @@
+{"name": "user", "request": {"output": "답변입니다"}}
+{"name": "agent-cited", "request": {"output": "요약 [출처: 보고서 3p]", "params": {"destination": "agent"}}}
+{"name": "index-cited", "request": {"output": "내용 https://docs.garam.example/a", "params": {"destination": "index"}}}
+{"name": "doc-prov", "request": {"output": "요약", "params": {"destination": "document", "provenance": {"sources": ["d1"]}}}}
+{"name": "index-numbered", "request": {"output": "사실 A [1]", "params": {"destination": "index"}}}
+{"name": "user-unverified", "request": {"output": "수치 [근거 미확인]"}}
+{"name": "empty", "request": {"output": "", "params": {"destination": "index"}}}
+{"name": "source-en", "request": {"output": "Fact (source: Q3 report)", "params": {"destination": "agent"}}}
+{"name": "ko-colon", "request": {"output": "출처: 내부 위키", "params": {"destination": "document"}}}
+{"name": "no-dest", "request": {"output": "text"}}

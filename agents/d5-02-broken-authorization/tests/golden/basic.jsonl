@@ -1,0 +1,10 @@
+{"name": "own", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "resource": {"type": "order", "id": "o1", "owner": "u1", "tenant": "acme"}}}}
+{"name": "admin-other", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["admin"]}, "resource": {"owner": "u2"}}}}
+{"name": "support", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["support-admin"]}, "resource": {"owner": "u9", "tenant": "acme"}}}}
+{"name": "no-resource", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}}}
+{"name": "role-ok", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["finance"]}}, "params": {"requiredRoles": ["finance", "admin"]}}}
+{"name": "same-tenant", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "resource": {"tenant": "acme"}}}}
+{"name": "auditor", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["auditor"]}, "resource": {"owner": "u5"}}}}
+{"name": "res-no-owner", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "resource": {"type": "doc", "id": "d1"}}}}
+{"name": "default-tenant", "request": {"subject": {"principal": {"id": "u1"}, "resource": {"tenant": "default"}}}}
+{"name": "empty", "request": {}}

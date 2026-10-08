@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D8-06.checksum-mismatch: Memory record checksum mismatch. Block, then use a restore point.
+D8-06.conflict: Conflicting records with the same ID. Alert.
+D8-06.pass: Passed memory integrity check.

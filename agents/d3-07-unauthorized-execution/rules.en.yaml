@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D3-07.not-allowlisted: Tool not in params.toolAllowlist. Block.
+D3-07.code-exec: Code or shell execution tool called without approval. Human approval (execution in an L2+ sandbox).
+D3-07.pass: Passed tool allowlist and execution approval checks.

@@ -1,0 +1,10 @@
+{"name": "read", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/report.md"}}}}
+{"name": "rel", "request": {"tool": {"name": "write_file", "args": {"path": "notes/a.txt", "content": "x"}}}}
+{"name": "list", "request": {"tool": {"name": "list_dir", "args": {"path": "/workspace/src"}}}}
+{"name": "custom-root", "request": {"tool": {"name": "write_file", "args": {"path": "/data/out.csv"}}, "params": {"allowedPaths": ["/data"]}}}
+{"name": "move", "request": {"tool": {"name": "move_file", "args": {"src": "/workspace/a.txt", "dest": "/workspace/b.txt"}}}}
+{"name": "search", "request": {"tool": {"name": "search_docs", "args": {"q": "../ means parent dir"}}}}
+{"name": "env-example", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/.env.example"}}}}
+{"name": "non-file-tool", "request": {"tool": {"name": "send_email", "args": {"path": "/etc/passwd"}}}}
+{"name": "delete-one", "request": {"tool": {"name": "delete_file", "args": {"path": "/workspace/tmp/old.log"}}}}
+{"name": "read-pub", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/docs/key-concepts.md"}}}}

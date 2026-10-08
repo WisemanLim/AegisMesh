@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D4-07.overconfident: Low response confidence without an uncertainty notice. A notice is added.
+D4-07.trust-regression: Negative feedback ratio regressed against the baseline. Alert.
+D4-07.pass: Passed trust signal check.

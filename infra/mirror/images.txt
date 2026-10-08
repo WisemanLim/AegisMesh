@@ -1,0 +1,11 @@
+# 폐쇄망 미러에 넣는 이미지 (Epic 61) — k3d 5.9.0 의 k3s v1.35.5-k3s1 시스템 이미지(traefik·servicelb 끔, local-path 의 볼륨 도우미 busybox 포함) + AegisMesh 헬름 차트 이미지.
+# 형식: <원본 이미지(호스트 도커에 있는 이름)> <미러 경로(docker.io 기준)>
+rancher/mirrored-pause:3.6 rancher/mirrored-pause:3.6
+rancher/mirrored-coredns-coredns:1.14.3 rancher/mirrored-coredns-coredns:1.14.3
+rancher/local-path-provisioner:v0.0.36 rancher/local-path-provisioner:v0.0.36
+rancher/mirrored-metrics-server:v0.8.1 rancher/mirrored-metrics-server:v0.8.1
+rancher/mirrored-library-busybox:1.37.0 rancher/mirrored-library-busybox:1.37.0
+postgres:17-alpine library/postgres:17-alpine
+otel/opentelemetry-collector-contrib:0.162.0 otel/opentelemetry-collector-contrib:0.162.0
+aegismesh-api:prod library/aegismesh-api:prod
+aegismesh-web:prod library/aegismesh-web:prod

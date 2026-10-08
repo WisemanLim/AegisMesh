@@ -1,0 +1,1 @@
+{"name": "default-ttl-expired", "request": {"memory": [{"id": "m1", "text": "x", "createdAt": 1000}], "params": {"defaultTtlDays": 1, "now": 173800}}, "expect": ["alert"]}

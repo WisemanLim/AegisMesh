@@ -1,0 +1,82 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: d6-03
+  name: Loop Detector
+  nameKo: 무한 루프 탐지기
+  version: 1.0.0
+  source:
+    diagram: Security Risks in AI Agents
+    domain: D6
+    item: Infinite loops
+spec:
+  series: C2
+  gate: tool
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 10
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM03
+      - LLM06
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI01
+    mitre-atlas:
+      version: '2026.06'
+      ids:
+      - AML.TA0012
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-835
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: loop_detector
+    available:
+    - id: loop_detector
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxRepeat:
+      type: integer
+      default: 3
+      min: 1
+      labelKo: 같은 호출 반복 한도
+      labelEn: Max identical repeats
+    maxNoProgress:
+      type: integer
+      default: 4
+      min: 1
+      labelKo: 무진척 단계 한도
+      labelEn: Max no-progress steps
+    maxRunSec:
+      type: integer
+      default: 900
+      min: 1
+      labelKo: 최대 실행 시간(초)
+      labelEn: Max run time (s)

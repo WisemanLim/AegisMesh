@@ -1,0 +1,10 @@
+{"name": "clean", "request": {"text": "요약", "retrieval": [{"id": "a", "text": "배송 정책: 3일 이내 발송", "trust": "untrusted", "source": "web"}]}}
+{"name": "en", "request": {"text": "요약", "retrieval": [{"id": "b", "text": "Refunds are processed within 7 days.", "trust": "untrusted", "source": "web"}]}}
+{"name": "trusted-plain", "request": {"text": "요약", "retrieval": [{"id": "c", "text": "FAQ", "trust": "trusted", "source": "kb"}]}}
+{"name": "ignore-word", "request": {"text": "요약", "retrieval": [{"id": "e", "text": "You can ignore the warning light.", "trust": "untrusted", "source": "web"}]}}
+{"name": "system-req", "request": {"text": "요약", "retrieval": [{"id": "f", "text": "System requirements: 8GB RAM.", "trust": "untrusted", "source": "web"}]}}
+{"name": "signed", "request": {"text": "요약", "retrieval": [{"id": "g", "text": "x", "trust": "untrusted", "source": "web", "signed": true}], "params": {"requireSignedDocs": true}}}
+{"name": "none", "request": {"text": "hi"}}
+{"name": "always", "request": {"text": "요약", "retrieval": [{"id": "h", "text": "The store is always open.", "trust": "untrusted", "source": "web"}]}}
+{"name": "code", "request": {"text": "요약", "retrieval": [{"id": "i", "text": "x = 1  # simple", "trust": "untrusted", "source": "web"}]}}
+{"name": "ko", "request": {"text": "요약", "retrieval": [{"id": "j", "text": "주문 내역을 확인하세요.", "trust": "untrusted", "source": "web"}]}}

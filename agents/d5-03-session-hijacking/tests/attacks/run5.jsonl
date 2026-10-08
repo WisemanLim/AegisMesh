@@ -1,0 +1,3 @@
+{"name": "bearer-without-proof", "request": {"session": {"id": "s7", "boundKey": "jkt-A"}}, "expect": ["block"]}
+{"name": "proof-other-key", "request": {"session": {"id": "s7", "boundKey": "jkt-A", "proofKey": "jkt-B"}}, "expect": ["block"]}
+{"name": "replay-other-key-same-device", "request": {"session": {"id": "s7", "boundKey": "jkt-A", "proofKey": "jkt-Q", "boundFingerprint": "fp1", "fingerprint": "fp1"}}, "expect": ["block"]}

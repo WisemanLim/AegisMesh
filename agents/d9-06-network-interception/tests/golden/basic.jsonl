@@ -1,0 +1,10 @@
+{"name": "good", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": []}}}
+{"name": "tls-ext", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "api.x", "port": 443, "tls": true, "external": true}]}}}
+{"name": "internal-plain-unknown", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "b", "port": 80, "tls": false, "external": false}]}}}
+{"name": "none", "request": {}}
+{"name": "default-deny", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": []}}}
+{"name": "many", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "b", "tls": true}, {"src": "a", "dst": "b", "tls": true}, {"src": "a", "dst": "b", "tls": true}]}}}
+{"name": "no-mtls-info", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny"}}}
+{"name": "other", "request": {"artifact": {"kind": "iac"}}}
+{"name": "ext-tls-unknown", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "x", "external": true}]}}}
+{"name": "route-ok", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "b", "tls": true, "unexpectedRoute": false}]}}}

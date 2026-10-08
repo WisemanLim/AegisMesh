@@ -1,0 +1,2 @@
+{"name": "zone-external-model-default-deny", "request": {"output": "고객 주민번호 900101-1234568 확인", "params": {"zone": "external_model"}}, "expect": ["block"]}
+{"name": "zone-explicit-block", "request": {"output": "연락처 010-1234-5678", "params": {"zone": "external", "zonePolicy": {"external": {"phone": "block"}}}}, "expect": ["block"]}

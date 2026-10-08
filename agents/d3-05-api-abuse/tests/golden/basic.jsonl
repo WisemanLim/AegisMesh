@@ -1,0 +1,12 @@
+{"name": "get", "request": {"tool": {"name": "http_request", "args": {"method": "GET", "url": "https://api.example.com/v1/orders?limit=50"}}}}
+{"name": "limit-ok", "request": {"tool": {"name": "list_orders", "args": {"limit": 100}}}}
+{"name": "rate-ok", "request": {"tool": {"name": "search", "args": {}}, "params": {"rateLimit": {"calls": 60, "windowSec": 60}, "recentCalls": 12}}}
+{"name": "delete-one", "request": {"tool": {"name": "http_request", "args": {"method": "DELETE", "url": "https://api.example.com/v1/orders/123"}}}}
+{"name": "put-uuid", "request": {"tool": {"name": "http_request", "args": {"method": "PUT", "url": "https://api.example.com/v1/users/550e8400-e29b-41d4-a716-446655440000"}}}}
+{"name": "custom-batch", "request": {"tool": {"name": "export_rows", "args": {"batch_size": 5000}}, "params": {"maxBatch": 10000}}}
+{"name": "no-params", "request": {"tool": {"name": "get_weather", "args": {"city": "Busan"}}}}
+{"name": "post", "request": {"tool": {"name": "http_request", "args": {"method": "POST", "url": "https://api.example.com/v1/orders"}}}}
+{"name": "amount-small", "request": {"tool": {"name": "refund", "args": {"amount": 30}}}}
+{"name": "patch-id", "request": {"tool": {"name": "http_request", "args": {"method": "PATCH", "url": "/v1/items/42"}}}}
+{"name": "refund-amount", "request": {"tool": {"name": "refund", "args": {"amount": 5000}}}}
+{"name": "approved-bulk", "request": {"tool": {"name": "export", "args": {"page_size": 50000}, "approved": true}}}

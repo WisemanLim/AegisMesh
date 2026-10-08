@@ -1,0 +1,24 @@
+# SeaweedFS gRPC 상호 TLS (Epic 52 · NFR-D3) — 내부 CA 로 서명된 인증서만. master·volume·filer·s3 와 그 클라이언트가 같은 인증서를 쓴다.
+# 인증서는 볼륨 tls 의 objstore 하위 경로(/tls), 회전은 make certs-rotate (SeaweedFS 가 파일을 다시 읽는다).
+[grpc]
+ca = "/tls/ca.crt"
+
+[grpc.master]
+cert = "/tls/tls.crt"
+key = "/tls/tls.key"
+
+[grpc.volume]
+cert = "/tls/tls.crt"
+key = "/tls/tls.key"
+
+[grpc.filer]
+cert = "/tls/tls.crt"
+key = "/tls/tls.key"
+
+[grpc.s3]
+cert = "/tls/tls.crt"
+key = "/tls/tls.key"
+
+[grpc.client]
+cert = "/tls/tls.crt"
+key = "/tls/tls.key"

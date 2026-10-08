@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X09.regression: Red-team check 'regression' → block.
+X09.unregistered-target: Red-team check 'unregistered-target' → block.
+X09.stale: Red-team check 'stale' → alert.
+X09.pass: Passed red-team regression and cadence check.

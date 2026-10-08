@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D1-06.high-entropy-egress: An image or link URL in the output sends high-entropy parameters to a host outside the allowlist (context exfiltration). Block.
+D1-06.auto-render: Auto-rendered image from a host outside the allowlist. Transformed by turning the image into link text.
+D1-06.pass: Passed output URL allowlist and entropy checks.

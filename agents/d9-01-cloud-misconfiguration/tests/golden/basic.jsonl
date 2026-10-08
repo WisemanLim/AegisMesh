@@ -1,0 +1,10 @@
+{"name": "private-enc", "request": {"artifact": {"kind": "iac", "resources": [{"type": "bucket", "name": "logs", "public": false, "encrypted": true}]}}}
+{"name": "iam-scoped", "request": {"artifact": {"kind": "iac", "resources": [{"type": "iam_policy", "name": "p", "actions": ["s3:GetObject"], "resources": ["arn:x"]}]}}}
+{"name": "sg-https", "request": {"artifact": {"kind": "iac", "resources": [{"type": "security_group", "name": "web", "ingress": [{"cidr": "0.0.0.0/0", "port": 443}]}]}}}
+{"name": "sg-ssh-vpn", "request": {"artifact": {"kind": "iac", "resources": [{"type": "security_group", "name": "bastion", "ingress": [{"cidr": "10.0.0.0/8", "port": 22}]}]}}}
+{"name": "iam-star-scoped", "request": {"artifact": {"kind": "iac", "resources": [{"type": "iam_policy", "name": "p", "actions": ["*"], "resources": ["arn:aws:s3:::one"]}]}}}
+{"name": "db-enc", "request": {"artifact": {"kind": "iac", "resources": [{"type": "db", "name": "pg", "encrypted": true}]}}}
+{"name": "no-artifact", "request": {}}
+{"name": "cloud-config", "request": {"artifact": {"kind": "cloud_config", "resources": [{"type": "bucket", "name": "b", "public": false}]}}}
+{"name": "empty", "request": {"artifact": {"kind": "iac", "resources": []}}}
+{"name": "disk-unknown", "request": {"artifact": {"kind": "iac", "resources": [{"type": "disk", "name": "d"}]}}}

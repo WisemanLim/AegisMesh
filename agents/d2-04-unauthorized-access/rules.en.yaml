@@ -1,0 +1,3 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D2-04.acl-denied: Search results include documents the requesting principal cannot read (ACL). Block and search again.
+D2-04.pass: Passed search-result ACL re-check.

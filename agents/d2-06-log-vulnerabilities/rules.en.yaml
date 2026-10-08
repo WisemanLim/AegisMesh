@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D2-06.secret-in-logs: Observability pipeline check 'secret-in-logs' → block.
+D2-06.no-masking: Observability pipeline check 'no-masking' → alert.
+D2-06.raw-payload: Observability pipeline check 'raw-payload' → alert.
+D2-06.retention: Observability pipeline check 'retention' → alert.
+D2-06.open-access: Observability pipeline check 'open-access' → alert.
+D2-06.pass: Passed observability pipeline masking, retention and access checks.

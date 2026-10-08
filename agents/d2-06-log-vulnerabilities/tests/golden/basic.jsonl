@@ -1,0 +1,10 @@
+{"name": "good", "request": {"artifact": {"kind": "log_pipeline", "processors": ["transform/mask", "batch"], "attributes": ["gen_ai.prompt"], "droppedAttributes": ["gen_ai.prompt"], "retentionDays": 30, "payloadAccess": "security-team"}}}
+{"name": "no-artifact", "request": {}}
+{"name": "other-kind", "request": {"artifact": {"kind": "sbom"}}}
+{"name": "redact", "request": {"artifact": {"kind": "log_pipeline", "processors": ["redaction"], "attributes": ["gen_ai.prompt"], "droppedAttributes": ["gen_ai.prompt"], "retentionDays": 30, "payloadAccess": "security-team"}}}
+{"name": "no-raw", "request": {"artifact": {"kind": "log_pipeline", "processors": ["mask"], "attributes": ["http.status"]}}}
+{"name": "ret-90", "request": {"artifact": {"kind": "log_pipeline", "processors": ["transform/mask", "batch"], "attributes": ["gen_ai.prompt"], "droppedAttributes": ["gen_ai.prompt"], "retentionDays": 90, "payloadAccess": "security-team"}}}
+{"name": "custom-ret", "request": {"artifact": {"kind": "log_pipeline", "processors": ["transform/mask", "batch"], "attributes": ["gen_ai.prompt"], "droppedAttributes": ["gen_ai.prompt"], "retentionDays": 365, "payloadAccess": "security-team"}, "params": {"maxRetentionDays": 400}}}
+{"name": "clean-sample", "request": {"artifact": {"kind": "log_pipeline", "processors": ["transform/mask", "batch"], "attributes": ["gen_ai.prompt"], "droppedAttributes": ["gen_ai.prompt"], "retentionDays": 30, "payloadAccess": "security-team", "sampleRecords": ["GET /health 200"]}}}
+{"name": "access-role", "request": {"artifact": {"kind": "log_pipeline", "processors": ["transform/mask", "batch"], "attributes": ["gen_ai.prompt"], "droppedAttributes": ["gen_ai.prompt"], "retentionDays": 30, "payloadAccess": "auditors"}}}
+{"name": "empty-attrs", "request": {"artifact": {"kind": "log_pipeline", "processors": ["mask"]}}}

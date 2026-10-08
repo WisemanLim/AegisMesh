@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D4-04.arithmetic: Recomputing an arithmetic equation in the output gives a different value. Alert.
+D4-04.comparison: Magnitude comparison claim contradicts the numbers. Alert.
+D4-04.percent-sum: Shares do not add up to 100% (params.percentagesSumTo100). Alert.
+D4-04.inconsistent: Numbers disagree with sampled answers to the same query (self-consistency failure). Alert.
+D4-04.pass: Arithmetic and comparison recomputation agree.

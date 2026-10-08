@@ -1,0 +1,1 @@
+{"name": "plaintext-internal", "request": {"artifact": {"kind": "network_policy", "egressDefault": "deny", "mtls": true, "flows": [{"src": "a", "dst": "10.0.3.9", "port": 8080, "tls": false, "mtls": false, "external": false}]}}, "expect": ["block"]}

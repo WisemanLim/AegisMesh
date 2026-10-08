@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D10-06.missing-card: No system or model card. Alert.
+D10-06.stale-card: Card not updated after a change. Alert.
+D10-06.pass: Passed card presence and freshness check.

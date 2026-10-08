@@ -1,0 +1,9 @@
+# NIST AI RMF 1.0 — PRD §4.3 도메인 대표 기능 + 매니페스트 standards.nist-ai-rmf
+framework: nist-ai-rmf
+title: NIST AI RMF 1.0
+version: "1.0"
+controls:
+  - { id: GOVERN, title: 거버넌스, titleEn: "Govern", domains: [D3, D5, D6, D9, D10], platform: [ledger, risk_register] }
+  - { id: MAP, title: 맥락·위험 식별, titleEn: "Map context and risks", domains: [D2, D7], platform: [risk_register] }
+  - { id: MEASURE, title: 측정·평가, titleEn: "Measure and assess", domains: [D1, D2, D4, D8], platform: [redteam] }
+  - { id: MANAGE, title: 대응·관리, titleEn: "Manage and respond", domains: [D1, D3, D5, D6, D7, D8], platform: [incidents, approvals] }

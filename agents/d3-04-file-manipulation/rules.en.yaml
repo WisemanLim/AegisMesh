@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D3-04.path-traversal: '''..'' in the path — escapes the allowed root. Block.'
+D3-04.sensitive-file: Access to sensitive files such as credentials, keys or .env. Block.
+D3-04.outside-root: Outside the allowed root (params.allowedPaths, default /workspace). Writes are blocked, reads need approval.
+D3-04.mass-change: Mass change by wildcard. Human approval.
+D3-04.read-only-path: Write to a read-only mount path. Block.
+D3-04.pass: Passed file path rules.

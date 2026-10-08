@@ -1,0 +1,10 @@
+{"name": "overconf", "request": {"output": "정답은 확실히 42입니다.", "params": {"modelConfidence": 0.2}}, "expect": ["transform"]}
+{"name": "overconf-en", "request": {"output": "The answer is 42.", "params": {"modelConfidence": 0.4}}, "expect": ["transform"]}
+{"name": "regression", "request": {"artifact": {"kind": "feedback_stats", "negativeRate": 0.2, "baselineNegativeRate": 0.05}}, "expect": ["alert"]}
+{"name": "regression2", "request": {"artifact": {"kind": "feedback_stats", "negativeRate": 0.12, "baselineNegativeRate": 0.02}}, "expect": ["alert"]}
+{"name": "custom-low", "request": {"output": "답", "params": {"modelConfidence": 0.6, "lowConfidence": 0.7}}, "expect": ["transform"]}
+{"name": "overconf3", "request": {"output": "환불 가능합니다.", "params": {"modelConfidence": 0.1}}, "expect": ["transform"]}
+{"name": "regression3", "request": {"artifact": {"kind": "feedback_stats", "negativeRate": 0.5, "baselineNegativeRate": 0.1}}, "expect": ["alert"]}
+{"name": "overconf4", "request": {"output": "Yes.", "params": {"modelConfidence": 0.0}}, "expect": ["transform"]}
+{"name": "regression4", "request": {"artifact": {"kind": "feedback_stats", "negativeRate": 0.07, "baselineNegativeRate": 0.0}}, "expect": ["alert"]}
+{"name": "overconf5", "request": {"output": "배송은 내일 도착합니다.", "params": {"modelConfidence": 0.35}}, "expect": ["transform"]}

@@ -1,0 +1,4108 @@
+{
+ "openapi": "3.1.0",
+ "operations": {
+  "DELETE /v1/auth/totp": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "204",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "DELETE /v1/auth/webauthn/{cid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:cid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "204",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "DELETE /v1/targets/{tid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:tid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "204",
+    "422"
+   ],
+   "tags": [
+    "instant"
+   ]
+  },
+  "DELETE /v1/traffic-samples": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "samples"
+   ]
+  },
+  "GET /health": {
+   "params": [],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200"
+   ],
+   "tags": []
+  },
+  "GET /healthz": {
+   "params": [],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200"
+   ],
+   "tags": []
+  },
+  "GET /readyz": {
+   "params": [],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200"
+   ],
+   "tags": []
+  },
+  "GET /v1/agents": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "GET /v1/agents/{agent_id}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:agent_id!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "GET /v1/agents/{agent_id}/reviews": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:agent_id!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "GET /v1/agents/{aid}/config": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!",
+    "query:policy",
+    "query:principal",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/airgap/imports": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "GET /v1/appeals": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:agent",
+    "query:status",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "GET /v1/applications": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:active",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "GET /v1/approvals": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:status",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "GET /v1/approvals/{aid}/context": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "GET /v1/approvals:tray": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "GET /v1/auth/config": {
+   "params": [],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/auth/geoip": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:ip"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/auth/mds": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/auth/me": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/auth/mfa": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/auth/oidc/start": {
+   "params": [
+    "query:next",
+    "query:redirect!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/auth/sessions": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/auth/sso": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/authz:check": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:perm!",
+    "query:tenant",
+    "query:user!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/cards/{agent_id}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:agent_id!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/compliance/cards": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "GET /v1/compliance/cards/{subject}/doc": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:subject!",
+    "query:lang",
+    "query:tenant",
+    "query:version"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "GET /v1/compliance/deploy-gate": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "GET /v1/compliance/fairness": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:days",
+    "query:target",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "GET /v1/coverage": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:stage"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "GET /v1/data-protection": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "GET /v1/domains/artifacts/{group}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:group!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d1/exfil": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d2/isolation": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d3/calls": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:limit",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d3/calls/{trace}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:trace!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d3/registry": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d3/sandbox": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d4/decisions": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d4/grounding/{fid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:fid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d4/propagation": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d5/authz": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d5/identity": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d5/tokens": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:hours",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d6/autonomy": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:target",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d6/budgets": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d6/runs": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d6/runs/{trace}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:trace!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d8/bias": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:days",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d8/context": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant",
+    "query:trace"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/domains/d8/memory": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/erasure": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/erasure/{rid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:rid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/evidence": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:before",
+    "query:kind",
+    "query:limit",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/evidence/bus": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/evidence/public-key": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/evidence/purges/{pid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/evidence/retention": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/evidence/rewrap": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/evidence:export": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:chain",
+    "query:from",
+    "query:to"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/evidence:verify": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:chain"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "GET /v1/findings": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:agent",
+    "query:from",
+    "query:limit",
+    "query:offset",
+    "query:tenant",
+    "query:trace",
+    "query:verdict"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "GET /v1/findings/{fid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:fid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "GET /v1/findings/{fid}/appeals": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:fid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "GET /v1/findings/{fid}/inspect": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:fid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/gates": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:hours",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/gates/degradation": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:days",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/gates/{gate}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:gate!",
+    "query:hours",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/gates:status": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/governance/snapshot": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/identity": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "GET /v1/identity/jwks": {
+   "params": [],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "GET /v1/identity/static-credentials": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "GET /v1/incidents": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:status",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/incidents/{iid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:iid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/incidents/{iid}/response": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:iid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "GET /v1/install/precheck": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "GET /v1/market": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:status",
+    "query:tier"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "GET /v1/metrics/success": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "metrics"
+   ]
+  },
+  "GET /v1/notifications": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:hours"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "GET /v1/observability": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "observability"
+   ]
+  },
+  "GET /v1/observability/dr": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "observability"
+   ]
+  },
+  "GET /v1/observability/kms": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "observability"
+   ]
+  },
+  "GET /v1/observability/tls": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "observability"
+   ]
+  },
+  "GET /v1/policies": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/policies/{pid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "GET /v1/policies/{pid}/diff": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!",
+    "query:from!",
+    "query:tenant",
+    "query:to!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/policies/{pid}/versions": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "GET /v1/profiles": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "GET /v1/profiles/{pid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "GET /v1/profiles/{pid}/compare": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!",
+    "query:target",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "instant"
+   ]
+  },
+  "GET /v1/publishers": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "GET /v1/quality": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "GET /v1/quality/fp-budget": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:day",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "GET /v1/quality/garak": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "GET /v1/quarantine": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:active",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "scan"
+   ]
+  },
+  "GET /v1/recall-tests": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "GET /v1/redteam/campaigns": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:agent",
+    "query:limit"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/reports": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:lang"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/reports/{fw}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:fw!",
+    "query:days",
+    "query:format",
+    "query:lang"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/risk-items": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "GET /v1/risks": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "GET /v1/roles": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/sandbox": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "sandbox"
+   ]
+  },
+  "GET /v1/sbom": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "GET /v1/scan-targets": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "scan"
+   ]
+  },
+  "GET /v1/search": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:q!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "GET /v1/secrets/backend": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "GET /v1/secrets/leases": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:active",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "GET /v1/setup/status": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "GET /v1/targets": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "instant"
+   ]
+  },
+  "GET /v1/tenants": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/tenants/isolation-test": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/tenants/{tid}/auth-policy": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:tid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/topology": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "GET /v1/traffic-samples": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:limit",
+    "query:target",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "samples"
+   ]
+  },
+  "GET /v1/traffic-samples/settings": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "samples"
+   ]
+  },
+  "GET /v1/trust-keys": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "GET /v1/trust-keys:export": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "GET /v1/updates": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "GET /v1/updates/sbom": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "GET /v1/users": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "GET /v1/users/{uid}/tokens": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:uid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "PATCH /v1/tenants/{tid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:tid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "active",
+    "name",
+    "retentionDays"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "PATCH /v1/users/{uid}": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:uid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "active",
+    "displayName",
+    "password",
+    "roles"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/agents": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "POST /v1/agents/{agent_id}:promote": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:agent_id!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "reason!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "POST /v1/agents/{aid}/config:test": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "overrides",
+    "policy",
+    "principal",
+    "reason",
+    "sample",
+    "values"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/agents/{aid}:inspect": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "draft",
+    "engine",
+    "policy",
+    "request!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/airgap/imports": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "POST /v1/appeals/{lid}:decide": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:lid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "label!",
+    "note"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "POST /v1/applications/{aid}:release": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "POST /v1/approvals/{aid}:decide": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "decision!",
+    "reason"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "POST /v1/auth/bootstrap": {
+   "params": [],
+   "bodyRequired": true,
+   "bodyFields": [
+    "displayName",
+    "lang",
+    "password!",
+    "tenantId",
+    "tenantName",
+    "token!",
+    "username!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/login": {
+   "params": [],
+   "bodyRequired": true,
+   "bodyFields": [
+    "password!",
+    "reason",
+    "username!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/logout": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/mfa:verify": {
+   "params": [],
+   "bodyRequired": true,
+   "bodyFields": [
+    "code",
+    "credential",
+    "ticket!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/oidc/backchannel-logout": {
+   "params": [],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/oidc/callback": {
+   "params": [],
+   "bodyRequired": true,
+   "bodyFields": [
+    "code!",
+    "state!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/reauth": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "code",
+    "credential",
+    "password",
+    "ticket"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/reauth:options": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/sessions/{sid}:revoke": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:sid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/sessions:revoke-others": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/sso:test": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/totp:confirm": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "code!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/totp:setup": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/webauthn/register": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "credential!",
+    "name",
+    "ticket!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/auth/webauthn/register:options": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/compliance/cards/{subject}:publish": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:subject!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "audiences!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "POST /v1/compliance/cards:generate": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "subject"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "POST /v1/compliance/fairness/assessments": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "status",
+    "summary!",
+    "target!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "POST /v1/compliance/fairness:measure": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "days",
+    "target"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "POST /v1/domains/d2/isolation:regress": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:n",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/domains/d4/corrections": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "note",
+    "source",
+    "status",
+    "traceId"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/domains/d5/authz:drift-scan": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/domains/decisions": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "decision!",
+    "kind!",
+    "name!",
+    "reason!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/erasure": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "basis!",
+    "days",
+    "subject!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/erasure/{rid}/stores": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:rid!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "note",
+    "status!",
+    "store!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/erasure/{rid}:certify": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:rid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/erasure/{rid}:verify": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:rid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/evidence/retention:request": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "chain!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "POST /v1/evidence/rewrap:request": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "evidence"
+   ]
+  },
+  "POST /v1/findings/{fid}:appeal": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:fid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "detail",
+    "method",
+    "reason",
+    "sample"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "POST /v1/gates/{gate}/relocations": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:gate!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "agent!",
+    "reason!",
+    "restore"
+   ],
+   "responses": [
+    "202",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/gates/{gate}/relocations:ignore": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:gate!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "agent!",
+    "reason!",
+    "restore"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/governance:assess": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "POST /v1/identity/svid": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "POST /v1/identity:rotate": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "force"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "POST /v1/identity:verify": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "audience",
+    "token!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "POST /v1/incidents/{iid}/steps": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:iid!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "note",
+    "step!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "POST /v1/incidents/{iid}:close": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:iid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "note"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "POST /v1/incidents/{iid}:contain": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:iid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "note"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "POST /v1/incidents/{iid}:preserve": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:iid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "POST /v1/incidents/{iid}:replay": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:iid!",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "POST /v1/instant:apply": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "blockDomains",
+    "confirmed",
+    "profile!",
+    "stage!",
+    "target!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "instant"
+   ]
+  },
+  "POST /v1/instant:rollback": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "target!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "instant"
+   ]
+  },
+  "POST /v1/judge": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:agent!",
+    "query:engine"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "action",
+    "artifact",
+    "auth",
+    "gate",
+    "goal",
+    "history",
+    "memory",
+    "output",
+    "params",
+    "plan",
+    "retrieval",
+    "schema",
+    "segments",
+    "session",
+    "subject",
+    "system",
+    "text",
+    "tool",
+    "traceId"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "POST /v1/judge:batch": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "agents",
+    "gate!",
+    "policy",
+    "request!",
+    "stage",
+    "target"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "POST /v1/judge:stream": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "agents",
+    "chunk",
+    "final",
+    "held",
+    "policy",
+    "request",
+    "seq",
+    "stage",
+    "streamId",
+    "target"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "POST /v1/market/{lid}:request": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:lid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "tenant"
+   ],
+   "responses": [
+    "202",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "POST /v1/metrics/success:snapshot": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "metrics"
+   ]
+  },
+  "POST /v1/observability:mask-test": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "text!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "observability"
+   ]
+  },
+  "POST /v1/observability:test-log": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "text!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "observability"
+   ]
+  },
+  "POST /v1/policies": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "POST /v1/policies/{pid}:rollback": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "reason!",
+    "to!"
+   ],
+   "responses": [
+    "202",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/policies:simulate": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "agents",
+    "draft",
+    "gate!",
+    "policy",
+    "request!",
+    "stage",
+    "target"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/policies:test": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/profiles": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/profiles/{pid}:apply": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "stage",
+    "target!",
+    "tenant"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "judge"
+   ]
+  },
+  "POST /v1/profiles/{pid}:preview": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:pid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "alertDomains",
+    "samples",
+    "source",
+    "stage",
+    "target",
+    "tenant"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "POST /v1/profiles:validate": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "POST /v1/publishers": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "keyId!",
+    "name!",
+    "publicKey!",
+    "tier"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "registry"
+   ]
+  },
+  "POST /v1/quality/corpora": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "content!",
+    "format",
+    "kind",
+    "license",
+    "mode",
+    "name!",
+    "scope",
+    "source",
+    "variant"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "POST /v1/quality/fp-budget:enforce": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "POST /v1/quality/golden:replay": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "n",
+    "seed"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "quality"
+   ]
+  },
+  "POST /v1/quarantine/{qid}:release": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:qid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "scan"
+   ]
+  },
+  "POST /v1/recall-tests": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "dedupRate",
+    "dpEpsilon",
+    "miaAuc",
+    "model!",
+    "outputs!",
+    "version!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "domains"
+   ]
+  },
+  "POST /v1/redteam/campaigns:request": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "agents",
+    "reason!",
+    "scenario"
+   ],
+   "responses": [
+    "202",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "POST /v1/redteam/campaigns:run": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "POST /v1/risks": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "decision",
+    "dueAt",
+    "owner",
+    "score",
+    "source",
+    "title!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "governance"
+   ]
+  },
+  "POST /v1/rogue/{name}:terminate": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:name!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "reason!",
+    "tenant"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "POST /v1/sandbox:probe": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:level"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "sandbox"
+   ]
+  },
+  "POST /v1/scan": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "agents",
+    "artifact!",
+    "tenant"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "scan"
+   ]
+  },
+  "POST /v1/scan-targets": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "artifact!",
+    "intervalSec",
+    "name!",
+    "tenant"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "scan"
+   ]
+  },
+  "POST /v1/scan-targets/{tid}:run": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:tid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "scan"
+   ]
+  },
+  "POST /v1/secrets/leases": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "holder",
+    "path!",
+    "scopes!",
+    "tenant",
+    "ttlSec"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "POST /v1/secrets/leases/{lid}:renew": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:lid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "ttlSec"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "POST /v1/secrets/leases/{lid}:revoke": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:lid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "POST /v1/secrets:introspect": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "scope",
+    "secret!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "identity"
+   ]
+  },
+  "POST /v1/setup/verify": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "console"
+   ]
+  },
+  "POST /v1/targets": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "egress",
+    "endpoint!",
+    "externalModel",
+    "insertion",
+    "kind",
+    "mcpServers",
+    "modelProvider",
+    "name!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "instant"
+   ]
+  },
+  "POST /v1/tenants": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "id!",
+    "isolation",
+    "lang",
+    "name!",
+    "region",
+    "retentionDays"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/tenants:isolation-test": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/trust-keys": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "keyId!",
+    "name!",
+    "publicKey!"
+   ],
+   "responses": [
+    "202",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "POST /v1/trust-keys/{kid}:revoke": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:kid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "reason!"
+   ],
+   "responses": [
+    "202",
+    "422"
+   ],
+   "tags": [
+    "airgap"
+   ]
+  },
+  "POST /v1/updates/agents/{aid}:reload": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!"
+   ],
+   "bodyRequired": false,
+   "bodyFields": [],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "workflow"
+   ]
+  },
+  "POST /v1/users": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "displayName",
+    "kind",
+    "password",
+    "roles",
+    "tenant",
+    "username!"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "POST /v1/users/{uid}/tokens": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:uid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "name!",
+    "ttlDays"
+   ],
+   "responses": [
+    "201",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "PUT /v1/agents/{aid}/config": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:aid!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "overrides",
+    "policy",
+    "principal",
+    "reason",
+    "sample",
+    "values"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "policy"
+   ]
+  },
+  "PUT /v1/auth/sso": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "acrValues",
+    "clientId!",
+    "enabled",
+    "groupsClaim",
+    "issuer!",
+    "mfaRequired"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "PUT /v1/auth/sso/mappings": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "items!"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "PUT /v1/compliance/fairness/disclosure": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "external",
+    "internal"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "compliance"
+   ]
+  },
+  "PUT /v1/tenants/{tid}/auth-policy": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:tid!"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "aaguids",
+    "mfa"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "auth"
+   ]
+  },
+  "PUT /v1/traffic-samples/settings": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "days",
+    "enabled!",
+    "maxSamples"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "samples"
+   ]
+  },
+  "PUT /v1/traffic-samples/{sid}/label": {
+   "params": [
+    "header:authorization",
+    "header:dpop",
+    "header:x-aegis-tenant",
+    "path:sid!",
+    "query:tenant"
+   ],
+   "bodyRequired": true,
+   "bodyFields": [
+    "label"
+   ],
+   "responses": [
+    "200",
+    "422"
+   ],
+   "tags": [
+    "samples"
+   ]
+  }
+ }
+}

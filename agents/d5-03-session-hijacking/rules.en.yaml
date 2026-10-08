@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D5-03.token-replay: Token bound to proof of possession (DPoP, mTLS) used without proof or with another key. Stolen-token reuse → block and revoke all sessions.
+D5-03.fingerprint-mismatch: Current device fingerprint differs from the one the session was issued to. Suspected theft → block and re-authenticate.
+D5-03.impossible-travel: Moving from the last seen location to the current one would need a physically impossible speed (geo-IP). Shared or stolen credentials suspected → re-authenticate and alert.
+D5-03.ip-change: Same device, different IP. Could be a network switch, so alert.
+D5-03.pass: Session binding holds.

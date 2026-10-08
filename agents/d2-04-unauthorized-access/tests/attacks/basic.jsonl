@@ -1,0 +1,10 @@
+{"name": "denied", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "hr-salary", "acl": ["role:hr"]}]}, "expect": ["block"]}
+{"name": "other-user", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "memo", "acl": ["u2"]}]}, "expect": ["block"]}
+{"name": "anon", "request": {"retrieval": [{"id": "secret", "acl": ["u1"]}]}, "expect": ["block"]}
+{"name": "obo-agent-denied", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}, "onBehalfOf": {"type": "agent", "id": "bot"}}, "retrieval": [{"id": "d", "acl": ["u1"]}]}, "expect": ["block"]}
+{"name": "empty-acl", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "locked", "acl": []}]}, "expect": ["block"]}
+{"name": "mixed", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "ok"}, {"id": "no", "acl": ["role:admin"]}]}, "expect": ["block"]}
+{"name": "role-case", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["HR"]}}, "retrieval": [{"id": "r", "acl": ["role:hr"]}]}, "expect": ["block"]}
+{"name": "legal", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": ["sales"]}}, "retrieval": [{"id": "contract", "acl": ["role:legal"]}]}, "expect": ["block"]}
+{"name": "ko", "request": {"subject": {"tenant": "acme", "principal": {"id": "김민수", "roles": []}}, "retrieval": [{"id": "인사", "acl": ["이영희"]}]}, "expect": ["block"]}
+{"name": "many", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1", "roles": []}}, "retrieval": [{"id": "n0", "acl": ["u2"]}, {"id": "n1", "acl": ["u2"]}, {"id": "n2", "acl": ["u2"]}]}, "expect": ["block"]}

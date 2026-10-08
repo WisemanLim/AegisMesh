@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D7-07.egress-denied: Upstream API integrity 'egress-denied' → block.
+D7-07.pin-mismatch: Upstream API integrity 'pin-mismatch' → block.
+D7-07.response-tampered: Upstream API integrity 'response-tampered' → block.
+D7-07.no-attestation: Upstream API integrity 'no-attestation' → alert.
+D7-07.pass: Passed provider integrity check.

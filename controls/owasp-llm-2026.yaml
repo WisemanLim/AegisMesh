@@ -1,0 +1,16 @@
+# OWASP GenAI LLM Top 10 2026 (2026-08-04) — 대응 에이전트는 매니페스트 standards.owasp-llm 에서 자동 계산
+framework: owasp-llm-2026
+title: OWASP GenAI LLM Top 10 2026
+version: "2026"
+standardKey: owasp-llm
+controls:
+  - { id: LLM01, title: Prompt Injection }
+  - { id: LLM02, title: Sensitive Information Disclosure }
+  - { id: LLM03, title: Excessive Agency }
+  - { id: LLM04, title: Supply Chain }
+  - { id: LLM05, title: Data and Model Poisoning }
+  - { id: LLM06, title: Unbounded Consumption }
+  - { id: LLM07, title: Misinformation }
+  - { id: LLM08, title: Hidden Context Exposure }
+  - { id: LLM09, title: Vector and Embedding Weaknesses }
+  - { id: LLM10, title: Improper Output Handling }

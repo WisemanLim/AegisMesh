@@ -1,0 +1,77 @@
+{
+  "realm": "aegis",
+  "displayName": "AegisMesh 시험 IdP (local)",
+  "enabled": true,
+  "sslRequired": "none",
+  "attributes": { "acr.loa.map": "{\"pwd\":1,\"mfa\":2}" },
+  "browserFlow": "browser-loa",
+  "otpPolicyType": "totp",
+  "otpPolicyAlgorithm": "HmacSHA1",
+  "otpPolicyDigits": 6,
+  "otpPolicyPeriod": 30,
+  "groups": [{ "name": "sec-platform" }, { "name": "sec-soc" }, { "name": "ciso-office" }, { "name": "garam-admins" }],
+  "clients": [
+    {
+      "clientId": "aegismesh-console",
+      "name": "AegisMesh 콘솔",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["http://localhost:3000/auth/callback", "http://localhost:13000/auth/callback"],
+      "webOrigins": ["+"],
+      "frontchannelLogout": false,
+      "attributes": { "pkce.code.challenge.method": "S256",
+                      "post.logout.redirect.uris": "http://localhost:3000/login*##http://localhost:13000/login*",
+                      "backchannel.logout.url": "http://api:8000/v1/auth/oidc/backchannel-logout",
+                      "backchannel.logout.session.required": "true", "backchannel.logout.revoke.offline.tokens": "false" },
+      "protocolMappers": [
+        {
+          "name": "groups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "consentRequired": false,
+          "config": { "full.path": "false", "id.token.claim": "true", "access.token.claim": "true", "userinfo.token.claim": "true", "claim.name": "groups" }
+        }
+      ]
+    }
+  ],
+  "authenticationFlows": [
+    {
+      "alias": "browser-loa", "description": "AegisMesh 시험 — LoA1 비밀번호, LoA2 OTP (acr pwd / mfa)",
+      "providerId": "basic-flow", "topLevel": true, "builtIn": false,
+      "authenticationExecutions": [
+        { "authenticator": "auth-cookie", "authenticatorFlow": false, "requirement": "ALTERNATIVE", "priority": 10, "userSetupAllowed": false },
+        { "authenticatorFlow": true, "requirement": "ALTERNATIVE", "priority": 20, "flowAlias": "browser-loa forms", "userSetupAllowed": false }
+      ]
+    },
+    {
+      "alias": "browser-loa forms", "description": "", "providerId": "basic-flow", "topLevel": false, "builtIn": false,
+      "authenticationExecutions": [
+        { "authenticatorFlow": true, "requirement": "CONDITIONAL", "priority": 10, "flowAlias": "loa1", "userSetupAllowed": false },
+        { "authenticatorFlow": true, "requirement": "CONDITIONAL", "priority": 20, "flowAlias": "loa2", "userSetupAllowed": false }
+      ]
+    },
+    {
+      "alias": "loa1", "description": "", "providerId": "basic-flow", "topLevel": false, "builtIn": false,
+      "authenticationExecutions": [
+        { "authenticator": "conditional-level-of-authentication", "authenticatorConfig": "loa1", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 10, "userSetupAllowed": false },
+        { "authenticator": "auth-username-password-form", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 20, "userSetupAllowed": false }
+      ]
+    },
+    {
+      "alias": "loa2", "description": "", "providerId": "basic-flow", "topLevel": false, "builtIn": false,
+      "authenticationExecutions": [
+        { "authenticator": "conditional-level-of-authentication", "authenticatorConfig": "loa2", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 10, "userSetupAllowed": false },
+        { "authenticator": "auth-otp-form", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 20, "userSetupAllowed": false }
+      ]
+    }
+  ],
+  "authenticatorConfig": [
+    { "alias": "loa1", "config": { "loa-condition-level": "1", "loa-max-age": "36000" } },
+    { "alias": "loa2", "config": { "loa-condition-level": "2", "loa-max-age": "0" } }
+  ],
+  "users": "{{USERS}}"
+}

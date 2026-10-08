@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D10-07.blind: Continuous monitoring check 'blind' → block.
+D10-07.degradation-high: Continuous monitoring check 'degradation-high' → alert.
+D10-07.latency-regression: Continuous monitoring check 'latency-regression' → alert.
+D10-07.no-collector: Continuous monitoring check 'no-collector' → alert.
+D10-07.pass: Passed continuous monitoring check.

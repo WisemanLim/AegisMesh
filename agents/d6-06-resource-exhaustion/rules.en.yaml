@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D6-06.quota-exceeded: Principal quota (tokens, time, concurrency, storage, cost) exceeded. Block.
+D6-06.quota-near: Quota at 90% or more. Alert (backpressure).
+D6-06.oversized-call: Request exceeds the per-call token limit. Alert.
+D6-06.pass: Passed quota check.

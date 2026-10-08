@@ -1,0 +1,10 @@
+{"name": "clean", "request": {"artifact": {"kind": "package", "name": "tidy-json", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 50000}}}
+{"name": "build-script", "request": {"artifact": {"kind": "package", "name": "tidy-json", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 50000, "installScripts": {"postinstall": "node build.js"}}}}
+{"name": "popular-exact", "request": {"artifact": {"kind": "package", "name": "requests", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 50000}}}
+{"name": "long-name", "request": {"artifact": {"kind": "package", "name": "my-company-internal-utils", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 50000}}}
+{"name": "old-low-dl", "request": {"artifact": {"kind": "package", "name": "tidy-json", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 10}}}
+{"name": "new-popular", "request": {"artifact": {"kind": "package", "name": "tidy-json", "ecosystem": "npm", "publishedDaysAgo": 5, "downloads": 500000}}}
+{"name": "files-ok", "request": {"artifact": {"kind": "package", "name": "tidy-json", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 50000, "files": [{"path": "index.js", "content": "module.exports = x => x * 2"}]}}}
+{"name": "no-artifact", "request": {}}
+{"name": "tsc", "request": {"artifact": {"kind": "package", "name": "tidy-json", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 50000, "installScripts": {"prepare": "tsc -p ."}}}}
+{"name": "unrelated", "request": {"artifact": {"kind": "package", "name": "zeta-graph", "ecosystem": "npm", "publishedDaysAgo": 400, "downloads": 50000}}}

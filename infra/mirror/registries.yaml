@@ -1,0 +1,5 @@
+# k3s(containerd) 레지스트리 설정 (Epic 61) — docker.io 를 사내 미러로만. k3s 인자 --disable-default-registry-endpoint 로 원 레지스트리 대체 경로를 끈다.
+mirrors:
+  "docker.io":
+    endpoint:
+      - "http://aegis-registry:5000"

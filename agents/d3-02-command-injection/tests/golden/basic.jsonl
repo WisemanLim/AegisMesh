@@ -1,0 +1,10 @@
+{"name": "ls", "request": {"tool": {"name": "run_shell", "args": {"command": "ls -la /workspace"}}}}
+{"name": "grep", "request": {"tool": {"name": "run_shell", "args": {"command": "grep -r TODO src"}}}}
+{"name": "search-q", "request": {"tool": {"name": "search_docs", "args": {"q": "price; shipping"}}}}
+{"name": "sql-ok", "request": {"tool": {"name": "run_sql", "args": {"query": "SELECT name FROM users WHERE id = 5"}}}}
+{"name": "note-pipe", "request": {"tool": {"name": "create_note", "args": {"text": "a | b table"}}}}
+{"name": "email", "request": {"tool": {"name": "send_email", "args": {"body": "Use && in bash to chain commands"}}}}
+{"name": "filename", "request": {"tool": {"name": "read_file", "args": {"path": "/workspace/a-b_c.txt"}}}}
+{"name": "sql-like", "request": {"tool": {"name": "db_query", "args": {"sql": "SELECT * FROM t WHERE name LIKE 'kim%'"}}}}
+{"name": "echo", "request": {"tool": {"name": "exec_command", "args": {"cmd": "echo hello"}}}}
+{"name": "python", "request": {"tool": {"name": "run_script", "args": {"script": "report.py"}}}}

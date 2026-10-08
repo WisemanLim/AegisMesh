@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D1-07.canary: The canary token planted in the system instructions appeared in the output → hidden-context extraction confirmed. Block.
+D1-07.verbatim: Output reproduces 15% or more of the system instructions by 6-gram. Block at 30% or more, otherwise alert.
+D1-07.secret-in-context: 'Credential-like string inside the system instructions. Design-principle alert (LLM08: assume hidden context can be discovered).'
+D1-07.pass: Passed all 3 rule checks.

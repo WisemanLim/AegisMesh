@@ -1,0 +1,6 @@
+{
+  "detectionRate": 1.0,
+  "falsePositiveRate": 0.0,
+  "golden": 14,
+  "attacks": 15
+}

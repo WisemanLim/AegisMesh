@@ -1,0 +1,335 @@
+# aegismesh — prod 모드: runtime 스테이지 + DB_ENGINE RDBMS (postgres)
+# 내부 상호 TLS (Epic 48 · NFR-D3): tls-init 이 볼륨 tls 에 내부 CA·인증서를 만들고(scripts/certs.py, 비커밋),
+# 각 서비스는 자기 하위 경로만 /tls 에 읽기 전용으로 붙인다. 회전 = make certs-rotate ENV=prod (재기동 없음).
+x-pg-tls: &pg-tls                                   # libpq 클라이언트 — 서버 인증서 검증(verify-full) + 클라이언트 인증서
+  PGSSLMODE: verify-full
+  PGSSLROOTCERT: /tls/ca.crt
+  PGSSLCERT: /tls/tls.crt
+  PGSSLKEY: /tls/tls.key
+x-otel-tls: &otel-tls                               # OTLP 내보내기 — 수집기 서버 인증서 검증 + 클라이언트 인증서
+  OTEL_EXPORTER_OTLP_CERTIFICATE: /tls/ca.crt
+  OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE: /tls/tls.crt
+  OTEL_EXPORTER_OTLP_CLIENT_KEY: /tls/tls.key
+x-bao-node: &bao-node            # OpenBao 서버 공통(Epic 56) — 이미지 진입점이 -config=/openbao/config 를 붙이고 openbao(uid 100)로 낮춘다
+  image: openbao/openbao:2.4.1
+  profiles: ["bao-cluster"]
+  command: ["server"]
+  cap_add: ["IPC_LOCK"]
+  env_file: [{ path: ./infra/openbao/cluster.env, required: false }]   # BAO_TOKEN = 봉인 해제기 transit 포장·해제 전용(make bao-cluster-up 이 생성, 비커밋)
+  healthcheck:                  # 살아 있음 = 응답(봉인 상태 2 포함), 1 = 연결 실패. 자기 인증서로 상호 TLS
+    test: ["CMD-SHELL", "bao status -address=$$BAO_HEALTH -ca-cert=/tls/ca.crt -client-cert=/tls/tls.crt -client-key=/tls/tls.key >/dev/null 2>&1; [ $$? -ne 1 ]"]
+    interval: 5s
+    timeout: 5s
+    retries: 24
+  restart: unless-stopped
+  depends_on:
+    tls-init: { condition: service_completed_successfully }
+services:
+  tls-init:                     # 내부 CA·인증서 — 없으면 만들고 만료 30일 전이면 재발급(CA 유지). 다른 서비스가 끝나기를 기다린다
+    build: { context: ., dockerfile: Dockerfile, target: runtime, args: { FIDO_MDS_OPTIONAL: "${FIDO_MDS_OPTIONAL:-0}" } }
+    image: aegismesh-api:${APP_ENV:-local}
+    user: "0:0"
+    entrypoint: ["python", "scripts/certs.py"]
+    command: ["ensure"]
+    environment:
+      HOST_UID: ${HOST_UID:-0}                      # make certs-client 가 넘긴다(클라이언트 묶음 소유자)
+    volumes: ["tls:/tls", "./infra/tls/clients:/out"]
+    restart: "no"
+  api:
+    env_file: [".env.prod", { path: ./infra/guard/api.env, required: false }, { path: ./infra/spire/api.env, required: false }, { path: ./infra/openbao/cluster-api.env, required: false }, { path: ./infra/nats/api.env, required: false }, { path: ./infra/injguard/api.env, required: false }, { path: ./infra/gvisor/api.env, required: false }]   # guard-up·spire-up ENV=prod
+    group_add: ["0"]              # SPIRE 관리 소켓(root:root 0770)에 연결 — spire-up 일 때만 쓰인다
+    # uvicorn TLS + 클라이언트 인증서 필수(--ssl-cert-reqs 2 = CERT_REQUIRED). 회전: SIGHUP → 작업 프로세스를 하나씩 교체하며 다시 읽는다
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--ssl-certfile", "/tls/tls.crt",
+              "--ssl-keyfile", "/tls/tls.key", "--ssl-ca-certs", "/tls/ca.crt", "--ssl-cert-reqs", "2"]
+    environment:
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-2}        # 작업 프로세스 수 (노드 코어에 맞춰 조정 — NFR-P1). 2 이상이어야 SIGHUP 무중단 회전
+      <<: [*pg-tls, *otel-tls]
+    volumes:
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: api } }
+    healthcheck:
+      test: ["CMD", "python", "-c", "import ssl,sys,urllib.request as u; c=ssl.create_default_context(cafile='/tls/ca.crt'); c.load_cert_chain('/tls/tls.crt','/tls/tls.key'); sys.exit(0 if u.urlopen('https://localhost:8000/health', context=c).status==200 else 1)"]
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+      db: { condition: service_healthy }
+  worker:
+    env_file: [".env.prod", { path: ./infra/guard/api.env, required: false }, { path: ./infra/spire/api.env, required: false }, { path: ./infra/openbao/cluster-api.env, required: false }, { path: ./infra/nats/api.env, required: false }, { path: ./infra/injguard/api.env, required: false }, { path: ./infra/gvisor/api.env, required: false }]
+    group_add: ["0"]
+    environment:
+      <<: [*pg-tls, *otel-tls]
+    volumes:
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: api } }
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+      db: { condition: service_healthy }
+  web:
+    environment:
+      API_URL: https://api:8000                     # 콘솔 서버 → API 상호 TLS (lib/api.ts apiFetch)
+      API_TLS_DIR: /tls
+    volumes:
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: web } }
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  guard:                        # 안전 분류 모델(프로파일 guard) — 클라이언트 인증서 필수(상호 TLS)
+    environment:
+      TLS_DIR: /tls
+    volumes:
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: guard } }
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  injguard:                     # 인라인 주입 분류 모델(프로파일 injguard) — 클라이언트 인증서 필수(상호 TLS)
+    environment:
+      TLS_DIR: /tls
+    volumes:
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: injguard } }
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  sandbox-l2:                   # L2 격리 브로커 — 클라이언트 인증서 필수(상호 TLS)
+    environment:
+      TLS_DIR: /tls
+    volumes:
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: sandbox-l2 } }
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  otel-collector:
+    command: ["--config=/etc/otelcol/config.yaml", "--config=/etc/otelcol/tls.yaml"]   # 수신 상호 TLS 덧씌움
+    volumes:
+      - ./infra/otel/tls.yaml:/etc/otelcol/tls.yaml:ro
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: otel } }
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  db:
+    image: ${DB_IMAGE:-postgres:17-alpine}
+    entrypoint: ["sh", "/aegis-pg/entry.sh"]
+    # 재해 복구(NFR-A5): WAL 보관 → dbbackup(archive_timeout = 일반 데이터 RPO 상한) · 기본값 synchronous_commit=local,
+    # 원장을 쓴 트랜잭션만 동기 대기 서버 플러시까지 기다린다(app/db.py, 원장 RPO 0) · 복제 접근은 infra/postgres/pg_hba.conf
+    command: ["postgres", "-c", "max_connections=${DB_MAX_CONNECTIONS:-300}",   # api 작업 프로세스 × (DB_POOL_SIZE+DB_MAX_OVERFLOW) 여유
+              "-c", "hba_file=/aegis-pg/pg_hba.conf", "-c", "wal_level=replica", "-c", "wal_keep_size=512MB",
+              "-c", "archive_mode=on", "-c", "archive_command=test ! -f /backup/wal/%f && cp %p /backup/wal/%f",
+              "-c", "archive_timeout=${DB_ARCHIVE_TIMEOUT_SEC:-60}", "-c", "synchronous_commit=local",
+              "-c", "ssl=on", "-c", "ssl_cert_file=/tls/server/tls.crt", "-c", "ssl_key_file=/tls/server/tls.key",
+              "-c", "ssl_ca_file=/tls/server/ca.crt"]                       # 원격 접속은 hostssl 만(상호 TLS, NFR-D3)
+    environment:
+      POSTGRES_USER: ${DB_USER:?DB_USER 필요 / required}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD 필요 / required}
+      POSTGRES_DB: ${DB_NAME:-app}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - dbbackup:/backup
+      - ./infra/postgres:/aegis-pg:ro
+      - { type: volume, source: tls, target: /tls/server, read_only: true, volume: { subpath: db } }
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  db-standby:                   # 동기 대기 서버 (NFR-A5 원장 RPO 0) — 처음 기동 때 주 서버를 복제, 스트리밍이 붙으면 동기 등록
+    image: ${DB_IMAGE:-postgres:17-alpine}
+    init: true
+    entrypoint: ["sh", "/aegis-pg/standby.sh"]
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME:-app}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME:-app}
+      DB_REPLICATION_PASSWORD: ${DB_REPLICATION_PASSWORD:?DB_REPLICATION_PASSWORD 필요 / required}
+      DB_MAX_CONNECTIONS: ${DB_MAX_CONNECTIONS:-300}     # 대기·복구 서버는 주 서버 이상이어야 한다
+      PGSSLMODE: verify-full                        # 주 서버 연결(psql·pg_basebackup·walreceiver) — replicator 인증서
+      PGSSLROOTCERT: /tls/client/ca.crt
+      PGSSLCERT: /tls/client/tls.crt
+      PGSSLKEY: /tls/client/tls.key
+    volumes:
+      - dbstandby:/var/lib/postgresql/data
+      - dbbackup:/backup:ro
+      - ./infra/postgres:/aegis-pg:ro
+      - { type: volume, source: tls, target: /tls/server, read_only: true, volume: { subpath: db } }
+      - { type: volume, source: tls, target: /tls/client, read_only: true, volume: { subpath: replicator } }
+    depends_on:
+      db: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 120
+    restart: unless-stopped
+  db-backup:                    # 주기 기본 백업 (NFR-A5 RTO) — DB_BACKUP_INTERVAL_SEC 마다 pg_basebackup, 최근 DB_BACKUP_KEEP 개
+    image: ${DB_IMAGE:-postgres:17-alpine}
+    entrypoint: ["sh", "/aegis-pg/backup.sh", "loop"]
+    environment:
+      DB_NAME: ${DB_NAME:-app}
+      DB_REPLICATION_PASSWORD: ${DB_REPLICATION_PASSWORD:?DB_REPLICATION_PASSWORD 필요 / required}
+      DB_BACKUP_INTERVAL_SEC: ${DB_BACKUP_INTERVAL_SEC:-14400}
+      DB_BACKUP_KEEP: ${DB_BACKUP_KEEP:-12}
+      PGSSLMODE: verify-full
+      PGSSLROOTCERT: /tls/client/ca.crt
+      PGSSLCERT: /tls/client/tls.crt
+      PGSSLKEY: /tls/client/tls.key
+    volumes:
+      - dbbackup:/backup
+      - ./infra/postgres:/aegis-pg:ro
+      - { type: volume, source: tls, target: /tls/client, read_only: true, volume: { subpath: replicator } }
+    depends_on:
+      db-standby: { condition: service_healthy }      # 복제 역할(replicator)은 대기 서버 진입점이 만든다
+    restart: unless-stopped
+  objstore:                     # 백업 외부 복사 대상 객체 저장(Epic 52) — SeaweedFS S3 만 상호 TLS 로 열림(운영은 다른 호스트·사이트)
+    image: chrislusf/seaweedfs:4.48
+    entrypoint: ["sh", "/aegis-obj/start.sh"]
+    environment:
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:?S3_ACCESS_KEY 필요 / required}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?S3_SECRET_KEY 필요 / required}
+      S3_BUCKET: ${S3_BUCKET:-aegis-backup}
+    volumes:
+      - objdata:/data
+      - ./infra/objstore:/aegis-obj:ro
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: objstore } }
+    healthcheck:                # master 는 컨테이너 안(127.0.0.1)에만 열려 있다
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9333/cluster/status"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  backup-ship:                  # 기본 백업·보관 WAL → objstore (파일마다 KMS 봉투 암호화, app/offsite.py)
+    image: aegismesh-api:${APP_ENV:-local}
+    command: ["python", "-m", "app.offsite", "loop"]
+    env_file: [".env.prod"]
+    user: "0:0"                 # postgres(백업)·app(키 고리·TLS 키) 소유 0600 파일을 읽기만 — 다른 권한은 모두 뺀다
+    cap_drop: ["ALL"]
+    cap_add: ["DAC_READ_SEARCH"]
+    volumes:
+      - dbbackup:/backup:ro
+      - appdata:/app/data:ro
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: api } }
+    restart: unless-stopped
+    depends_on:
+      objstore: { condition: service_healthy }
+  db-drill:                     # 복구 훈련 전용 (make db-restore-drill ENV=prod) — 운영 볼륨 무변경, 끝나면 컨테이너·볼륨 삭제
+    profiles: ["drill"]
+    image: ${DB_IMAGE:-postgres:17-alpine}
+    entrypoint: ["sh", "/aegis-pg/drill.sh"]
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME:-app}
+      DRILL_BACKUP: ${DRILL_BACKUP:-}
+      DB_MAX_CONNECTIONS: ${DB_MAX_CONNECTIONS:-300}
+    volumes:
+      - dbdrill:/var/lib/postgresql/data
+      - ${DRILL_SOURCE_VOLUME:-dbbackup}:/backup:ro    # SOURCE=offsite 면 외부 복사본을 받아 푼 dboffsite
+      - ./infra/postgres:/aegis-pg:ro
+      - { type: volume, source: tls, target: /tls/server, read_only: true, volume: { subpath: db } }
+    healthcheck:                # WAL 재생이 끝나고 승격되어야 healthy
+      test: ["CMD-SHELL", "[ \"$$(psql -U $${POSTGRES_USER} -d $${POSTGRES_DB} -Atqc 'SELECT pg_is_in_recovery()' 2>/dev/null)\" = f ]"]
+      interval: 3s
+      timeout: 3s
+      retries: 600
+  nats:                         # 발견 버스(Epic 60, 프로파일 bus) — JetStream + 상호 TLS(infra/nats/nats-prod.conf), 호스트 포트 없음
+    image: nats:2.11.9-alpine
+    profiles: ["bus"]
+    command: ["nats-server", "-c", "/etc/nats/aegis.conf"]
+    volumes:
+      - ./infra/nats/nats-prod.conf:/etc/nats/aegis.conf:ro
+      - natsdata:/data
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: nats } }
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8222/healthz?js-enabled-only=true"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+  bus-relay:                    # 원장 커서 → NATS 게시(최소 1회·Nats-Msg-Id 중복 제거, app/bus.py)
+    profiles: ["bus"]
+    image: aegismesh-api:${APP_ENV:-local}
+    command: ["python", "-m", "app.bus", "relay"]
+    env_file: [".env.prod", { path: ./infra/nats/api.env, required: false }, { path: ./infra/injguard/api.env, required: false }, { path: ./infra/gvisor/api.env, required: false }]
+    environment:
+      <<: [*pg-tls]
+    volumes:
+      - appdata:/app/data:ro                                        # KMS 키 고리 — 원장 본문 복호화(요약만 게시)
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: api } }
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+      nats: { condition: service_healthy }
+  bao-unsealer:                 # 자동 봉인 해제기(Epic 56) — transit 키 aegis-autounseal 만, 자신은 Shamir 수동 봉인 해제(make bao-cluster-unseal)
+    <<: *bao-node
+    env_file: []
+    environment: { BAO_HEALTH: "https://bao-unsealer:8200" }
+    volumes:
+      - ./infra/openbao/unsealer.hcl:/openbao/config/config.hcl:ro
+      - baounseal:/openbao/file
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: bao-unsealer } }
+  bao-1:                        # OpenBao 3노드 raft (Epic 56, 프로파일 bao-cluster) — transit 자동 봉인 해제·retry_join·상호 TLS(infra/openbao/cluster.hcl)
+    <<: *bao-node
+    environment: { BAO_RAFT_NODE_ID: bao-1, BAO_API_ADDR: "https://bao-1:8200", BAO_CLUSTER_ADDR: "https://bao-1:8201", BAO_HEALTH: "https://bao-1:8200" }
+    volumes:
+      - ./infra/openbao/cluster.hcl:/openbao/config/config.hcl:ro
+      - bao1data:/openbao/file
+      - bao1audit:/openbao/logs
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: bao-1 } }
+  bao-2:
+    <<: *bao-node
+    environment: { BAO_RAFT_NODE_ID: bao-2, BAO_API_ADDR: "https://bao-2:8200", BAO_CLUSTER_ADDR: "https://bao-2:8201", BAO_HEALTH: "https://bao-2:8200" }
+    volumes:
+      - ./infra/openbao/cluster.hcl:/openbao/config/config.hcl:ro
+      - bao2data:/openbao/file
+      - bao2audit:/openbao/logs
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: bao-2 } }
+  bao-3:
+    <<: *bao-node
+    environment: { BAO_RAFT_NODE_ID: bao-3, BAO_API_ADDR: "https://bao-3:8200", BAO_CLUSTER_ADDR: "https://bao-3:8201", BAO_HEALTH: "https://bao-3:8200" }
+    volumes:
+      - ./infra/openbao/cluster.hcl:/openbao/config/config.hcl:ro
+      - bao3data:/openbao/file
+      - bao3audit:/openbao/logs
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: bao-3 } }
+  bao-hsm:                      # OpenBao HSM 봉인 리허설 (Epic 68, 프로파일 bao-hsm) — SoftHSM2(PKCS#11) RSA-3072 비추출 키(OAEP)로 자동 봉인 해제
+    profiles: ["bao-hsm"]
+    build: { context: ./infra/openbao/hsm }
+    image: aegismesh-bao-hsm:${APP_ENV:-local}
+    command: ["server"]
+    cap_add: ["IPC_LOCK"]
+    env_file: [{ path: ./infra/openbao/hsm.env, required: false }]   # BAO_HSM_PIN — make bao-hsm-up 이 생성(비커밋)
+    environment: { BAO_RAFT_NODE_ID: bao-hsm, BAO_API_ADDR: "https://bao-hsm:8200", BAO_CLUSTER_ADDR: "https://bao-hsm:8201", BAO_HEALTH: "https://bao-hsm:8200" }
+    volumes:
+      - ./infra/openbao/hsm.hcl:/openbao/config/config.hcl:ro
+      - baohsmdata:/openbao/file
+      - baohsmtokens:/openbao/hsm/tokens                        # SoftHSM2 토큰(봉인 키) — 운영은 실제 HSM 안
+      - { type: volume, source: tls, target: /tls, read_only: true, volume: { subpath: bao-hsm } }
+    healthcheck:
+      test: ["CMD-SHELL", "bao status -address=$$BAO_HEALTH -ca-cert=/tls/ca.crt -client-cert=/tls/tls.crt -client-key=/tls/tls.key >/dev/null 2>&1; [ $$? -ne 1 ]"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+    restart: unless-stopped
+    depends_on:
+      tls-init: { condition: service_completed_successfully }
+volumes:
+  baohsmdata:
+  baohsmtokens:
+  dbdata:
+  dbstandby:
+  dbbackup:
+  dbdrill:
+  tls:
+  objdata:
+  dboffsite:
+  baounseal:
+  bao1data:
+  bao2data:
+  bao3data:
+  bao1audit:
+  bao2audit:
+  bao3audit:
+  natsdata:

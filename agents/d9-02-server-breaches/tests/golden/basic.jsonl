@@ -1,0 +1,10 @@
+{"name": "normal-exec", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "/usr/bin/python3", "parent": "uvicorn"}]}}}
+{"name": "tmp-write", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "file_write", "path": "/tmp/cache"}]}}}
+{"name": "https", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "net_connect", "dest": "api.example.com", "port": 443}]}}}
+{"name": "shell-from-cron", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "/bin/sh", "parent": "cron"}]}}}
+{"name": "integrity-ok", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "integrity", "path": "/usr/bin/python3", "changed": false}]}}}
+{"name": "none", "request": {}}
+{"name": "app-data", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "file_write", "path": "/app/data/app.db"}]}}}
+{"name": "pg", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "net_connect", "dest": "db", "port": 5432}]}}}
+{"name": "git", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": [{"type": "exec", "process": "/usr/bin/git", "parent": "bash"}]}}}
+{"name": "empty", "request": {"artifact": {"kind": "runtime_events", "host": "agent-1", "events": []}}}

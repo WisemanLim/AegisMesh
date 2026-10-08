@@ -1,0 +1,10 @@
+{"name": "plain", "request": {"output": "주문이 발송되었습니다."}}
+{"name": "order-no", "request": {"output": "주문번호 2024100612345678 입니다."}}
+{"name": "date", "request": {"output": "1990-01-01 생 고객 대상 이벤트"}}
+{"name": "public-email", "request": {"output": "문의: help@garam.example", "params": {"publicEmailDomains": ["garam.example"]}}}
+{"name": "tel-office", "request": {"output": "대표번호 02-123-4567"}}
+{"name": "health-general", "request": {"output": "우울증 진단 기준은 DSM-5 에 정의되어 있다."}}
+{"name": "amount", "request": {"output": "결제 금액 1,234,567원"}}
+{"name": "uuid", "request": {"output": "id 550e8400-e29b-41d4-a716-446655440000"}}
+{"name": "invalid-rrn", "request": {"output": "코드 900101-1234560 은 샘플"}}
+{"name": "isbn", "request": {"output": "ISBN 9788966260959"}}

@@ -1,0 +1,27 @@
+# 마이그레이션·시드 (설치·갱신 후 1회) — Helm 이 완료를 기다린다. DB 준비를 먼저 기다린다.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "aegismesh.fullname" . }}-migrate
+  labels: {{- include "aegismesh.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  backoffLimit: 6
+  template:
+    metadata: { labels: {{ include "aegismesh.sel" (list . "migrate") }} }
+    spec:
+      restartPolicy: OnFailure
+      {{- include "aegismesh.podSecurity" . | nindent 6 }}
+      containers:
+        - name: migrate
+          image: {{ include "aegismesh.apiImage" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- include "aegismesh.containerSecurity" . | nindent 10 }}
+          command: [sh, -c, 'for i in $(seq 1 60); do python -c "from app import db; db.ping()" 2>/dev/null && break; sleep 2; done; alembic upgrade head && python -m app.seed']
+          envFrom: [{ configMapRef: { name: {{ include "aegismesh.fullname" . }}-config } }]
+          env: {{- include "aegismesh.env" . | nindent 12 }}
+          volumeMounts: [{ name: data, mountPath: /app/data }]
+      volumes: [{ name: data, persistentVolumeClaim: { claimName: {{ include "aegismesh.fullname" . }}-data } }]

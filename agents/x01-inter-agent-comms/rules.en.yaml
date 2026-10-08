@@ -1,0 +1,7 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X01.unsigned-card: Inter-agent communication trust check 'unsigned-card' failed. Block.
+X01.untrusted-key: Inter-agent communication trust check 'untrusted-key' failed. Block.
+X01.bad-signature: Inter-agent communication trust check 'bad-signature' failed. Block.
+X01.pin-mismatch: Inter-agent communication trust check 'pin-mismatch' failed. Block.
+X01.plaintext: Inter-agent communication trust check 'plaintext' failed. Block.
+X01.pass: Passed AgentCard signature, certificate pinning and TLS checks.

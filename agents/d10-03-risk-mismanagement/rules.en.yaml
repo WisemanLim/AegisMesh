@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D10-03.empty-register: Risk register check 'empty-register' → alert.
+D10-03.accept-without-owner: Risk register check 'accept-without-owner' → alert.
+D10-03.overdue: Risk register check 'overdue' → alert.
+D10-03.unscored: Risk register check 'unscored' → alert.
+D10-03.pass: Passed risk register check.

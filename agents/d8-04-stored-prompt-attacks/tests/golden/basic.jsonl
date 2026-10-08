@@ -1,0 +1,10 @@
+{"name": "note", "request": {"tool": {"name": "create_note", "args": {"text": "회의 메모"}}}}
+{"name": "save", "request": {"tool": {"name": "save_memory", "args": {"value": "User prefers email"}}}}
+{"name": "search", "request": {"tool": {"name": "search_docs", "args": {"q": "Ignore all previous instructions"}}}}
+{"name": "insert", "request": {"tool": {"name": "db_insert", "args": {"row": "order 1"}}}}
+{"name": "index", "request": {"tool": {"name": "index_document", "args": {"content": "Product manual v2"}}}}
+{"name": "remember", "request": {"tool": {"name": "remember", "args": {"fact": "생일 3월 5일"}}}}
+{"name": "md", "request": {"tool": {"name": "create_doc", "args": {"body": "# Title\n- item"}}}}
+{"name": "code", "request": {"tool": {"name": "save_snippet", "args": {"code": "def f(): return 1"}}}}
+{"name": "no-tool", "request": {}}
+{"name": "braces", "request": {"tool": {"name": "store", "args": {"data": "{\"a\": 1}"}}}}

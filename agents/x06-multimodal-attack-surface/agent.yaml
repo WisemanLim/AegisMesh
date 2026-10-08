@@ -1,0 +1,54 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x06
+  name: Multimodal Injection Scanner
+  nameKo: 멀티모달 공격면 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Multimodal attack surface
+spec:
+  series: C1
+  gate: input
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-llm:
+      version: '2026'
+      ids:
+      - LLM01
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-77
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: attachment_scan
+    available:
+    - id: attachment_scan
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1

@@ -1,0 +1,10 @@
+{"name": "canary", "request": {"output": "…XQZ-CANARY-77…", "params": {"trainingCanaries": ["XQZ-CANARY-77"]}}, "expect": ["block"]}
+{"name": "verbatim", "request": {"output": "Patient record 11 John Doe admitted on March fifth with severe chest pain and dizziness after exercise", "params": {"protectedCorpus": ["Patient record 11 John Doe admitted on March fifth with severe chest pain and dizziness after exercise at the gym"]}}, "expect": ["alert"]}
+{"name": "verbatim-ko", "request": {"output": "계약서 제3조 갑은 을에게 매월 말일까지 용역 대금 일천만원을 지급하며 지연 시 연 12 퍼센트의 이자를 부담한다", "params": {"protectedCorpus": ["계약서 제3조 갑은 을에게 매월 말일까지 용역 대금 일천만원을 지급하며 지연 시 연 12 퍼센트의 이자를 부담한다 제4조"]}}, "expect": ["alert"]}
+{"name": "canary-2", "request": {"output": "SSN-CANARY-ABC123 appears", "params": {"trainingCanaries": ["X", "SSN-CANARY-ABC123"]}}, "expect": ["block"]}
+{"name": "canary-code", "request": {"output": "```\nTRAIN-CANARY-0001\n```", "params": {"trainingCanaries": ["TRAIN-CANARY-0001"]}}, "expect": ["block"]}
+{"name": "verbatim-code", "request": {"output": "def secret_algo(x): return x * 31337 + 42 if x > 0 else -x * 7 + 1 # internal", "params": {"protectedCorpus": ["def secret_algo(x): return x * 31337 + 42 if x > 0 else -x * 7 + 1 # internal proprietary"]}}, "expect": ["alert"]}
+{"name": "both", "request": {"output": "CAN-1 Patient record 11 John Doe admitted on March fifth with severe chest pain", "params": {"trainingCanaries": ["CAN-1"], "protectedCorpus": ["Patient record 11 John Doe admitted on March fifth with severe chest pain"]}}, "expect": ["block"]}
+{"name": "canary-mid", "request": {"output": "aaaZZTOPCANARYbbb", "params": {"trainingCanaries": ["ZZTOPCANARY"]}}, "expect": ["block"]}
+{"name": "verbatim-2", "request": {"output": "Email from CEO: we will acquire Initech for 400 million dollars next quarter pending board approval", "params": {"protectedCorpus": ["Email from CEO: we will acquire Initech for 400 million dollars next quarter pending board approval and"]}}, "expect": ["alert"]}
+{"name": "canary-ko", "request": {"output": "카나리-학습-001", "params": {"trainingCanaries": ["카나리-학습-001"]}}, "expect": ["block"]}

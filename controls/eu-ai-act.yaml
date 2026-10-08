@@ -1,0 +1,11 @@
+# EU AI Act (Regulation (EU) 2024/1689) — PRD §4.4 매핑. 설계 참고용이며 법률 판단이 아니다(PRD 부록 E).
+framework: eu-ai-act
+title: EU AI Act (Regulation (EU) 2024/1689)
+version: "2024/1689"
+controls:
+  - { id: Art.9, title: 위험관리체계, titleEn: "Risk management system", items: [D10-03], platform: [risk_register] }
+  - { id: Art.12, title: 기록 보관(로깅), titleEn: "Record-keeping (logging)", items: [D10-04], platform: [ledger] }
+  - { id: Art.14, title: 인적 감독, titleEn: "Human oversight", items: [D6-01, D4-03, X03], platform: [approvals] }
+  - { id: Art.15, title: 정확성·견고성·사이버보안, titleEn: "Accuracy · robustness · cybersecurity", items: [D4-01, D4-02, D4-03, D4-04, D4-05, D4-06, D1-01, D1-03, D7-06], platform: [redteam] }
+  - { id: Art.53, title: GPAI 기술문서, titleEn: "GPAI technical documentation", items: [D10-06], platform: [cards] }
+  - { id: Art.55, title: GPAI 시스템 리스크 평가·적대적 시험, titleEn: "GPAI systemic risk evaluation · adversarial testing", items: [X09, D7-06], platform: [redteam] }

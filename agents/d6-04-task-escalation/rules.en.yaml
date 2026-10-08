@@ -1,0 +1,6 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D6-04.tool-out-of-scope: Tool outside the task-scope contract. Block.
+D6-04.resource-out-of-scope: Access to an out-of-scope resource. Block.
+D6-04.action-out-of-scope: Out-of-scope action. Human approval (scope-change incident).
+D6-04.plan-expansion: Out-of-scope subtask added to the plan. Human approval.
+D6-04.pass: Within the task-scope contract.

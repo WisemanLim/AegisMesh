@@ -1,0 +1,11 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D2-03.anthropic-key: A anthropic-key credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.openai-key: A openai-key credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.aws-access-key: A aws-access-key credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.github-token: A github-token credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.slack-token: A slack-token credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.google-api-key: A google-api-key credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.private-key: A private-key credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.jwt: A jwt credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.conn-string: A conn-string credential appears in the output or input. Output is masked as [REDACTED_…]; input raises an alert.
+D2-03.pass: Passed all 9 credential pattern checks.

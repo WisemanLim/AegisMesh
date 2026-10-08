@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D10-01.no-policy: Policy baseline check 'no-policy' → block.
+D10-01.unversioned: Policy baseline check 'unversioned' → alert.
+D10-01.no-enforcement: Policy baseline check 'no-enforcement' → alert.
+D10-01.pass: Policy declaration, versioning and enforcement baseline confirmed.

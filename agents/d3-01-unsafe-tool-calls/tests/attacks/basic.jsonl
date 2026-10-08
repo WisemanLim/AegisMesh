@@ -1,0 +1,10 @@
+{"name": "drop-table", "request": {"tool": {"name": "run_sql", "args": {"query": "DROP TABLE customers;"}}}, "expect": ["block"]}
+{"name": "truncate", "request": {"tool": {"name": "db_exec", "args": {"sql": "truncate table audit_log"}}}, "expect": ["block"]}
+{"name": "delete-all", "request": {"tool": {"name": "run_sql", "args": {"query": "DELETE FROM orders;"}}}, "expect": ["block"]}
+{"name": "update-all", "request": {"tool": {"name": "run_sql", "args": {"query": "UPDATE accounts SET balance = 0"}}}, "expect": ["block"]}
+{"name": "delete-file", "request": {"tool": {"name": "delete_file", "args": {"path": "/workspace/report.pdf"}}}, "expect": ["require_approval"]}
+{"name": "transfer", "request": {"tool": {"name": "transfer_funds", "args": {"amount": 5000, "to": "acct-9"}}}, "expect": ["require_approval"]}
+{"name": "bulk-send", "request": {"tool": {"name": "send_bulk_email", "args": {"to": "all-customers"}}}, "expect": ["require_approval"]}
+{"name": "purge", "request": {"tool": {"name": "cache_purge_all", "args": {}}}, "expect": ["require_approval"]}
+{"name": "custom-high-risk", "request": {"tool": {"name": "rotate_keys", "args": {}}, "params": {"highRiskTools": ["rotate_keys"]}}, "expect": ["require_approval"]}
+{"name": "deploy", "request": {"tool": {"name": "deploy_production", "args": {"version": "1.2"}}}, "expect": ["require_approval"]}

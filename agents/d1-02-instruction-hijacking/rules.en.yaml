@@ -1,0 +1,4 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D1-02.goal-override: Input or plan tells the agent to overwrite or abandon its original goal. Block.
+D1-02.plan-drift: A high-risk action not in the original goal (send, transfer, delete, etc.) was added to the plan. Waits for human approval.
+D1-02.pass: Goal invariant holds.

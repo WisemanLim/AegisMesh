@@ -1,0 +1,10 @@
+{"name": "high", "request": {"action": {"type": "deploy", "impact": "high"}}, "expect": ["require_approval"]}
+{"name": "critical", "request": {"action": {"type": "rotate_keys", "impact": "critical"}}, "expect": ["require_approval"]}
+{"name": "medium-ext", "request": {"action": {"type": "post_tweet", "impact": "medium", "external": true}}, "expect": ["require_approval"]}
+{"name": "irrev", "request": {"action": {"type": "delete", "impact": "medium", "reversible": false}}, "expect": ["require_approval"]}
+{"name": "l0", "request": {"action": {"type": "draft", "impact": "low", "external": true}, "params": {"autonomyLevel": 0}}, "expect": ["require_approval"]}
+{"name": "l2-crit", "request": {"action": {"type": "wire", "impact": "critical"}, "params": {"autonomyLevel": 2}}, "expect": ["require_approval"]}
+{"name": "ext-irrev", "request": {"action": {"type": "send", "impact": "low", "external": true, "reversible": false}}, "expect": ["require_approval"]}
+{"name": "l1-high-ext", "request": {"action": {"type": "publish", "impact": "high", "external": true}}, "expect": ["require_approval"]}
+{"name": "l3-crit-ext", "request": {"action": {"type": "x", "impact": "critical", "external": true}, "params": {"autonomyLevel": 3}}, "expect": ["require_approval"]}
+{"name": "medium-l0", "request": {"action": {"type": "x", "impact": "medium"}, "params": {"autonomyLevel": 0}}, "expect": ["require_approval"]}

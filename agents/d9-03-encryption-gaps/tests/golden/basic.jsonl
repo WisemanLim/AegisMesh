@@ -1,0 +1,10 @@
+{"name": "good", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [{"name": "api", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 200}], "stores": [{"name": "db", "encrypted": true}]}}}
+{"name": "tls12", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [{"name": "a", "tls": true, "mtls": true, "tlsVersion": "1.2", "certExpiresInDays": 200}], "stores": []}}}
+{"name": "no-mtls-optional", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [{"name": "a", "tls": true, "mtls": false, "tlsVersion": "1.3", "certExpiresInDays": 200}], "stores": []}, "params": {"requireMtls": false}}}
+{"name": "cert-30", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [{"name": "a", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 30}], "stores": []}}}
+{"name": "custom-warn", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [{"name": "a", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 10}], "stores": []}, "params": {"certWarnDays": 7}}}
+{"name": "none", "request": {}}
+{"name": "empty", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [], "stores": []}}}
+{"name": "store-unknown", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [], "stores": [{"name": "x"}]}}}
+{"name": "many", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [{"name": "s0", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 200}, {"name": "s1", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 200}, {"name": "s2", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 200}, {"name": "s3", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 200}, {"name": "s4", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": 200}], "stores": []}}}
+{"name": "no-cert-info", "request": {"artifact": {"kind": "crypto_inventory", "endpoints": [{"name": "a", "tls": true, "mtls": true, "tlsVersion": "1.3", "certExpiresInDays": null}], "stores": []}}}

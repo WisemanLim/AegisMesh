@@ -1,0 +1,10 @@
+{"name": "tenant", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "x1", "tenant": "globex", "text": "globex 계약서"}]}, "expect": ["block"]}
+{"name": "tenant-mem", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "memory": [{"id": "x2", "tenant": "initech"}]}, "expect": ["block"]}
+{"name": "user-leaked", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "x3", "tenant": "acme", "owner": "u2", "text": "u2 의 배송지는 서울시 강남구 테헤란로 1"}], "output": "배송지: u2 의 배송지는 서울시 강남구 테헤란로 1 입니다"}, "expect": ["block"]}
+{"name": "user-context", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "x4", "tenant": "acme", "owner": "u3", "text": "비공개 메모"}], "output": "요약 완료"}, "expect": ["alert"]}
+{"name": "session", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "memory": [{"id": "x5", "owner": "u1", "session": "s9"}], "session": {"id": "s1"}}, "expect": ["alert"]}
+{"name": "mem-user", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "memory": [{"id": "x6", "tenant": "acme", "owner": "u7", "text": "u7 카드 끝자리 1234"}], "output": "u7 카드 끝자리 1234 입니다"}, "expect": ["block"]}
+{"name": "mixed", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "retrieval": [{"id": "ok", "tenant": "acme", "owner": "u1"}, {"id": "bad", "tenant": "x"}]}, "expect": ["block"]}
+{"name": "ko-tenant", "request": {"subject": {"tenant": "가람", "principal": {"id": "u1"}}, "memory": [{"id": "x8", "tenant": "나래"}]}, "expect": ["block"]}
+{"name": "user-mem-context", "request": {"subject": {"tenant": "acme", "principal": {"id": "u1"}}, "memory": [{"id": "x9", "owner": "u5"}]}, "expect": ["alert"]}
+{"name": "tenant-default", "request": {"subject": {"principal": {"id": "u1"}}, "retrieval": [{"id": "x10", "tenant": "acme"}]}, "expect": ["block"]}

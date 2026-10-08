@@ -1,0 +1,10 @@
+{"name": "index", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"primary": false, "index": true}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "cache", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"cache": true}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "primary", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"primary": true}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "backup-late", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"backup": true}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "no-receipt", "request": {"artifact": {"kind": "deletion_audit", "requestedAt": 1790000000, "stores": {}}, "params": {"now": 1790000000}}, "expect": ["alert"]}
+{"name": "ttl", "request": {"memory": [{"id": "m1", "createdAt": 1789992800, "ttlSec": 3600}], "params": {"now": 1790000000}}, "expect": ["alert"]}
+{"name": "all", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"primary": true, "index": true, "cache": true, "backup": true}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "ttl-many", "request": {"memory": [{"id": "m0", "createdAt": 1789900001, "ttlSec": 60}, {"id": "m1", "createdAt": 1789900001, "ttlSec": 60}, {"id": "m2", "createdAt": 1789900001, "ttlSec": 60}], "params": {"now": 1790000000}}, "expect": ["alert"]}
+{"name": "index+receipt", "request": {"artifact": {"kind": "deletion_audit", "requestedAt": 1789999990, "stores": {"index": true}}, "params": {"now": 1790000000}}, "expect": ["block"]}
+{"name": "vector", "request": {"artifact": {"kind": "deletion_audit", "subject": "u1", "requestedAt": 1786544000, "receiptIssued": true, "stores": {"index": true, "cache": false}}, "params": {"now": 1790000000}}, "expect": ["block"]}

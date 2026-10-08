@@ -1,0 +1,10 @@
+{"name": "plain", "request": {"text": "분기 보고서 요약해줘"}}
+{"name": "goal-plan-ok", "request": {"goal": "Summarize the Q3 sales report", "plan": ["Open Q3 sales report", "Extract key figures", "Write summary"]}}
+{"name": "goal-send-ok", "request": {"goal": "Send the weekly report to the finance team", "plan": ["Generate report", "Send report via email to finance"]}}
+{"name": "ko-plan", "request": {"goal": "고객 문의에 답변하고 환불 처리", "plan": ["문의 내용 확인", "환불 정책 확인", "답변 작성"]}}
+{"name": "new-goal-word", "request": {"text": "What is the goal of the new marketing campaign?"}}
+{"name": "instead-benign", "request": {"text": "Use Python instead of Excel for this analysis."}}
+{"name": "delete-in-goal", "request": {"goal": "Delete duplicate rows from the dataset", "plan": ["Load dataset", "Find duplicates", "Delete duplicates"]}}
+{"name": "no-goal-plan", "request": {"plan": ["Search docs", "Answer question"]}}
+{"name": "goal-only", "request": {"goal": "Draft an email reply"}}
+{"name": "ko-task", "request": {"text": "오늘 할 일 목록을 정리해줘"}}

@@ -1,0 +1,1177 @@
+{
+ "source": {
+  "diagram": "Security Risks in AI Agents",
+  "author": "Rushika Rai",
+  "transcribed": "AegisMesh PRD §3 (2026-09-17)"
+ },
+ "domains": [
+  {
+   "id": "D1",
+   "nameEn": "Prompt Injection Attacks",
+   "nameKo": "프롬프트 인젝션 공격",
+   "series": "C1",
+   "stage": 1,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM01"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI01"
+     ]
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0011",
+      "AML.TA0005"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D2",
+   "nameEn": "Data Leakage Risks",
+   "nameKo": "데이터 유출 위험",
+   "series": "C3",
+   "stage": 2,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM02"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI06"
+     ]
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0010"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D3",
+   "nameEn": "Tool Misuse & Abuse",
+   "nameKo": "도구 오남용",
+   "series": "C2",
+   "stage": 1,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM03"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI02",
+      "ASI05"
+     ]
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0011",
+      "AML.TA0012"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D4",
+   "nameEn": "Model Hallucination Risks",
+   "nameKo": "모델 환각 위험",
+   "series": "C1",
+   "stage": 2,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM07"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0012"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D5",
+   "nameEn": "Access Control Failures",
+   "nameKo": "접근 통제 실패",
+   "series": "C2",
+   "stage": 1,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM02",
+      "LLM03"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI03"
+     ]
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0004"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D6",
+   "nameEn": "Autonomous Agent Overreach",
+   "nameKo": "자율 에이전트 과잉행동",
+   "series": "C2",
+   "stage": 2,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM03",
+      "LLM06"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI01"
+     ]
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0012"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D7",
+   "nameEn": "Supply Chain Vulnerabilities",
+   "nameKo": "공급망 취약점",
+   "series": "C3",
+   "stage": 3,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM04",
+      "LLM05"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI04"
+     ]
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0002",
+      "AML.TA0003"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D8",
+   "nameEn": "Memory & Context Exploits",
+   "nameKo": "메모리·컨텍스트 악용",
+   "series": "C1",
+   "stage": 3,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM08",
+      "LLM09"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI06"
+     ]
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": [
+      "AML.TA0006"
+     ]
+    }
+   }
+  },
+  {
+   "id": "D9",
+   "nameEn": "Infrastructure-Level Risks",
+   "nameKo": "인프라 계층 위험",
+   "series": "C3",
+   "stage": 3,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": []
+    }
+   }
+  },
+  {
+   "id": "D10",
+   "nameEn": "Governance & Compliance Gaps",
+   "nameKo": "거버넌스·컴플라이언스 공백",
+   "series": "C4",
+   "stage": 4,
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    },
+    "mitre-atlas": {
+     "version": "2026.06",
+     "ids": []
+    }
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "D1-01",
+   "domain": "D1",
+   "nameEn": "Malicious instructions",
+   "nameKo": "악성 지시 주입",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-D1-01"
+  },
+  {
+   "id": "D1-02",
+   "domain": "D1",
+   "nameEn": "Instruction hijacking",
+   "nameKo": "지시 탈취",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-D1-02"
+  },
+  {
+   "id": "D1-03",
+   "domain": "D1",
+   "nameEn": "Jailbreak prompts",
+   "nameKo": "탈옥 프롬프트",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-D1-03"
+  },
+  {
+   "id": "D1-04",
+   "domain": "D1",
+   "nameEn": "Context override",
+   "nameKo": "컨텍스트 덮어쓰기",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-D1-04"
+  },
+  {
+   "id": "D1-05",
+   "domain": "D1",
+   "nameEn": "Hidden payloads",
+   "nameKo": "은닉 페이로드",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-D1-05"
+  },
+  {
+   "id": "D1-06",
+   "domain": "D1",
+   "nameEn": "Data exfiltration",
+   "nameKo": "인젝션 경유 유출",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-D1-06"
+  },
+  {
+   "id": "D1-07",
+   "domain": "D1",
+   "nameEn": "System prompt leakage",
+   "nameKo": "시스템 프롬프트 유출",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-D1-07"
+  },
+  {
+   "id": "D2-01",
+   "domain": "D2",
+   "nameEn": "Sensitive exposure",
+   "nameKo": "민감정보 노출",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 2,
+   "fr": "FR-D2-01"
+  },
+  {
+   "id": "D2-02",
+   "domain": "D2",
+   "nameEn": "Cross-session leaks",
+   "nameKo": "세션 간 유출",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 2,
+   "fr": "FR-D2-02"
+  },
+  {
+   "id": "D2-03",
+   "domain": "D2",
+   "nameEn": "API key leaks",
+   "nameKo": "자격증명 유출",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 2,
+   "fr": "FR-D2-03"
+  },
+  {
+   "id": "D2-04",
+   "domain": "D2",
+   "nameEn": "Unauthorized access",
+   "nameKo": "무단 접근",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 2,
+   "fr": "FR-D2-04"
+  },
+  {
+   "id": "D2-05",
+   "domain": "D2",
+   "nameEn": "Training data recall",
+   "nameKo": "학습 데이터 재현",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 2,
+   "fr": "FR-D2-05"
+  },
+  {
+   "id": "D2-06",
+   "domain": "D2",
+   "nameEn": "Log vulnerabilities",
+   "nameKo": "로그 취약성",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 2,
+   "fr": "FR-D2-06"
+  },
+  {
+   "id": "D2-07",
+   "domain": "D2",
+   "nameEn": "Memory persistence",
+   "nameKo": "메모리 잔존",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 2,
+   "fr": "FR-D2-07"
+  },
+  {
+   "id": "D3-01",
+   "domain": "D3",
+   "nameEn": "Unsafe tool calls",
+   "nameKo": "위험 도구 호출",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D3-01"
+  },
+  {
+   "id": "D3-02",
+   "domain": "D3",
+   "nameEn": "Command injection",
+   "nameKo": "명령 주입",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D3-02"
+  },
+  {
+   "id": "D3-03",
+   "domain": "D3",
+   "nameEn": "System compromise",
+   "nameKo": "시스템 장악",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D3-03"
+  },
+  {
+   "id": "D3-04",
+   "domain": "D3",
+   "nameEn": "File manipulation",
+   "nameKo": "파일 조작",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D3-04"
+  },
+  {
+   "id": "D3-05",
+   "domain": "D3",
+   "nameEn": "API abuse",
+   "nameKo": "API 남용",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D3-05"
+  },
+  {
+   "id": "D3-06",
+   "domain": "D3",
+   "nameEn": "Privilege escalation",
+   "nameKo": "권한 상승",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D3-06"
+  },
+  {
+   "id": "D3-07",
+   "domain": "D3",
+   "nameEn": "Unauthorized execution",
+   "nameKo": "무단 실행",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D3-07"
+  },
+  {
+   "id": "D4-01",
+   "domain": "D4",
+   "nameEn": "False outputs",
+   "nameKo": "허위 출력",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 2,
+   "fr": "FR-D4-01"
+  },
+  {
+   "id": "D4-02",
+   "domain": "D4",
+   "nameEn": "Fabricated citations",
+   "nameKo": "인용 날조",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 2,
+   "fr": "FR-D4-02"
+  },
+  {
+   "id": "D4-03",
+   "domain": "D4",
+   "nameEn": "Incorrect decisions",
+   "nameKo": "잘못된 결정",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 2,
+   "fr": "FR-D4-03"
+  },
+  {
+   "id": "D4-04",
+   "domain": "D4",
+   "nameEn": "Logic flaws",
+   "nameKo": "논리 오류",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 2,
+   "fr": "FR-D4-04"
+  },
+  {
+   "id": "D4-05",
+   "domain": "D4",
+   "nameEn": "Compliance violations",
+   "nameKo": "규정 위반 출력",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 2,
+   "fr": "FR-D4-05"
+  },
+  {
+   "id": "D4-06",
+   "domain": "D4",
+   "nameEn": "Misinformation spread",
+   "nameKo": "오정보 확산",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 2,
+   "fr": "FR-D4-06"
+  },
+  {
+   "id": "D4-07",
+   "domain": "D4",
+   "nameEn": "Trust erosion",
+   "nameKo": "신뢰 침식",
+   "priority": "P2",
+   "series": "C1",
+   "stage": 2,
+   "fr": "FR-D4-07"
+  },
+  {
+   "id": "D5-01",
+   "domain": "D5",
+   "nameEn": "Weak authentication",
+   "nameKo": "취약 인증",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D5-01"
+  },
+  {
+   "id": "D5-02",
+   "domain": "D5",
+   "nameEn": "Broken authorization",
+   "nameKo": "인가 파손",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D5-02"
+  },
+  {
+   "id": "D5-03",
+   "domain": "D5",
+   "nameEn": "Session hijacking",
+   "nameKo": "세션 탈취",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D5-03"
+  },
+  {
+   "id": "D5-04",
+   "domain": "D5",
+   "nameEn": "Identity spoofing",
+   "nameKo": "신원 위장",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D5-04"
+  },
+  {
+   "id": "D5-05",
+   "domain": "D5",
+   "nameEn": "Role confusion",
+   "nameKo": "역할 혼동",
+   "priority": "P1",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D5-05"
+  },
+  {
+   "id": "D5-06",
+   "domain": "D5",
+   "nameEn": "Token misuse",
+   "nameKo": "토큰 오용",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D5-06"
+  },
+  {
+   "id": "D5-07",
+   "domain": "D5",
+   "nameEn": "Permission misalignment",
+   "nameKo": "권한 불일치",
+   "priority": "P1",
+   "series": "C2",
+   "stage": 1,
+   "fr": "FR-D5-07"
+  },
+  {
+   "id": "D6-01",
+   "domain": "D6",
+   "nameEn": "Unchecked autonomy",
+   "nameKo": "통제 없는 자율성",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-D6-01"
+  },
+  {
+   "id": "D6-02",
+   "domain": "D6",
+   "nameEn": "Recursive actions",
+   "nameKo": "재귀 행동",
+   "priority": "P1",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-D6-02"
+  },
+  {
+   "id": "D6-03",
+   "domain": "D6",
+   "nameEn": "Infinite loops",
+   "nameKo": "무한 루프",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-D6-03"
+  },
+  {
+   "id": "D6-04",
+   "domain": "D6",
+   "nameEn": "Task escalation",
+   "nameKo": "과업 확대",
+   "priority": "P1",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-D6-04"
+  },
+  {
+   "id": "D6-05",
+   "domain": "D6",
+   "nameEn": "Goal misalignment",
+   "nameKo": "목표 불일치",
+   "priority": "P1",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-D6-05"
+  },
+  {
+   "id": "D6-06",
+   "domain": "D6",
+   "nameEn": "Resource exhaustion",
+   "nameKo": "자원 고갈",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-D6-06"
+  },
+  {
+   "id": "D6-07",
+   "domain": "D6",
+   "nameEn": "Financial damage",
+   "nameKo": "금전 피해",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-D6-07"
+  },
+  {
+   "id": "D7-01",
+   "domain": "D7",
+   "nameEn": "Third-party tools",
+   "nameKo": "서드파티 도구",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D7-01"
+  },
+  {
+   "id": "D7-02",
+   "domain": "D7",
+   "nameEn": "Dependency exploits",
+   "nameKo": "의존성 취약점",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D7-02"
+  },
+  {
+   "id": "D7-03",
+   "domain": "D7",
+   "nameEn": "Library backdoors",
+   "nameKo": "라이브러리 백도어",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D7-03"
+  },
+  {
+   "id": "D7-04",
+   "domain": "D7",
+   "nameEn": "Plugin vulnerabilities",
+   "nameKo": "플러그인 취약점",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D7-04"
+  },
+  {
+   "id": "D7-05",
+   "domain": "D7",
+   "nameEn": "Dataset tampering",
+   "nameKo": "데이터셋 변조",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D7-05"
+  },
+  {
+   "id": "D7-06",
+   "domain": "D7",
+   "nameEn": "Model poisoning",
+   "nameKo": "모델 오염",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D7-06"
+  },
+  {
+   "id": "D7-07",
+   "domain": "D7",
+   "nameEn": "API compromise",
+   "nameKo": "API 침해",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D7-07"
+  },
+  {
+   "id": "D8-01",
+   "domain": "D8",
+   "nameEn": "Context poisoning",
+   "nameKo": "컨텍스트 오염",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-D8-01"
+  },
+  {
+   "id": "D8-02",
+   "domain": "D8",
+   "nameEn": "Long-term manipulation",
+   "nameKo": "장기 조작",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-D8-02"
+  },
+  {
+   "id": "D8-03",
+   "domain": "D8",
+   "nameEn": "Persistent exploits",
+   "nameKo": "지속 익스플로잇",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-D8-03"
+  },
+  {
+   "id": "D8-04",
+   "domain": "D8",
+   "nameEn": "Stored prompt attacks",
+   "nameKo": "저장형 프롬프트 공격",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-D8-04"
+  },
+  {
+   "id": "D8-05",
+   "domain": "D8",
+   "nameEn": "Knowledge injection",
+   "nameKo": "지식 주입",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-D8-05"
+  },
+  {
+   "id": "D8-06",
+   "domain": "D8",
+   "nameEn": "Memory corruption",
+   "nameKo": "메모리 손상",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-D8-06"
+  },
+  {
+   "id": "D8-07",
+   "domain": "D8",
+   "nameEn": "Retrieval bias",
+   "nameKo": "검색 편향",
+   "priority": "P2",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-D8-07"
+  },
+  {
+   "id": "D9-01",
+   "domain": "D9",
+   "nameEn": "Cloud misconfiguration",
+   "nameKo": "클라우드 오구성",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D9-01"
+  },
+  {
+   "id": "D9-02",
+   "domain": "D9",
+   "nameEn": "Server breaches",
+   "nameKo": "서버 침해",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D9-02"
+  },
+  {
+   "id": "D9-03",
+   "domain": "D9",
+   "nameEn": "Encryption gaps",
+   "nameKo": "암호화 공백",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D9-03"
+  },
+  {
+   "id": "D9-04",
+   "domain": "D9",
+   "nameEn": "Database exposure",
+   "nameKo": "데이터베이스 노출",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D9-04"
+  },
+  {
+   "id": "D9-05",
+   "domain": "D9",
+   "nameEn": "Endpoint compromise",
+   "nameKo": "엔드포인트 침해",
+   "priority": "P2",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D9-05"
+  },
+  {
+   "id": "D9-06",
+   "domain": "D9",
+   "nameEn": "Network interception",
+   "nameKo": "네트워크 가로채기",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D9-06"
+  },
+  {
+   "id": "D9-07",
+   "domain": "D9",
+   "nameEn": "DDoS attacks",
+   "nameKo": "서비스 거부",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-D9-07"
+  },
+  {
+   "id": "D10-01",
+   "domain": "D10",
+   "nameEn": "Policy absence",
+   "nameKo": "정책 부재",
+   "priority": "P0",
+   "series": "C4",
+   "stage": 4,
+   "fr": "FR-D10-01"
+  },
+  {
+   "id": "D10-02",
+   "domain": "D10",
+   "nameEn": "Regulatory violations",
+   "nameKo": "규제 위반",
+   "priority": "P1",
+   "series": "C4",
+   "stage": 4,
+   "fr": "FR-D10-02"
+  },
+  {
+   "id": "D10-03",
+   "domain": "D10",
+   "nameEn": "Risk mismanagement",
+   "nameKo": "위험관리 부실",
+   "priority": "P1",
+   "series": "C4",
+   "stage": 4,
+   "fr": "FR-D10-03"
+  },
+  {
+   "id": "D10-04",
+   "domain": "D10",
+   "nameEn": "Audit failures",
+   "nameKo": "감사 실패",
+   "priority": "P0",
+   "series": "C4",
+   "stage": 4,
+   "fr": "FR-D10-04"
+  },
+  {
+   "id": "D10-05",
+   "domain": "D10",
+   "nameEn": "Ethical blindspots",
+   "nameKo": "윤리 맹점",
+   "priority": "P2",
+   "series": "C4",
+   "stage": 4,
+   "fr": "FR-D10-05"
+  },
+  {
+   "id": "D10-06",
+   "domain": "D10",
+   "nameEn": "Transparency issues",
+   "nameKo": "투명성 결여",
+   "priority": "P2",
+   "series": "C4",
+   "stage": 4,
+   "fr": "FR-D10-06"
+  },
+  {
+   "id": "D10-07",
+   "domain": "D10",
+   "nameEn": "Lack monitoring",
+   "nameKo": "모니터링 부재",
+   "priority": "P1",
+   "series": "C4",
+   "stage": 4,
+   "fr": "FR-D10-07"
+  }
+ ],
+ "gaps": [
+  {
+   "id": "X01",
+   "nameEn": "Inter-agent communication security",
+   "nameKo": "에이전트 간 통신 보안",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-X01",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI07"
+     ]
+    }
+   }
+  },
+  {
+   "id": "X02",
+   "nameEn": "Cascading failures",
+   "nameKo": "연쇄 실패",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-X02",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI08"
+     ]
+    }
+   }
+  },
+  {
+   "id": "X03",
+   "nameEn": "Human-agent trust exploitation",
+   "nameKo": "사람-에이전트 신뢰 악용",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 4,
+   "fr": "FR-X03",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI09"
+     ]
+    }
+   }
+  },
+  {
+   "id": "X04",
+   "nameEn": "Rogue agents",
+   "nameKo": "이탈 에이전트",
+   "priority": "P0",
+   "series": "C2",
+   "stage": 2,
+   "fr": "FR-X04",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": [
+      "ASI10"
+     ]
+    }
+   }
+  },
+  {
+   "id": "X05",
+   "nameEn": "Improper output handling",
+   "nameKo": "출력 처리 부실",
+   "priority": "P0",
+   "series": "C1",
+   "stage": 1,
+   "fr": "FR-X05",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": [
+      "LLM10"
+     ]
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    }
+   }
+  },
+  {
+   "id": "X06",
+   "nameEn": "Multimodal attack surface",
+   "nameKo": "멀티모달 공격면",
+   "priority": "P1",
+   "series": "C1",
+   "stage": 3,
+   "fr": "FR-X06",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    }
+   }
+  },
+  {
+   "id": "X07",
+   "nameEn": "Model & inference layer risks",
+   "nameKo": "모델·추론 계층 위험",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 3,
+   "fr": "FR-X07",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    }
+   }
+  },
+  {
+   "id": "X08",
+   "nameEn": "Incident response & forensics",
+   "nameKo": "사고 대응·포렌식",
+   "priority": "P0",
+   "series": "C3",
+   "stage": 4,
+   "fr": "FR-X08",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    }
+   }
+  },
+  {
+   "id": "X09",
+   "nameEn": "Continuous red teaming",
+   "nameKo": "상시 레드팀",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 4,
+   "fr": "FR-X09",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    }
+   }
+  },
+  {
+   "id": "X10",
+   "nameEn": "Cost & service-level observability",
+   "nameKo": "비용·서비스 수준 관측",
+   "priority": "P1",
+   "series": "C3",
+   "stage": 4,
+   "fr": "FR-X10",
+   "standards": {
+    "owasp-llm": {
+     "version": "2026",
+     "ids": []
+    },
+    "owasp-asi": {
+     "version": "2026",
+     "ids": []
+    }
+   }
+  }
+ ]
+}

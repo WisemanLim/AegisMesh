@@ -1,0 +1,7 @@
+apiVersion: v2
+name: aegismesh
+description: AegisMesh — AI 에이전트 보안 멀티 에이전트 플랫폼 (제어 API · worker · 콘솔 · 관측 수집기 · PostgreSQL)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords: [ai-security, agents, policy, evidence-ledger]

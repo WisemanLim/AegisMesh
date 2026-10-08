@@ -1,0 +1,10 @@
+{"name": "creds", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 3, "sessionHours": 8}]}}, "expect": ["block"]}
+{"name": "integrity", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": false, "plaintextCredentials": 0, "sessionHours": 8}]}}, "expect": ["block"]}
+{"name": "edr", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": false, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8}]}}, "expect": ["alert"]}
+{"name": "session", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 72}]}}, "expect": ["alert"]}
+{"name": "hw", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8, "hwKey": false}]}, "params": {"requireHwKey": true}}, "expect": ["alert"]}
+{"name": "creds1", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": true, "integrityOk": true, "plaintextCredentials": 1, "sessionHours": 8}]}}, "expect": ["block"]}
+{"name": "mixed", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "ok", "edr": true, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 8}, {"name": "bad", "edr": true, "integrityOk": false, "plaintextCredentials": 0, "sessionHours": 8}]}}, "expect": ["block"]}
+{"name": "edr+session", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": false, "integrityOk": true, "plaintextCredentials": 0, "sessionHours": 99}]}}, "expect": ["alert"]}
+{"name": "all", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "a", "edr": false, "integrityOk": true, "plaintextCredentials": 2, "sessionHours": 8}]}}, "expect": ["block"]}
+{"name": "runner-creds", "request": {"artifact": {"kind": "endpoint_posture", "hosts": [{"name": "ci", "edr": true, "integrityOk": true, "plaintextCredentials": 9, "sessionHours": 8}]}}, "expect": ["block"]}

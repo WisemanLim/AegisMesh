@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+D10-04.ledger-broken: Audit trail check 'ledger-broken' → block.
+D10-04.stale-checkpoint: Audit trail check 'stale-checkpoint' → alert.
+D10-04.anonymous-actions: Audit trail check 'anonymous-actions' → alert.
+D10-04.pass: Passed ledger integrity and audit principal checks.

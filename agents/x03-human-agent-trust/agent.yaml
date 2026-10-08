@@ -1,0 +1,70 @@
+apiVersion: aegismesh/v1
+kind: Agent
+metadata:
+  id: x03
+  name: Human Trust Exploitation Detector
+  nameKo: 사람-에이전트 신뢰 악용 탐지기
+  version: 1.0.0
+  source:
+    diagram: AegisMesh gap analysis
+    domain: X
+    item: Human-agent trust exploitation
+spec:
+  series: C3
+  gate: offline
+  isolation: L0
+  verdicts:
+  - block
+  - alert
+  - allow
+  latencyBudgetMs: 30
+  standards:
+    owasp-asi:
+      version: '2026'
+      ids:
+      - ASI09
+    cwe:
+      version: '4.20'
+      ids:
+      - CWE-451
+    nist-ai-rmf:
+      version: '1.0'
+      ids:
+      - GOVERN 3.2
+      - MAP 3.5
+    iso-42001:
+      version: '2023'
+      ids:
+      - A.9
+  modes:
+  - cli
+  - rest
+  - mcp
+  engines:
+    default: interaction_patterns
+    available:
+    - id: interaction_patterns
+      kind: builtin
+  io:
+    input:
+      schema: aegismesh.io/JudgeRequest/v1
+    output:
+      schema: aegismesh.io/Finding/v1
+  resources:
+    cpu: 100m
+    memory: 128Mi
+  dependencies: []
+  tests:
+    golden: tests/golden
+    attacks: tests/attacks
+    baseline: tests/baseline.json
+    thresholds:
+      falsePositiveRate: 0.005
+      falseNegativeRate: 0.1
+  config:
+    maxRepeatedRequests:
+      type: integer
+      default: 3
+      min: 1
+      labelKo: 반복 요청 한도
+      labelEn: Max repeated requests

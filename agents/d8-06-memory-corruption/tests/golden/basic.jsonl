@@ -1,0 +1,10 @@
+{"name": "ok", "request": {"memory": [{"id": "m", "text": "가", "checksum": "64ee5293d31bc58b72d76ae9a86a902e90442428e29f24f4ecb257ba841cdd36"}]}}
+{"name": "no-checksum", "request": {"memory": [{"id": "m", "text": "x"}]}}
+{"name": "dup-same", "request": {"memory": [{"id": "m", "text": "x"}, {"id": "m", "text": "x"}]}}
+{"name": "many-ok", "request": {"memory": [{"id": "m0", "text": "t0", "checksum": "512f26ada3c3d634ac3c6b12b7b33cb50bb0963c3f6d9924241619c84ec78ff2"}, {"id": "m1", "text": "t1", "checksum": "628b49d96dcde97a430dd4f597705899e09a968f793491e4b704cae33a40dc02"}, {"id": "m2", "text": "t2", "checksum": "c44474038d459e40e4714afefa7bf8dae9f9834b22f5e8ec1dd434ecb62b512e"}, {"id": "m3", "text": "t3", "checksum": "cece8a9cecfb6c7e7ee4f3346d5e2544138bfb6e33bec6042a17333a4d3180b0"}, {"id": "m4", "text": "t4", "checksum": "a2f1a68a3cf7bab14245ba34e6a348b6822aceb4a9ec7ad04a86c2c93ca1a28a"}]}}
+{"name": "empty", "request": {}}
+{"name": "en", "request": {"memory": [{"id": "m", "text": "User likes tea", "checksum": "e2f077a705af4e99011296cc0d3d9096b890fdb26262a0174efec6a3786638c0"}]}}
+{"name": "distinct", "request": {"memory": [{"id": "a", "text": "1"}, {"id": "b", "text": "2"}]}}
+{"name": "empty-text", "request": {"memory": [{"id": "m", "text": "", "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}]}}
+{"name": "unicode", "request": {"memory": [{"id": "m", "text": "🍵", "checksum": "c71290e28f2018be2dbbec1d94d6cd6b0ac9057f9e4916ea4c753345476329cd"}]}}
+{"name": "mixed-ok", "request": {"memory": [{"id": "a", "text": "1", "checksum": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"}, {"id": "b", "text": "2"}]}}

@@ -1,0 +1,11 @@
+{"name": "small", "request": {"tool": {"name": "refund", "args": {"amount": 30000}}}}
+{"name": "approved", "request": {"tool": {"name": "transfer", "args": {"amount": 500000}, "approved": true}}}
+{"name": "non-money", "request": {"tool": {"name": "search", "args": {"amount": 999999999}}}}
+{"name": "custom-th", "request": {"tool": {"name": "pay", "args": {"amount": 300000}}, "params": {"approvalThreshold": 500000}}}
+{"name": "action-small", "request": {"action": {"type": "payment", "amount": 5000}}}
+{"name": "approved-irrev", "request": {"action": {"type": "purchase", "amount": 50000, "reversible": false, "approved": true}}}
+{"name": "daily-ok", "request": {"tool": {"name": "pay", "args": {"amount": 10000}}, "params": {"dailySpent": 50000, "dailyLimit": 100000}}}
+{"name": "order-small", "request": {"tool": {"name": "create_order", "args": {"total": 20000}}}}
+{"name": "zero", "request": {"tool": {"name": "refund", "args": {"amount": 0}}}}
+{"name": "ko", "request": {"tool": {"name": "결제", "args": {"금액": 9900}}}}
+{"name": "read-only-order-lookup", "request": {"tool": {"name": "get_order", "args": {"orderId": "ORD-10291"}}}}

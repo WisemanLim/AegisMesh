@@ -1,0 +1,5 @@
+# Rule descriptions in English (NFR-C4) — same keys as core.RULES. Korean stays the source of truth.
+X08.evidence-lost: Incident response check 'evidence-lost' → block.
+X08.uncontained: Incident response check 'uncontained' → block.
+X08.no-runbook: Incident response check 'no-runbook' → alert.
+X08.pass: Passed open-incident response status check.

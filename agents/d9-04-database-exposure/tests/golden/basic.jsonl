@@ -1,0 +1,10 @@
+{"name": "good", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "bot", "usedBy": "agent", "privileges": ["SELECT"], "viaGateway": true, "queryAudit": true}]}}}
+{"name": "human-dba", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "dba", "usedBy": "human", "privileges": ["SUPERUSER"]}]}}}
+{"name": "rw", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "bot", "usedBy": "agent", "privileges": ["SELECT", "INSERT", "UPDATE"], "viaGateway": true, "queryAudit": true}]}}}
+{"name": "none", "request": {}}
+{"name": "empty", "request": {"artifact": {"kind": "db_accounts", "accounts": []}}}
+{"name": "app-svc", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "svc", "usedBy": "service", "privileges": ["ALL"]}]}}}
+{"name": "lower", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "bot", "usedBy": "agent", "privileges": ["select"], "viaGateway": true, "queryAudit": true}]}}}
+{"name": "many-good", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "a", "usedBy": "agent", "privileges": ["SELECT"], "viaGateway": true, "queryAudit": true}, {"user": "b", "usedBy": "agent", "privileges": ["SELECT"], "viaGateway": true, "queryAudit": true}]}}}
+{"name": "delete-ok", "request": {"artifact": {"kind": "db_accounts", "accounts": [{"user": "bot", "usedBy": "agent", "privileges": ["DELETE"], "viaGateway": true, "queryAudit": true}]}}}
+{"name": "other", "request": {"artifact": {"kind": "iac"}}}
